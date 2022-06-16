@@ -11,11 +11,29 @@
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 13/06/2022 21:08:45
+ Date: 15/06/2022 22:13:14
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for categorias
+-- ----------------------------
+DROP TABLE IF EXISTS `categorias`;
+CREATE TABLE `categorias`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of categorias
+-- ----------------------------
+INSERT INTO `categorias` VALUES (1, 'Categoría principal', 1, '2022-06-15 22:25:54', NULL);
 
 -- ----------------------------
 -- Table structure for cms_apicustom
@@ -144,7 +162,7 @@ CREATE TABLE `cms_logs`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_logs
@@ -168,6 +186,11 @@ INSERT INTO `cms_logs` VALUES (16, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; W
 INSERT INTO `cms_logs` VALUES (17, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36', 'http://localhost:8000/admin/statistic_builder/add-save', 'Añadir nueva información Inventario en Statistic Builder', '', 1, '2022-06-14 01:58:01', NULL);
 INSERT INTO `cms_logs` VALUES (18, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36', 'http://localhost:8000/admin/logout', 'admin@admin.com se desconectó', '', 1, '2022-06-14 02:03:50', NULL);
 INSERT INTO `cms_logs` VALUES (19, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36', 'http://localhost:8000/admin/login', 'Ingreso de admin@admin.com desde la Dirección IP 127.0.0.1', '', 1, '2022-06-14 02:06:24', NULL);
+INSERT INTO `cms_logs` VALUES (20, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36', 'http://localhost:8000/admin/login', 'Ingreso de admin@admin.com desde la Dirección IP 127.0.0.1', '', 1, '2022-06-14 17:35:28', NULL);
+INSERT INTO `cms_logs` VALUES (21, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36', 'http://localhost:8000/admin/login', 'Ingreso de admin@admin.com desde la Dirección IP 127.0.0.1', '', 1, '2022-06-15 21:53:22', NULL);
+INSERT INTO `cms_logs` VALUES (22, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36', 'http://localhost:8000/admin/login', 'Ingreso de admin@admin.com desde la Dirección IP 127.0.0.1', '', 1, '2022-06-15 21:53:23', NULL);
+INSERT INTO `cms_logs` VALUES (23, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36', 'http://localhost:8000/admin/categorias/add-save', 'Añadir nueva información  en Categorías', '', 1, '2022-06-15 22:25:54', NULL);
+INSERT INTO `cms_logs` VALUES (24, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36', 'http://localhost:8000/admin/productos/add-save', 'Añadir nueva información  en Productos', '', 1, '2022-06-15 22:28:23', NULL);
 
 -- ----------------------------
 -- Table structure for cms_menus
@@ -188,12 +211,13 @@ CREATE TABLE `cms_menus`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_menus
 -- ----------------------------
 INSERT INTO `cms_menus` VALUES (1, 'Productos', 'Route', 'AdminProductos1ControllerGetIndex', 'normal', 'fa fa-glass', 0, 1, 0, 1, 1, '2022-06-10 00:30:27', '2022-06-14 00:46:44');
+INSERT INTO `cms_menus` VALUES (2, 'Categorias', 'Route', 'AdminCategoriasControllerGetIndex', NULL, 'fa fa-glass', 0, 1, 0, 1, 2, '2022-06-15 21:54:55', NULL);
 
 -- ----------------------------
 -- Table structure for cms_menus_privileges
@@ -204,12 +228,13 @@ CREATE TABLE `cms_menus_privileges`  (
   `id_cms_menus` int(11) NULL DEFAULT NULL,
   `id_cms_privileges` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_menus_privileges
 -- ----------------------------
 INSERT INTO `cms_menus_privileges` VALUES (3, 1, 1);
+INSERT INTO `cms_menus_privileges` VALUES (4, 2, 1);
 
 -- ----------------------------
 -- Table structure for cms_moduls
@@ -228,7 +253,7 @@ CREATE TABLE `cms_moduls`  (
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_moduls
@@ -245,6 +270,7 @@ INSERT INTO `cms_moduls` VALUES (9, 'Statistic Builder', 'fa fa-dashboard', 'sta
 INSERT INTO `cms_moduls` VALUES (10, 'API Generator', 'fa fa-cloud-download', 'api_generator', '', 'ApiCustomController', 1, 1, '2022-06-10 00:30:03', NULL, NULL);
 INSERT INTO `cms_moduls` VALUES (11, 'Log User Access', 'fa fa-flag-o', 'logs', 'cms_logs', 'LogsController', 1, 1, '2022-06-10 00:30:03', NULL, NULL);
 INSERT INTO `cms_moduls` VALUES (12, 'Productos', 'fa fa-star', 'productos', 'productos', 'AdminProductos1Controller', 0, 0, '2022-06-10 00:30:27', NULL, NULL);
+INSERT INTO `cms_moduls` VALUES (13, 'Categorías', 'fa fa-glass', 'categorias', 'categorias', 'AdminCategoriasController', 0, 0, '2022-06-15 21:54:55', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for cms_notifications
@@ -300,7 +326,7 @@ CREATE TABLE `cms_privileges_roles`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_privileges_roles
@@ -317,6 +343,7 @@ INSERT INTO `cms_privileges_roles` VALUES (9, 1, 1, 1, 1, 1, 1, 9, '2022-06-10 0
 INSERT INTO `cms_privileges_roles` VALUES (10, 1, 1, 1, 1, 1, 1, 10, '2022-06-10 00:30:03', NULL);
 INSERT INTO `cms_privileges_roles` VALUES (11, 1, 0, 1, 0, 1, 1, 11, '2022-06-10 00:30:03', NULL);
 INSERT INTO `cms_privileges_roles` VALUES (12, 1, 1, 1, 1, 1, 1, 12, NULL, NULL);
+INSERT INTO `cms_privileges_roles` VALUES (13, 1, 1, 1, 1, 1, 1, 13, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for cms_settings
@@ -451,7 +478,7 @@ CREATE TABLE `migrations`  (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 60 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 61 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of migrations
@@ -486,6 +513,7 @@ INSERT INTO `migrations` VALUES (56, '2016_11_17_102740_create_cms_statistic_com
 INSERT INTO `migrations` VALUES (57, '2017_06_06_164501_add_deleted_at_cms_moduls', 2);
 INSERT INTO `migrations` VALUES (58, '2019_08_19_000000_create_failed_jobs_table', 2);
 INSERT INTO `migrations` VALUES (59, '2022_06_10_000648_create_productos_table', 2);
+INSERT INTO `migrations` VALUES (60, '2022_06_15_215140_create_categorias_table', 3);
 
 -- ----------------------------
 -- Table structure for password_resets
@@ -538,16 +566,18 @@ CREATE TABLE `productos`  (
   `activo` tinyint(1) NOT NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `id_categoria` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of productos
 -- ----------------------------
-INSERT INTO `productos` VALUES (1, '00000001', 'Producto de prueba.', 999, 10.00, 1, '2022-06-10 00:38:34', '2022-06-10 00:38:45');
-INSERT INTO `productos` VALUES (2, '00000002', 'Producto de prueba 2', 999, 15.00, 1, '2022-06-10 00:39:25', NULL);
-INSERT INTO `productos` VALUES (3, '00000003', 'Producto de prueba 3', 999, 20.00, 1, '2022-06-10 00:39:47', NULL);
-INSERT INTO `productos` VALUES (4, '00000004', 'Producto de prueba 4', 999, 25.00, 1, '2022-06-10 00:39:59', NULL);
+INSERT INTO `productos` VALUES (1, '00000001', 'Producto de prueba.', 999, 10.00, 1, '2022-06-10 00:38:34', '2022-06-10 00:38:45', 1);
+INSERT INTO `productos` VALUES (2, '00000002', 'Producto de prueba 2', 999, 15.00, 1, '2022-06-10 00:39:25', NULL, 1);
+INSERT INTO `productos` VALUES (3, '00000003', 'Producto de prueba 3', 999, 20.00, 1, '2022-06-10 00:39:47', NULL, 1);
+INSERT INTO `productos` VALUES (4, '00000004', 'Producto de prueba 4', 999, 25.00, 1, '2022-06-10 00:39:59', NULL, 1);
+INSERT INTO `productos` VALUES (5, '00000005', 'Producto de prueba 5', 999, 30.00, 1, '2022-06-15 22:28:23', NULL, 1);
 
 -- ----------------------------
 -- Table structure for users
