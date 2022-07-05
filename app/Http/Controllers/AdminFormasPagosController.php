@@ -5,7 +5,7 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminProductos1Controller extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminFormasPagosController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
@@ -25,36 +25,31 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "productos";
+			$this->table = "formas_pagos";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Codigo","name"=>"codigo"];
-			$this->col[] = ["label"=>"Nombre","name"=>"nombre"];
-			$this->col[] = ["label"=>"Stock","name"=>"stock"];
-			$this->col[] = ["label"=>"Valor","name"=>"valor"];
-			$this->col[] = ["label"=>"Activo","name"=>"activo"];
-			$this->col[] = ["label"=>"Categoria","name"=>"id_categoria","join"=>"categorias,id"];
+			$this->col[] = ["label"=>"Código","name"=>"codigo"];
+			$this->col[] = ["label"=>"Forma Pago","name"=>"forma_pago"];
+			$this->col[] = ["label"=>"Observaciones","name"=>"observaciones"];
+			$this->col[] = ["label"=>"Activo","name"=>"activo_id","join"=>"estados,nombre"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Código','name'=>'codigo','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Nombre','name'=>'nombre','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Stock','name'=>'stock','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Valor','name'=>'valor','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Activo','name'=>'activo','type'=>'checkbox','validation'=>'required','width'=>'col-sm-10','dataenum'=>'1'];
-			$this->form[] = ['label'=>'Categoria','name'=>'id_categoria','type'=>'select','validation'=>'required','width'=>'col-sm-9','datatable'=>'categorias,nombre'];
+			$this->form[] = ['label'=>'Forma Pago','name'=>'forma_pago','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Observaciones','name'=>'observaciones','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Activo','name'=>'activo_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'estados,nombre'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
 			//$this->form[] = ['label'=>'Código','name'=>'codigo','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Nombre','name'=>'nombre','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Stock','name'=>'stock','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Valor','name'=>'valor','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Activo','name'=>'activo','type'=>'checkbox','validation'=>'required','width'=>'col-sm-10','dataenum'=>'1'];
+			//$this->form[] = ['label'=>'Forma Pago','name'=>'forma_pago','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Observaciones','name'=>'observaciones','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Activo','name'=>'activo_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'estado,nombre'];
 			# OLD END FORM
 
 			/* 
