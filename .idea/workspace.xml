@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7827057-71e2-48f8-88ba-e1bf7fe279ba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminCategoriasController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminProductos1Controller.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminProductosController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Productos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Productos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_06_10_000648_create_productos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_06_15_215039_create_productos_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_06_15_215140_create_categorias_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_06_15_215038_create_categorias_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_06_15_220324_create_clientes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_06_15_220324_create_clientes_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -159,6 +169,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -190,6 +201,10 @@
       <updated>1654818858803</updated>
       <workItem from="1654818860173" duration="7923000" />
       <workItem from="1655237384320" duration="5762000" />
+      <workItem from="1655380885504" duration="4297000" />
+      <workItem from="1655661091010" duration="592000" />
+      <workItem from="1656348487926" duration="656000" />
+      <workItem from="1656710207867" duration="24082000" />
     </task>
     <servers />
   </component>
@@ -201,7 +216,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

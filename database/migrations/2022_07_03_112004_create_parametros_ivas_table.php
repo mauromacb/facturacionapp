@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientesTable extends Migration
+class CreateParametrosIvasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateClientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('parametros_ivas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('identificacion','50');
-            $table->string('nombres','200');
-            $table->string('correo','100');
-            $table->string('telefono','200');
-            $table->string('direccion');
-            $table->string('tipo', 50)->nullable();
+            $table->string('nombre',200);
+            $table->smallInteger('porcentaje');
+            $table->text('observaciones');
+            $table->unsignedInteger('principal_id');
+            $table->foreign('principal_id')->references('id')->on('estados');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateClientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('parametros_ivas');
     }
 }
