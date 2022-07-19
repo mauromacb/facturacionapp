@@ -18,7 +18,7 @@ class CreateParametrosIvasTable extends Migration
             $table->string('nombre',200);
             $table->smallInteger('porcentaje');
             $table->text('observaciones');
-            $table->unsignedInteger('principal_id');
+            $table->unsignedBigInteger('principal_id');
             $table->foreign('principal_id')->references('id')->on('estados');
             $table->timestamps();
         });

@@ -14,13 +14,13 @@ class CreateFacturerosTable extends Migration
     public function up()
     {
         Schema::create('factureros', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->date('fecha_inicio');
             $table->date('fecha_caducidad');
             $table->integer('inicio_facturero');
             $table->integer('fin_facturero');
             $table->string('autorizacion','50');
-            $table->unsignedInteger('activo_id');
+            $table->unsignedBigInteger('activo_id');
             $table->foreign('activo_id')->references('id')->on('estados');
             $table->timestamps();
         });

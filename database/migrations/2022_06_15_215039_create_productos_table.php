@@ -16,13 +16,13 @@ class CreateProductosTable extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('codigo');
+            $table->string('codigo')->unique();
             $table->string('nombre');
             $table->integer('stock');
             $table->double('valor',8,2);
-            $table->unsignedInteger('categoria_id');
+            $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias');
-            $table->unsignedInteger('activo_id');
+            $table->unsignedBigInteger('activo_id');
             $table->foreign('activo_id')->references('id')->on('estados');
             $table->timestamps();
         });

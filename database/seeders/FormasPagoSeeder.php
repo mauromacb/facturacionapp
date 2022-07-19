@@ -14,11 +14,11 @@ class FormasPagoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('formas_pagos')->truncate();
+        //DB::table('formas_pagos')->truncate();
         //guardar un solo registro
         DB::table('formas_pagos')->insert([
             'codigo' => '01',
-            'forma_pago' => 'SIN UTILIZACION DEL SISTEMA FINANCIERO',
+            'forma_pago' => 'EFECTIVO',
             'activo_id' => 1,
             'observaciones' => '',
             'created_at' => date('Y-m-d H:i:s')

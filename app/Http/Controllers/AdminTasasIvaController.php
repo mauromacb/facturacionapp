@@ -5,7 +5,7 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminParametrosIvasController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminTasasIvaController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
@@ -25,31 +25,25 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "parametros_ivas";
+			$this->table = "tasas_iva";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Nombre","name"=>"nombre"];
-			$this->col[] = ["label"=>"Porcentaje","name"=>"porcentaje"];
-			$this->col[] = ["label"=>"Observaciones","name"=>"observaciones"];
-			$this->col[] = ["label"=>"Principal","name"=>"principal_id","join"=>"estados,nombre"];
+			$this->col[] = ["label"=>"Tasa","name"=>"tasa"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Nombre','name'=>'nombre','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Porcentaje','name'=>'porcentaje','type'=>'number','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Observaciones','name'=>'observaciones','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Principal','name'=>'principal_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'estados,nombre'];
+			$this->form[] = ['label'=>'Tasa','name'=>'tasa','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Nombre','name'=>'nombre','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Porcentaje','name'=>'porcentaje','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Observaciones','name'=>'observaciones','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Principal','name'=>'principal_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'estados,nombre'];
+			//$this->form[] = ["label"=>"Nombre","name"=>"nombre","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Tasa","name"=>"tasa","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
 			# OLD END FORM
 
 			/* 
