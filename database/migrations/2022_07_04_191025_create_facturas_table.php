@@ -15,12 +15,12 @@ class CreateFacturasTable extends Migration
     {
         Schema::create('facturas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cliente_id');
+            $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes');
-            $table->integer('empresa_id');
+            $table->unsignedBigInteger('empresa_id');
             $table->foreign('empresa_id')->references('id')->on('empresas');
             $table->integer('secuencial');
-            $table->integer('forma_pago_id');
+            $table->unsignedBigInteger('forma_pago_id');
             $table->foreign('forma_pago_id')->references('id')->on('formas_pagos');
             $table->date('fecha_emision');
             $table->double('total_sin_impuestos',8,2);
@@ -35,9 +35,9 @@ class CreateFacturasTable extends Migration
             $table->double('total_valor',8,2);
             $table->text('observacion','50');
             $table->unsignedInteger('created_by_id');
-            $table->foreign('created_by_id')->references('id')->on('cms_users');
+            //$table->foreign('created_by_id')->references('id')->on('cms_users');
             $table->unsignedInteger('updated_by_id');
-            $table->foreign('updated_by_id')->references('id')->on('cms_users');
+            //$table->foreign('updated_by_id')->references('id')->on('cms_users');
             $table->timestamps();
         });
     }

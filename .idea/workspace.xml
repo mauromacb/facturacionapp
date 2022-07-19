@@ -2,18 +2,47 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7827057-71e2-48f8-88ba-e1bf7fe279ba" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/TasaIva.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/forms/comprobantes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/forms/recibos.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery-3.2.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/vue.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/lang/es/auth.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/lang/es/pagination.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/lang/es/passwords.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/lang/es/validation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/facturacion.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/imprimir.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/facturacionapp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/facturacionapp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminCategoriasController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminProductos1Controller.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminProductosController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminClientesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminClientesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminEmpresasController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminEmpresasController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminFacturasController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminFacturasController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminParametrosIvasController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminProductosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminProductosController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Clientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Clientes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Productos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Productos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2022_06_10_000648_create_productos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_06_15_215039_create_productos_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2022_06_15_215140_create_categorias_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_06_15_215038_create_categorias_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_06_13_191545_create_empresas_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_06_13_191545_create_empresas_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_06_14_183453_create_estados_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_06_14_183453_create_estados_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_06_15_215038_create_categorias_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_06_15_215038_create_categorias_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_06_15_215039_create_productos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_06_15_215039_create_productos_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2022_06_15_220324_create_clientes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_06_15_220324_create_clientes_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_07_03_112004_create_parametros_ivas_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_07_03_112004_create_parametros_ivas_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_07_03_112948_create_formas_pagos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_07_03_112948_create_formas_pagos_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_07_03_150846_create_factureros_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_07_03_150846_create_factureros_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_07_04_191025_create_facturas_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_07_04_191025_create_facturas_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/FacturaSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/FacturaSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/FormasPagoSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/FormasPagoSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,6 +55,36 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - factapp@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - factapp@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - factapp@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="factapp: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+    </expand>
+    <select />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -161,15 +220,26 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf" />
       <path value="$PROJECT_DIR$/vendor/sabberworm/php-css-parser" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-searchable" />
     </include_path>
   </component>
   <component name="ProjectId" id="2AMUHLBB5Qgosi3qqX0KSuVkdW8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\facturacionapp\resources\views" />
+      <recent name="C:\laragon\www\facturacionapp\app\Models" />
+      <recent name="C:\laragon\www\facturacionapp\public" />
+      <recent name="C:\laragon\www\facturacionapp\resources\lang" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -189,6 +259,21 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@f1901e7c" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+          </expand>
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -204,7 +289,9 @@
       <workItem from="1655380885504" duration="4297000" />
       <workItem from="1655661091010" duration="592000" />
       <workItem from="1656348487926" duration="656000" />
-      <workItem from="1656710207867" duration="24082000" />
+      <workItem from="1656710207867" duration="48948000" />
+      <workItem from="1657855893694" duration="25000" />
+      <workItem from="1657855941032" duration="33513000" />
     </task>
     <servers />
   </component>

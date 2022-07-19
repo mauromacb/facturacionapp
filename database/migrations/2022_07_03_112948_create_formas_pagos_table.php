@@ -14,11 +14,11 @@ class CreateFormasPagosTable extends Migration
     public function up()
     {
         Schema::create('formas_pagos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('codigo',200);
             $table->string('forma_pago',255);
             $table->text('observaciones');
-            $table->unsignedInteger('activo_id');
+            $table->unsignedBigInteger('activo_id');
             $table->foreign('activo_id')->references('id')->on('estados');
             $table->timestamps();
         });
