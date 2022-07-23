@@ -1,16 +1,17 @@
 <?php namespace App\Http\Controllers;
 
 	use App\Models\Clientes;
+    use App\Models\Factura;
+    use App\Models\FacturaDetalle;
     use App\Models\Facturero;
     use App\Models\FormasPago;
-    use App\Models\User;
+    use Auth;
     use Illuminate\Support\Facades\Route;
     use Illuminate\Support\Facades\Schema;
     use Session;
 	use http\Client\Request;
 	use DB;
 	use CRUDBooster;
-    use Spatie\Searchable\Search;
 
     class AdminFacturasController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -260,7 +261,7 @@
             $page_menu = Route::getCurrentRoute()->getActionName();
             $command = 'add';
             $clientes=Clientes::limit('10')->pluck('nombres', 'id')->toArray();
-            $formapagos=FormasPago::limit('10')->pluck('forma_pago', 'id')->toArray();
+            $formapagos=FormasPago::where('activo_id',1)->limit('10')->pluck('forma_pago', 'id')->toArray();
             $facturero = Facturero::first();
 
             /*$this->addSelectTable("clientes","id",[
@@ -288,21 +289,69 @@
                 $this->arr['created_at'] = date('Y-m-d H:i:s');
             }
 
+            //Permite recibir toda la informacion ingresada en el formulario de facturacion
             $request=Request()->request->all();
-
-            $articulos = json_decode($request['listadoArticulos']);
-            dd($request);
+            //dd('entro aqui ');
 
 
-            //Looping Data Input Again After Insert
-            foreach ($this->data_inputan as $ro) {
-                $name = $ro['name'];
-                if (!$name) {
-                    continue;
-                }
-                $inputdata = Request::get($name);
-                var_dump($inputdata);
+            //dd($request);
+
+
+            //dd($detalles);
+
+
+            $factura_cabecera = new Factura();
+
+            $factura_cabecera->cliente_id=$request['cliente_id'];
+            $factura_cabecera->empresa_id=1;
+            $factura_cabecera->secuencial=$request['secuencial'];
+            $factura_cabecera->forma_pago_id=$request['forma_pago_id'];
+            $factura_cabecera->fecha_emision=$request['fecha_emision'];
+            $factura_cabecera->observacion=$request['observacion'];
+            $factura_cabecera->total_sin_impuestos=0;
+            $factura_cabecera->subtotal_12=0;
+            $factura_cabecera->subtotal_0=0;
+            $factura_cabecera->subtotal_no_iva=0;
+            $factura_cabecera->subtotal_extento_iva=0;
+            $factura_cabecera->total_ice=0;
+            $factura_cabecera->total_iva=0;
+            $factura_cabecera->total_descuento=0;
+            $factura_cabecera->total_propina=0;
+            $factura_cabecera->total_valor=0;
+            $factura_cabecera->created_by_id=1;
+            $factura_cabecera->updated_by_id=1;
+            $factura_cabecera->saveOrFail();
+
+
+            $detalles = json_decode($request['listadoArticulos']);
+
+            $subtotal = 0;
+            $totaliva = 0;
+            foreach ($detalles as $detalle) {
+                $factura_detalles = new FacturaDetalle();
+                $factura_detalles->producto_id = $detalle->codigo;
+                $factura_detalles->usuario_id = 1;
+                $factura_detalles->factura_id = $factura_cabecera->id;
+                $factura_detalles->fecha = $request['fecha_emision'];
+                //$factura_detalles->tasa_iva_id =
+                $factura_detalles->precio_unitario = $detalle->precio;
+                $factura_detalles->cantidad = $detalle->cantidad;
+                $factura_detalles->subtotal = $detalle->subTotal;
+                $factura_detalles->iva = $detalle->iva;
+                $factura_detalles->total = $detalle->total;
+                $factura_detalles->saveOrFail();
+
+                $subtotal = $subtotal + $request['subTotal'];
+                $totaliva = $totaliva + $request['total_iva'];
             }
+            $totalfactura = $subtotal + $totaliva;
+            $factura_cabecera->subtotal_12=$subtotal;
+            $factura_cabecera->total_iva=$totaliva;
+            $factura_cabecera->total_valor=$totalfactura;
+            $factura_cabecera->saveOrFail();
+
+
+
 
         }
 
