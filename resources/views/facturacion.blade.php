@@ -332,10 +332,9 @@
                         <input id="hiddenListado" type="hidden" name="listadoArticulos">
                         <div class="form-group header-group-0 " id="form-group-observacion" style="">
                             <label class="control-label col-sm-2">Observacion
-                                <span class="text-danger" title="Este campo es requerido">*</span>
                             </label>
                             <div class="col-sm-10">
-                                <textarea name="observacion" id="observacion" required="" maxlength="5000" class="form-control" rows="5"></textarea>
+                                <textarea name="observacion" id="observacion" maxlength="5000" class="form-control" rows="5"></textarea>
                                 <div class="text-danger"></div>
                                 <p class="help-block"></p>
                             </div>
@@ -349,7 +348,13 @@
                             <div class="col-sm-10">
                                 <select class="form-control select2-hidden-accessible" id="forma_pago_id" required="" name="forma_pago_id" tabindex="-1" aria-hidden="true">
                                     <option value="">** Selecciona una forma de pago</option>
-                                    @foreach($formapagos as $k=>$v)<option value="{{$k}}">{{$v}}</option>@endforeach
+                                    @foreach($formapagos as $k=>$v)
+                                        @if ($loop->first)
+                                            <option value="{{$k}}" selected>{{$v}}</option>
+                                        @else
+                                            <option value="{{$k}}">{{$v}}</option>
+                                        @endif
+                                    @endforeach
                                 </select>
                                 <div class="text-danger">
 
