@@ -22,7 +22,7 @@
     </head>
     <body class="anti" align="center">
         <div align="cemter" >
-            <img src="thumbnail_Don_cando.jpg">
+            <a href="{{url('admin/login')}}"><img src="thumbnail_Don_cando.jpg"></a>
         </div>
     </body>
 </html>

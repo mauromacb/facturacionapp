@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 	use App\Models\Clientes;
+    use App\Models\ConsumidorFinal;
     use Illuminate\Http\Request;
     use Session;
 	use DB;
@@ -45,18 +46,18 @@
 			$this->form[] = ['label'=>'Identificación','name'=>'identificacion','type'=>'text','validation'=>'required|min:1|max:255|unique:clientes','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Nombres','name'=>'nombres','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Correo','name'=>'correo','type'=>'email','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Teléfono','name'=>'telefono','type'=>'number','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Teléfono','name'=>'telefono','type'=>'number','validation'=>'required|min:1','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Dirección','name'=>'direccion','type'=>'textarea','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Tipo','name'=>'tipo','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Tipo','name'=>'tipo','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Cédula;Ruc'];
 			//$this->form[] = ['label'=>'Identificación','name'=>'identificacion','type'=>'text','validation'=>'required|min:1|max:255|unique:clientes','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Nombres','name'=>'nombres','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Correo','name'=>'correo','type'=>'email','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Teléfono','name'=>'telefono','type'=>'number','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Dirección','name'=>'direccion','type'=>'textarea','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Cédula;Ruc'];
+			//$this->form[] = ['label'=>'Dirección','name'=>'direccion','type'=>'textarea','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# OLD END FORM
 
 			/*
@@ -336,6 +337,13 @@
             $clientes = Clientes::FiltrarPorNombres($texto)
                 ->FiltrarPorIdentificacion($texto)
                 ->paginate(25);
+            return Response()->json([
+                'clientes' => $clientes
+            ]);
+        }
+
+        public function buscarConsumidorFinal(){
+            $clientes = ConsumidorFinal::first();
             return Response()->json([
                 'clientes' => $clientes
             ]);

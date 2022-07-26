@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 	use App\Models\Clientes;
+    use App\Models\ConsumidorFinal;
     use App\Models\Factura;
     use App\Models\FacturaDetalle;
     use App\Models\Facturero;
@@ -39,9 +40,10 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Secuencial","name"=>"secuencial"];
-			$this->col[] = ["label"=>"Cliente","name"=>"cliente_id","join"=>"clientes,id"];
-			$this->col[] = ["label"=>"Forma Pago","name"=>"forma_pago_id","join"=>"formas_pagos,id"];
+			$this->col[] = ["label"=>"Cliente","name"=>"cliente_id","join"=>"clientes,nombres"];
+			$this->col[] = ["label"=>"Forma Pago","name"=>"forma_pago_id","join"=>"formas_pagos,forma_pago"];
 			$this->col[] = ["label"=>"Fecha Emisión","name"=>"fecha_emision"];
+			$this->col[] = ["label"=>"Subtotal 12","name"=>"subtotal_12"];
 			$this->col[] = ["label"=>"Total Sin Impuestos","name"=>"total_sin_impuestos"];
 			$this->col[] = ["label"=>"Total Iva","name"=>"total_iva"];
 			$this->col[] = ["label"=>"Total Valor","name"=>"total_valor"];
@@ -263,6 +265,7 @@
             $clientes=Clientes::limit('10')->pluck('nombres', 'id')->toArray();
             $formapagos=FormasPago::where('activo_id',1)->limit('10')->pluck('forma_pago', 'id')->toArray();
             $facturero = Facturero::first();
+            $consumidor_final = ConsumidorFinal::first();
 
             /*$this->addSelectTable("clientes","id",[
                 "table"         => "clientes",
@@ -271,7 +274,7 @@
                 "sql_condition" => "nombres = 'Cliente  k3mv7TjHjD kyE473Qf53'"
             ]);*/
 
-            return view('facturacion', compact('page_title', 'page_menu', 'command', 'clientes', 'formapagos','facturero'));
+            return view('facturacion', compact('page_title', 'page_menu', 'command', 'clientes', 'formapagos','facturero','consumidor_final'));
         }
 
         public function postAddSave() {
@@ -341,8 +344,8 @@
                 $factura_detalles->total = $detalle->total;
                 $factura_detalles->saveOrFail();
 
-                $subtotal = $subtotal + $request['subTotal'];
-                $totaliva = $totaliva + $request['total_iva'];
+                $subtotal = $subtotal + $detalle->subTotal;
+                $totaliva = $totaliva + $detalle->iva;
             }
             $totalfactura = $subtotal + $totaliva;
             $factura_cabecera->subtotal_12=$subtotal;
@@ -350,8 +353,12 @@
             $factura_cabecera->total_valor=$totalfactura;
             $factura_cabecera->saveOrFail();
 
+            $secuencial=Facturero::first();
+            $secuencial->inicio_facturero=$secuencial->inicio_facturero+1;
+            $secuencial->save();
 
-
+            return redirect('/admin/facturas/add')->with('status', 'Profile updated!');
+            return redirect()->route('/admin/facturas');
 
         }
 

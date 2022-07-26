@@ -380,7 +380,7 @@ function actualizarTablaArticulos(){
 		$('<tr></tr>').html(
 			"<th width='120px'>Sub Total</th><td>"
 			+ resumen_sub_total.toFixed(2)
-			+ "</td>"
+			+ "<input type='hidden' name='total' id='total' value='"+resumen_total.toFixed(2)+"'></td>"
 		)
 	);
 	$("#tablaResumen").append(
@@ -406,3 +406,97 @@ var delay = (function(){
     timer = setTimeout(callback, ms);
   };
 })();
+
+function check(element){
+    if(element.checked) {
+        document.querySelector('#txtCliente').disabled = true;
+        document.querySelector('#identificacion').value = '99999999';
+        document.querySelector('#nombres').value = 'CONSUMIDOR FINAL';
+        document.querySelector('#telefono').value = '0999999999';
+        document.querySelector('#direccion').value = 'DIRECCION';
+        document.querySelector('#correo').value = 'correo@correo.com';
+        $("#hiddenCliente").val('');
+        $("#hiddenConsumidor").val(1);
+        /*var url = "{{ url('/clientes/buscar_consumidor_final') }}";
+
+        $.get(url , function( data ){
+            var clientes = data["clientes"]["data"];
+            $("#tablaClientes").html("");
+            for(i=0; i < clientes.length; i++){
+                console.log(clientes[i]["nombres"]);
+                var cliente_id = clientes[i]["id"];
+                var cliente_nombre = clientes[i]["nombres"];
+
+                var cliente_apellido = "";
+                if(clientes[i]["apellido"] != null){
+                    var cliente_apellido = clientes[i]["apellido"];
+                }
+
+                var cliente_rut = "-";
+                if(clientes[i]["identificacion"] != null){
+                    var cliente_rut = clientes[i]["identificacion"];
+                }
+
+                var cliente_mail = "-";
+                if(clientes[i]["correo"] != null){
+                    var cliente_mail = clientes[i]["correo"];
+                }
+
+                var cliente_direccion = "-";
+                if(clientes[i]["direccion"] != null){
+                    var cliente_direccion = clientes[i]["direccion"];
+                }
+                console.log(cliente_nombre);
+
+                $("#tablaClientes").append(
+                    $('<tr></tr>').html(
+                        "</td><td class='td_cliente_nombre'>"
+                        + cliente_nombre + " " + cliente_apellido
+                        + "</td><td class='td_cliente_rut'>"
+                        + cliente_rut
+                        + "<td class='td_cliente_id'>"
+                        + cliente_id
+                        + "</td><td class='td_cliente_mail'>"
+                        + cliente_mail
+                        + "</td><td class='td_cliente_direccion'>"
+                        + cliente_direccion
+                        + "</td><td>"
+                        + "<a class='btn-agregar-cliente btn btn-sm btn-block btn-link'>"
+                        + '<i class="fa fa-share" aria-hidden="true"></i>'
+                        + "</a>"
+                        + "</td>"
+
+                    )
+                );
+            }
+        });*/
+
+    }else{
+        document.querySelector('#txtCliente').disabled = false;
+        document.querySelector('#identificacion').value = '';
+        document.querySelector('#nombres').value = '';
+        document.querySelector('#telefono').value = '';
+        document.querySelector('#direccion').value = '';
+        document.querySelector('#correo').value = '';
+        $("#hiddenConsumidor").val('');
+    }
+
+
+}
+
+function devolucionfunc(){
+
+
+    if (document.getElementById("total").value>0) {
+        var totalFactura = parseFloat(document.getElementById("total").value).toFixed(2);
+        var pago = parseFloat(document.getElementById("pago").value).toFixed(2);
+        console.log(totalFactura +'-'+ pago);
+        if (parseFloat(totalFactura-pago).toFixed(2)<0){
+            document.getElementById("devolucion").value = parseFloat((totalFactura-pago)*-1).toFixed(2);
+        }else{
+            document.getElementById("devolucion").value = parseFloat(totalFactura-pago).toFixed(2);
+        }
+
+    }
+
+}

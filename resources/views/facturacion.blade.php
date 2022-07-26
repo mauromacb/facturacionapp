@@ -98,10 +98,11 @@
                             </label>
 
 
-                            <div class="col-sm-5">
+                            <div class="col-sm-3">
                                 <div class="input-group">
-                                    <input id="hiddenCliente" type="hidden" name="cliente_id" value="1">
-                                    <input name="cliente" type="text" id="txtCliente" placeholder="Ingrese los Nombres, razón social, cédula o ruc" oninvalid="this.setCustomValidity('Debe ingresar el nombre o la razón social del cliente')" required="" oninput="setCustomValidity('')" class="form-control" >
+                                    <input id="hiddenCliente" type="hidden" name="cliente_id" value="">
+                                    <input id="hiddenConsumidor" type="hidden" name="cliente_id" value="{{$consumidor_final->id}}">
+                                    <input name="cliente" type="text" id="txtCliente" placeholder="Ingrese los Nombres, razón social, cédula o ruc" oninvalid="this.setCustomValidity('Debe ingresar el nombre o la razón social del cliente')" oninput="setCustomValidity('')" class="form-control" disabled>
                                     <div class="input-group-btn">
                                     <button id="btnAgregarCliente" data-toggle="modal" data-target="#modalAgregarCliente" class="btn btn-default">
                                         <i class="fa fa-search "></i>
@@ -112,12 +113,20 @@
                                 </div><!--end-text-danger-->
                             </div>
 
+                            <label class="control-label col-sm-1">Consumidor Final
+                                <span class="text-danger" title="Este campo es requerido">*</span>
+                            </label>
+
+                            <div class="col-sm-1">
+                                <input onchange="check(this)" type="checkbox" name="consumidor" id="consumidor" value="S" checked>
+                            </div>
+
                             <label class="control-label col-sm-2">Cédula/Ruc
                                 <span class="text-danger" title="Este campo es requerido">*</span>
                             </label>
 
-                            <div class="col-sm-3">
-                                <input type="text" title="Identificacion" required="" class="form-control" name="identificacion" id="identificacion" value="">
+                            <div class="col-sm-2">
+                                <input type="text" title="Identificacion" required="" class="form-control" name="identificacion" id="identificacion" value="{{$consumidor_final->identificacion}}">
                             </div>
                         </div>
 
@@ -127,7 +136,7 @@
                             </label>
 
                             <div class="col-sm-3">
-                                <input type="text" title="Nombres" required="" class="form-control" name="nombres" id="nombres" value="">
+                                <input type="text" title="Nombres" required="" class="form-control" name="nombres" id="nombres" value="{{$consumidor_final->nombres}}">
                             </div>
 
                             <label class="control-label col-sm-1">Teléfono
@@ -135,7 +144,7 @@
                             </label>
 
                             <div class="col-sm-2">
-                                <input type="text" title="Teléfono" required="" class="form-control" name="telefono" id="telefono" value="">
+                                <input type="text" title="Teléfono" required="" class="form-control" name="telefono" id="telefono" value="{{$consumidor_final->telefono}}">
                             </div>
 
                             <label class="control-label col-sm-1">Correo
@@ -143,7 +152,7 @@
                             </label>
 
                             <div class="col-sm-3">
-                                <input type="text" title="Correo" required="" class="form-control" name="correo" id="correo" value="">
+                                <input type="text" title="Correo" required="" class="form-control" name="correo" id="correo" value="{{$consumidor_final->correo}}">
                             </div>
                         </div>
 
@@ -153,7 +162,7 @@
                             </label>
 
                             <div class="col-sm-10">
-                                <input type="text" title="Dirección" required="" class="form-control" name="direccion" id="direccion" value="">
+                                <input type="text" title="Dirección" required="" class="form-control" name="direccion" id="direccion" value="{{$consumidor_final->direcccion}}">
                             </div>
                         </div>
                         <!--Fin Datos del cliente-->
@@ -362,6 +371,28 @@
                                 <p class="help-block"></p>
 
                             </div>
+
+                            <label class="control-label col-sm-2">
+
+                            </label>
+
+                            <div class="col-sm-2">
+                                <input type="text" title="Ingrese el valor" class="form-control" name="pago" id="pago"  placeholder="Ingrese el valor del pago">
+                                <div class="text-danger">
+                                </div><!--end-text-danger-->
+                                <p class="help-block"></p>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="text" title="Devolución" required="" class="form-control" name="devolucion" id="devolucion" value="" placeholder="Valor devolución" disabled>
+                                    <div class="input-group-btn">
+                                        <div class="btn btn-default" onclick="devolucionfunc()">
+                                            <i class="fa fa-refresh "></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div><!-- /.box-body -->
 
@@ -400,64 +431,7 @@
 
 
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <strong><i class='{{CRUDBooster::getCurrentModule()->icon}}'></i> {!! $page_title or "Page Title" !!}</strong>
-                        </div>
 
-                        <div class="panel-body" style="padding:20px 0px 0px 0px">
-                            <?php
-                            $action = (@$row) ? CRUDBooster::mainpath("edit-save/$row->id") : CRUDBooster::mainpath("add-save");
-                            $return_url = ($return_url) ?: g('return_url');
-                            ?>
-                            <form class='form-horizontal' method='post' id="form" enctype="multipart/form-data" action='{{$action}}'>
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type='hidden' name='return_url' value='{{ @$return_url }}'/>
-                                <input type='hidden' name='ref_mainpath' value='{{ CRUDBooster::mainpath() }}'/>
-                                <input type='hidden' name='ref_parameter' value='{{urldecode(http_build_query(@$_GET))}}'/>
-                                @if($hide_form)
-                                    <input type="hidden" name="hide_form" value='{!! serialize($hide_form) !!}'>
-                                @endif
-                                <div class="box-body" id="parent-form-area">
-
-
-                                </div><!-- /.box-body -->
-
-                                <div class="box-footer" style="background: #F5F5F5">
-
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2"></label>
-                                        <div class="col-sm-10">
-                                            @if($button_cancel && CRUDBooster::getCurrentMethod() != 'getDetail')
-                                                @if(g('return_url'))
-                                                    <a href='{{g("return_url")}}' class='btn btn-default'><i
-                                                            class='fa fa-chevron-circle-left'></i> {{trans("crudbooster.button_back")}}</a>
-                                                @else
-                                                    <a href='{{CRUDBooster::mainpath("?".http_build_query(@$_GET)) }}' class='btn btn-default'><i
-                                                            class='fa fa-chevron-circle-left'></i> {{trans("crudbooster.button_back")}}</a>
-                                                @endif
-                                            @endif
-                                            @if(CRUDBooster::isCreate() || CRUDBooster::isUpdate())
-
-                                                @if(CRUDBooster::isCreate() && $button_addmore==TRUE && $command == 'add')
-                                                    <input type="submit" name="submit" value='{{trans("crudbooster.button_save_more")}}' class='btn btn-success'>
-                                                @endif
-
-                                                @if($button_save && $command != 'detail')
-                                                    <input type="submit" name="submit" value='{{trans("crudbooster.button_save")}}' class='btn btn-success'>
-                                                @endif
-
-                                            @endif
-                                        </div>
-                                    </div>
-
-
-                                </div><!-- /.box-footer-->
-
-                            </form>
-
-                        </div>
-                    </div>
 
             </div>
         </div>
@@ -470,8 +444,8 @@
                     <h4>
                         Buscar cliente
                         <span class="pull-right">
-						<a class="btn btn-success btn-sm text-center" href="/clientes/nuevo" target="_blank" >
-							<i class="fa fa-user-plus" aria-hidden="true"></i>
+						<a class="btn btn-success btn-sm text-center" href="/admin/clientes/add" target="_blank" >
+							<i class="fa fa-user-plus" aria-hidden="true"></i> Agregar nuevo cliente
 						</a>
 					</span>
                     </h4>
