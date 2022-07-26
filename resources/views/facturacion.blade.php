@@ -101,7 +101,7 @@
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <input id="hiddenCliente" type="hidden" name="cliente_id" value="">
-                                    <input id="hiddenConsumidor" type="hidden" name="cliente_id" value="{{$consumidor_final->id}}">
+                                    <input id="hiddenConsumidor" type="hidden" name="consumidor_final_id" value="{{$consumidor_final->id}}">
                                     <input name="cliente" type="text" id="txtCliente" placeholder="Ingrese los Nombres, razón social, cédula o ruc" oninvalid="this.setCustomValidity('Debe ingresar el nombre o la razón social del cliente')" oninput="setCustomValidity('')" class="form-control" disabled>
                                     <div class="input-group-btn">
                                     <button id="btnAgregarCliente" data-toggle="modal" data-target="#modalAgregarCliente" class="btn btn-default">
