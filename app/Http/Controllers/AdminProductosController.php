@@ -47,8 +47,8 @@
 			$this->form[] = ['label'=>'Stock','name'=>'stock','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Valor','name'=>'valor','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Categoría','name'=>'categoria_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'categorias,nombre'];
-			$this->form[] = ['label'=>'Iva','name'=>'tasa_iva_id','type'=>'select2','validation'=>'required','width'=>'col-sm-9','datatable'=>'estados,nombre'];
-			$this->form[] = ['label'=>'Activo','name'=>'activo_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'tasas_iva,nombre'];
+			$this->form[] = ['label'=>'Iva','name'=>'tasa_iva_id','type'=>'select2','validation'=>'required','width'=>'col-sm-9','datatable'=>'tasas_iva,nombre'];
+			$this->form[] = ['label'=>'Activo','name'=>'activo_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'estados,nombre'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -58,8 +58,8 @@
 			//$this->form[] = ['label'=>'Stock','name'=>'stock','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Valor','name'=>'valor','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Categoría','name'=>'categoria_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'categorias,nombre'];
-			//$this->form[] = ['label'=>'Activo','name'=>'activo_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'estados,nombre'];
 			//$this->form[] = ['label'=>'Iva','name'=>'tasa_iva_id','type'=>'select2','validation'=>'required','width'=>'col-sm-9','datatable'=>'tasas_iva,nombre'];
+			//$this->form[] = ['label'=>'Activo','name'=>'activo_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'SI;NO'];
 			# OLD END FORM
 
 			/*
