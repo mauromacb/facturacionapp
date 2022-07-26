@@ -41,10 +41,10 @@
 			$this->col = [];
 			$this->col[] = ["label"=>"Secuencial","name"=>"secuencial"];
 			$this->col[] = ["label"=>"Cliente","name"=>"cliente_id","join"=>"clientes,nombres"];
+			$this->col[] = ["label"=>"Consumidor Final","name"=>"consumidor_final_id","join"=>"consumidor_final,nombres"];
 			$this->col[] = ["label"=>"Forma Pago","name"=>"forma_pago_id","join"=>"formas_pagos,forma_pago"];
 			$this->col[] = ["label"=>"Fecha Emisión","name"=>"fecha_emision"];
 			$this->col[] = ["label"=>"Subtotal 12","name"=>"subtotal_12"];
-			$this->col[] = ["label"=>"Total Sin Impuestos","name"=>"total_sin_impuestos"];
 			$this->col[] = ["label"=>"Total Iva","name"=>"total_iva"];
 			$this->col[] = ["label"=>"Total Valor","name"=>"total_valor"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
@@ -306,6 +306,7 @@
             $factura_cabecera = new Factura();
 
             $factura_cabecera->cliente_id=$request['cliente_id'];
+            $factura_cabecera->consumidor_final_id=$request['consumidor_final_id'];
             $factura_cabecera->empresa_id=1;
             $factura_cabecera->secuencial=$request['secuencial'];
             $factura_cabecera->forma_pago_id=$request['forma_pago_id'];
