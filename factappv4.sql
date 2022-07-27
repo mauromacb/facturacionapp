@@ -11,7 +11,7 @@
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 26/07/2022 00:26:08
+ Date: 27/07/2022 00:14:46
 */
 
 SET NAMES utf8mb4;
@@ -26,8 +26,9 @@ CREATE TABLE `categorias`  (
   `nombre` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `nombre_categoria`(`nombre`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of categorias
@@ -53,6 +54,7 @@ INSERT INTO `categorias` VALUES (18, 'Categoria Kw', NULL, NULL);
 INSERT INTO `categorias` VALUES (19, 'Categoria vO', NULL, NULL);
 INSERT INTO `categorias` VALUES (20, 'Categoria kP', NULL, NULL);
 INSERT INTO `categorias` VALUES (21, 'Categoria uk.', NULL, '2022-07-18 20:14:08');
+INSERT INTO `categorias` VALUES (23, '456456', '2022-07-26 21:29:16', NULL);
 
 -- ----------------------------
 -- Table structure for clientes
@@ -69,7 +71,7 @@ CREATE TABLE `clientes`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 203 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 208 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of clientes
@@ -276,6 +278,11 @@ INSERT INTO `clientes` VALUES (199, '5052275248168', 'Cliente  pdI3KvGjpa MK1uia
 INSERT INTO `clientes` VALUES (200, '4392510173060', 'Cliente  FUQET0q7RK lq9rhktHNI', 'correo@ 9fED2z5hs2.com', 'tI4e9pYKhq', 'Direccion  DQL160eZCh h3Z5LuNy5C', 'Ruc', NULL, NULL);
 INSERT INTO `clientes` VALUES (201, '3237317963945', 'Cliente  okB9JP28kO tM9BGqOFN9', 'correo@ V6O8kVrW40.com', '7brob0n6Qi', 'Direccion  8abv4YxswH SZPTQabI5R', 'Ruc', NULL, NULL);
 INSERT INTO `clientes` VALUES (202, '1717911122', 'MAURICIO CONDOR', 'mauricio.macb@hotmail.com', '0995555555', 'DIRECCION QUITO ECUADOR', 'Cédula', '2022-07-26 00:05:38', NULL);
+INSERT INTO `clientes` VALUES (203, '1711121314001', 'Cliente  AaMxcV9De2 OmQlM3w5wZ', 'correo@dsadsad.com', '11111', 'dsadsa', 'Cédula', '2022-07-26 22:26:52', NULL);
+INSERT INTO `clientes` VALUES (204, '12312312312', 'Cliente de prueba', 'mauricio.macb@hotmail.com', '11111', 'ewrewrwe', 'Cédula', '2022-07-26 22:44:12', NULL);
+INSERT INTO `clientes` VALUES (205, '4162554797733', 'Cliente de prueba', 'cliente@prueba.com', '11111', 'dsfds', 'Cédula', '2022-07-26 22:57:04', '2022-07-26 22:57:04');
+INSERT INTO `clientes` VALUES (206, '4162554797733', 'Cliente de prueba', 'cliente@prueba.com', '11111', 'dsfds', 'Cédula', '2022-07-26 22:57:44', '2022-07-26 22:57:44');
+INSERT INTO `clientes` VALUES (207, '17179188888', 'LUIS LOPEZ', 'correo@prueba.com', '56565656', 'direcionn rere', 'Cédula', '2022-07-26 22:58:14', '2022-07-26 22:58:14');
 
 -- ----------------------------
 -- Table structure for cms_apicustom
@@ -404,7 +411,7 @@ CREATE TABLE `cms_logs`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 89 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 106 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_logs
@@ -497,6 +504,23 @@ INSERT INTO `cms_logs` VALUES (85, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; W
 INSERT INTO `cms_logs` VALUES (86, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/factureros/edit-save/1', 'Actualizar información  en Facturero', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>inicio_facturero</td><td>15</td><td>1</td></tr></tbody></table>', 1, '2022-07-26 00:13:51', NULL);
 INSERT INTO `cms_logs` VALUES (87, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/logout', 'admin@admin.com se desconectó', '', 1, '2022-07-26 00:20:35', NULL);
 INSERT INTO `cms_logs` VALUES (88, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/login', 'Ingreso de admin@admin.com desde la Dirección IP 127.0.0.1', '', 1, '2022-07-26 00:23:49', NULL);
+INSERT INTO `cms_logs` VALUES (89, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/login', 'Ingreso de admin@admin.com desde la Dirección IP 127.0.0.1', '', 1, '2022-07-26 14:26:51', NULL);
+INSERT INTO `cms_logs` VALUES (90, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/statistic_builder/add-save', 'Añadir nueva información PRODUCTOS en Generador de Estadísticas', '', 1, '2022-07-26 14:30:20', NULL);
+INSERT INTO `cms_logs` VALUES (91, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/statistic_builder/delete/1', 'Eliminar información PRODUCTOS en Generador de Estadísticas', '', 1, '2022-07-26 20:39:33', NULL);
+INSERT INTO `cms_logs` VALUES (92, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/statistic_builder/add-save', 'Añadir nueva información Inventario en Generador de Estadísticas', '', 1, '2022-07-26 21:04:37', NULL);
+INSERT INTO `cms_logs` VALUES (93, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/menu_management/add-save', 'Añadir nueva información Dashboard en Gestión de Menús', '', 1, '2022-07-26 21:17:35', NULL);
+INSERT INTO `cms_logs` VALUES (94, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/menu_management/edit-save/12', 'Actualizar información Dashboard en Gestión de Menús', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>type</td><td>Module</td><td>Statistic</td></tr><tr><td>path</td><td>productos</td><td>statistic_builder/show/inventario</td></tr><tr><td>parent_id</td><td>0</td><td></td></tr><tr><td>sorting</td><td></td><td></td></tr></tbody></table>', 1, '2022-07-26 21:19:42', NULL);
+INSERT INTO `cms_logs` VALUES (95, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/logout', 'admin@admin.com se desconectó', '', 1, '2022-07-26 21:21:45', NULL);
+INSERT INTO `cms_logs` VALUES (96, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/login', 'Ingreso de admin@admin.com desde la Dirección IP 127.0.0.1', '', 1, '2022-07-26 21:21:48', NULL);
+INSERT INTO `cms_logs` VALUES (97, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/menu_management/edit-save/12', 'Actualizar información Dashboard en Gestión de Menús', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>sorting</td><td></td><td></td></tr></tbody></table>', 1, '2022-07-26 21:23:03', NULL);
+INSERT INTO `cms_logs` VALUES (98, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/logout', 'admin@admin.com se desconectó', '', 1, '2022-07-26 21:24:20', NULL);
+INSERT INTO `cms_logs` VALUES (99, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/login', 'Ingreso de admin@admin.com desde la Dirección IP 127.0.0.1', '', 1, '2022-07-26 21:24:23', NULL);
+INSERT INTO `cms_logs` VALUES (100, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/categorias/add-save', 'Añadir nueva información  en Categorias', '', 1, '2022-07-26 21:29:16', NULL);
+INSERT INTO `cms_logs` VALUES (101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/clientes/add-save', 'Añadir nueva información  en Clientes', '', 1, '2022-07-26 22:26:52', NULL);
+INSERT INTO `cms_logs` VALUES (102, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/clientes/add-save', 'Añadir nueva información  en Clientes', '', 1, '2022-07-26 22:44:12', NULL);
+INSERT INTO `cms_logs` VALUES (103, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/facturas/delete/29', 'Eliminar información 29 en Factura de venta', '', 1, '2022-07-26 23:00:39', NULL);
+INSERT INTO `cms_logs` VALUES (104, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/empresas/edit-save/1', 'Actualizar información  en Empresa', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>nombre</td><td>Nombre Empresa.</td><td>SUPERMERCADO DON CANDO</td></tr><tr><td>ruc</td><td>1122334455001</td><td>0504181751001</td></tr><tr><td>direccion</td><td>Direccion de la empresa</td><td>AV. CALLE 10 DE AGOSTO Y MEXICO</td></tr></tbody></table>', 1, '2022-07-26 23:33:57', NULL);
+INSERT INTO `cms_logs` VALUES (105, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'http://localhost:8000/admin/factureros/edit-save/1', 'Actualizar información  en Facturero', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>inicio_facturero</td><td>3</td><td>1</td></tr></tbody></table>', 1, '2022-07-27 00:14:30', NULL);
 
 -- ----------------------------
 -- Table structure for cms_menus
@@ -517,7 +541,7 @@ CREATE TABLE `cms_menus`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_menus
@@ -532,6 +556,7 @@ INSERT INTO `cms_menus` VALUES (8, 'Inventario', 'Module', 'categorias', 'normal
 INSERT INTO `cms_menus` VALUES (9, 'Empresa', 'Route', 'AdminEmpresasControllerGetIndex', 'normal', 'fa fa-glass', 0, 1, 0, 1, 1, '2022-07-04 20:30:19', '2022-07-18 20:57:36');
 INSERT INTO `cms_menus` VALUES (10, 'Factura de venta', 'Route', 'AdminFacturasControllerGetIndex', 'normal', 'fa fa-star', 0, 1, 0, 1, 5, '2022-07-04 20:33:01', '2022-07-04 21:23:44');
 INSERT INTO `cms_menus` VALUES (11, 'IVA', 'Route', 'AdminTasasIvaControllerGetIndex', NULL, 'fa fa-glass', 7, 1, 0, 1, 1, '2022-07-18 20:31:07', NULL);
+INSERT INTO `cms_menus` VALUES (12, 'Dashboard', 'Statistic', 'statistic_builder/show/inventario', 'normal', 'fa fa-star', 0, 1, 0, 1, NULL, '2022-07-26 21:17:35', '2022-07-26 21:23:03');
 
 -- ----------------------------
 -- Table structure for cms_menus_privileges
@@ -542,7 +567,7 @@ CREATE TABLE `cms_menus_privileges`  (
   `id_cms_menus` int(11) NULL DEFAULT NULL,
   `id_cms_privileges` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_menus_privileges
@@ -561,6 +586,7 @@ INSERT INTO `cms_menus_privileges` VALUES (14, 10, 2);
 INSERT INTO `cms_menus_privileges` VALUES (15, 11, 1);
 INSERT INTO `cms_menus_privileges` VALUES (16, 9, 1);
 INSERT INTO `cms_menus_privileges` VALUES (17, 9, 2);
+INSERT INTO `cms_menus_privileges` VALUES (20, 12, 1);
 
 -- ----------------------------
 -- Table structure for cms_moduls
@@ -733,11 +759,15 @@ CREATE TABLE `cms_statistic_components`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_statistic_components
 -- ----------------------------
+INSERT INTO `cms_statistic_components` VALUES (1, 1, '954478917d37427a8d0c35a29bdf82b1', 'table', 'area5', 0, NULL, '{\"name\":\"Iventario\",\"sql\":\"select * from productos\"}', '2022-07-26 14:31:06', NULL);
+INSERT INTO `cms_statistic_components` VALUES (2, 1, 'aeed81f1c4a0b45c246134ec899b9c15', 'chartarea', 'area5', 1, NULL, '{\"name\":\"Facturas\",\"sql\":\"select * from facturas\",\"area_name\":\"cliente_id;forma_pago:id\",\"goals\":null}', '2022-07-26 14:32:25', NULL);
+INSERT INTO `cms_statistic_components` VALUES (5, 2, '3d741bd389e2ad373d63f532b287107b', 'table', 'area5', 0, NULL, '{\"name\":\"Inventario\",\"sql\":\"SELECT codigo,nombre, stock FROM productos where stock <=5\"}', '2022-07-26 21:09:14', NULL);
+INSERT INTO `cms_statistic_components` VALUES (7, 2, 'a1ab08f8c7dd8ae98563b4168362280a', 'smallbox', 'area1', 0, NULL, '{\"name\":\"Clientes\",\"icon\":\"ion-bag\",\"color\":\"bg-green\",\"link\":\"#\",\"sql\":\"select count(*) total from clientes\"}', '2022-07-26 21:13:37', NULL);
 
 -- ----------------------------
 -- Table structure for cms_statistics
@@ -750,11 +780,12 @@ CREATE TABLE `cms_statistics`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_statistics
 -- ----------------------------
+INSERT INTO `cms_statistics` VALUES (2, 'Inventario', 'inventario', '2022-07-26 21:04:37', NULL);
 
 -- ----------------------------
 -- Table structure for cms_users
@@ -820,7 +851,7 @@ CREATE TABLE `empresas`  (
 -- ----------------------------
 -- Records of empresas
 -- ----------------------------
-INSERT INTO `empresas` VALUES (1, 'Nombre Empresa.', '1122334455001', '09999999', 'email@email.com', 'Direccion de la empresa', NULL, '2022-07-18 23:09:01');
+INSERT INTO `empresas` VALUES (1, 'SUPERMERCADO DON CANDO', '0504181751001', '09999999', 'email@email.com', 'AV. CALLE 10 DE AGOSTO Y MEXICO', NULL, '2022-07-26 23:33:57');
 
 -- ----------------------------
 -- Table structure for estados
@@ -872,13 +903,11 @@ CREATE TABLE `factura_detalles`  (
   CONSTRAINT `fk_producto_id` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_tasa_iva_id` FOREIGN KEY (`tasa_iva_id`) REFERENCES `tasas_iva` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_usuario_id` FOREIGN KEY (`usuario_id`) REFERENCES `cms_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of factura_detalles
 -- ----------------------------
-INSERT INTO `factura_detalles` VALUES (1, 3, 1, 28, NULL, '2022-07-26 00:00:00', 0, 1, 22, 1, 22, 2.64, 24.64, NULL, NULL, '2022-07-26 00:19:49', '2022-07-26 00:19:49');
-INSERT INTO `factura_detalles` VALUES (2, 5, 1, 28, NULL, '2022-07-26 00:00:00', 0, 1, 56, 1, 56, 6.72, 62.72, NULL, NULL, '2022-07-26 00:19:49', '2022-07-26 00:19:49');
 
 -- ----------------------------
 -- Table structure for facturas
@@ -903,6 +932,7 @@ CREATE TABLE `facturas`  (
   `total_propina` double(8, 2) NOT NULL,
   `total_valor` double(8, 2) NOT NULL,
   `observacion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `anulado` tinyint(1) NULL DEFAULT 0,
   `created_by_id` int(10) UNSIGNED NOT NULL,
   `updated_by_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
@@ -916,12 +946,11 @@ CREATE TABLE `facturas`  (
   CONSTRAINT `facturas_empresa_id_foreign` FOREIGN KEY (`empresa_id`) REFERENCES `empresas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `facturas_forma_pago_id_foreign` FOREIGN KEY (`forma_pago_id`) REFERENCES `formas_pagos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `facturas_consumidor_final` FOREIGN KEY (`consumidor_final_id`) REFERENCES `consumidor_final` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of facturas
 -- ----------------------------
-INSERT INTO `facturas` VALUES (28, 202, NULL, 1, 1, 1, '2022-07-26', 0.00, 78.00, 0.00, 0.00, 0.00, 0.00, 9.36, 0.00, 0.00, 87.36, NULL, 1, 1, '2022-07-26 00:19:49', '2022-07-26 00:19:49');
 
 -- ----------------------------
 -- Table structure for factureros
@@ -945,7 +974,7 @@ CREATE TABLE `factureros`  (
 -- ----------------------------
 -- Records of factureros
 -- ----------------------------
-INSERT INTO `factureros` VALUES (1, '2022-01-01', '2022-12-01', 2, 999, '1000001', 1, '2022-07-05 19:33:45', '2022-07-26 00:19:49');
+INSERT INTO `factureros` VALUES (1, '2022-01-01', '2022-12-01', 1, 999, '1000001', 1, '2022-07-05 19:33:45', '2022-07-27 00:14:30');
 
 -- ----------------------------
 -- Table structure for failed_jobs
@@ -1092,7 +1121,7 @@ CREATE TABLE `productos`  (
 -- ----------------------------
 -- Records of productos
 -- ----------------------------
-INSERT INTO `productos` VALUES (1, '00000001', 'Producto de prueba', 20, 20.00, 15, 1, 1, '2022-07-04 21:09:05', NULL);
+INSERT INTO `productos` VALUES (1, '00000001', 'Producto de prueba', 5, 20.00, 15, 1, 1, '2022-07-04 21:09:05', NULL);
 INSERT INTO `productos` VALUES (2, '00000002', 'Producto de prueba 2', 200, 20.00, 5, 1, 1, '2022-07-04 21:01:49', '2022-07-21 22:00:09');
 INSERT INTO `productos` VALUES (3, '00000003', 'Producto de prueba3.', 432, 22.00, 16, 1, 1, '2022-07-05 20:25:33', '2022-07-18 20:13:44');
 INSERT INTO `productos` VALUES (4, '00000004', 'Producto de prueba 4', 300, 50.00, 8, 1, 1, '2022-07-25 18:50:29', NULL);

@@ -12,4 +12,8 @@ class Factura extends Model
     public function cliente(){
         return $this->hasOne(Clientes::class,'id','cliente_id');
     }
+
+    public function consumidor(){
+        return $this->hasOne(ConsumidorFinal::class,'id','consumidor_final_id');
+    }
 }
