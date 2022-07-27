@@ -444,9 +444,9 @@
                     <h4>
                         Buscar cliente
                         <span class="pull-right">
-						<a class="btn btn-success btn-sm text-center" href="/admin/clientes/add" target="_blank" >
+                        <button id="btnRegistrarCliente" data-toggle="modal" data-target="#modalRegistrarCliente" class="btn btn-success">
 							<i class="fa fa-user-plus" aria-hidden="true"></i> Agregar nuevo cliente
-						</a>
+                        </button>
 					</span>
                     </h4>
                 </div>
@@ -489,6 +489,115 @@
                         Confirmar
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalRegistrarCliente" role="dialog">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>
+                        Agregar nuevo cliente
+                        <span class="pull-right">
+                            <button class="btn btn-default btn-sm text-center" data-dismiss="modal">
+                                <i class="fa fa-close" aria-hidden="true"></i> Cerrar
+                            </button>
+					    </span>
+                    </h4>
+                </div>
+                <form class="form-horizontal" method="post" id="formRegistrarCliente" enctype="multipart/form-data" action="{{url('facturas/registrar/cliente')}}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="modal-body">
+                        <div class="box-body" id="parent-form-area">
+
+                                <div class="form-group header-group-0 col-sm-12" id="form-group-tipo" style="">
+                                    <label class="control-label col-sm-3">Tipo
+                                        <span class="text-danger" title="Este campo es requerido">*</span>
+                                    </label>
+
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="tipo" data-value="" required="" name="tipo">
+                                            <option value="">** Selecciona un Tipo</option>
+                                            <option value="Cédula">Cédula</option>
+                                            <option value="Ruc">Ruc</option>
+                                        </select>
+                                        <div class="text-danger"></div>
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group header-group-0 col-sm-12" id="form-group-identificacion" style="">
+                                    <label class="control-label col-sm-3">
+                                        Identificación
+                                        <span class="text-danger" title="Este campo es requerido">*</span>
+                                    </label>
+
+                                    <div class="col-sm-8">
+                                        <input type="text" title="Identificación" required="" maxlength="255" class="form-control" name="identificacion" id="identificacion" value="">
+
+                                        <div class="text-danger"></div>
+                                        <p class="help-block"></p>
+
+                                    </div>
+                                </div>
+                                <div class="form-group header-group-0 col-sm-12" id="form-group-nombres" style="">
+                                    <label class="control-label col-sm-3">
+                                        Nombres
+                                        <span class="text-danger" title="Este campo es requerido">*</span>
+                                    </label>
+
+                                    <div class="col-sm-8">
+                                        <input type="text" title="Nombres" required="" maxlength="255" class="form-control" name="nombres" id="nombres" value="">
+
+                                        <div class="text-danger"></div>
+                                        <p class="help-block"></p>
+
+                                    </div>
+                                </div>
+                                <div class="form-group header-group-0 col-sm-12" id="form-group-correo" style="">
+                                    <label class="control-label col-sm-3">Correo
+                                        <span class="text-danger" title="Este campo es requerido">*</span>
+                                    </label>
+
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                            <input type="email" name="correo" style="display: none">
+                                            <input type="email" title="Correo" required="" maxlength="255" class="form-control" name="correo" id="correo" value="">
+                                        </div>
+                                        <div class="text-danger"></div>
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group header-group-0 col-sm-12" id="form-group-telefono" style="">
+                                    <label class="control-label col-sm-3">Teléfono
+                                        <span class="text-danger" title="Este campo es requerido">*</span>
+                                    </label>
+
+                                    <div class="col-sm-8">
+                                        <input type="number" step="1" title="Teléfono" required="" min="1" class="form-control" name="telefono" id="telefono" value="">
+                                        <div class="text-danger"></div>
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group header-group-0 col-sm-12" id="form-group-direccion" style="">
+                                    <label class="control-label col-sm-3">Dirección
+                                        <span class="text-danger" title="Este campo es requerido">*</span>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="direccion" id="direccion" required="" maxlength="255" class="form-control" rows="5"></textarea>
+                                        <div class="text-danger"></div>
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>                                            </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button id="btnRegistrarCliente" class="btn btn-block btn-success">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

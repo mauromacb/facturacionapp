@@ -485,8 +485,6 @@ function check(element){
 }
 
 function devolucionfunc(){
-
-
     if (document.getElementById("total").value>0) {
         var totalFactura = parseFloat(document.getElementById("total").value).toFixed(2);
         var pago = parseFloat(document.getElementById("pago").value).toFixed(2);
@@ -498,5 +496,11 @@ function devolucionfunc(){
         }
 
     }
-
 }
+
+
+document.querySelectorAll('.printbutton').forEach(function(element) {
+    element.addEventListener('click', function() {
+        print();
+    });
+});

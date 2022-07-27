@@ -2,6 +2,7 @@
 
 	use App\Models\Clientes;
     use App\Models\ConsumidorFinal;
+    use App\Models\Empresa;
     use App\Models\Factura;
     use App\Models\FacturaDetalle;
     use App\Models\Facturero;
@@ -387,12 +388,15 @@
 
             $data = [];
             //$data['page_title'] = 'Detail Data';
-            $data = Factura::findOrFail($id)->first();
-            $dataDetalleFact = FacturaDetalle::where('factura_id',$id)->get();
+
+
+            $factura = Factura::findOrFail($id);
+            $dataDetalleFact = FacturaDetalle::where('factura_id',$factura->id)->get();
+            $empresa = Empresa::first();
 
 
             //Please use view method instead view method from laravel
-            return $this->view('/verfacturacion', compact('data','dataDetalleFact'));
+            return $this->view('/verfacturacion', compact('factura','dataDetalleFact', 'empresa'));
         }
 
 	    /*
@@ -488,7 +492,7 @@
 	    |
 	    */
 	    public function hook_before_delete($id) {
-	        //Your code here
+	        dd($id);
 
 	    }
 
@@ -510,7 +514,21 @@
         }
 
 
-	    //By the way, you can still create your own method in here... :)
+        public function registrarCliente(\Illuminate\Http\Request $request){
+            $cliente = new Clientes();
+            $cliente->identificacion = $request->identificacion;
+            $cliente->tipo = $request->tipo;
+            $cliente->nombres = $request->nombres;
+            $cliente->correo = $request->correo;
+            $cliente->telefono = $request->telefono;
+            $cliente->direccion = $request->direccion;
+            $cliente->save();
+
+            return redirect('/admin/facturas/add')->with(['message' =>  'Actualizado correctamente', 'message_type' => 'success']);
+        }
+
+
+        //By the way, you can still create your own method in here... :)
 
 
 	}
