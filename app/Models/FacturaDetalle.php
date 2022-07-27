@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class FacturaDetalle extends Model
 {
     use HasFactory;
+
+    public function producto(){
+        return $this->hasOne(Productos::class,'id','producto_id');
+    }
 }

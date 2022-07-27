@@ -25,7 +25,7 @@
 			$this->button_show = true;
 			$this->button_filter = true;
 			$this->button_import = false;
-			$this->button_export = false;
+			$this->button_export = true;
 			$this->table = "productos";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
@@ -45,7 +45,7 @@
 			$this->form[] = ['label'=>'Código','name'=>'codigo','type'=>'text','validation'=>'required|min:1|max:255|unique:productos','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Nombre','name'=>'nombre','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Stock','name'=>'stock','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Valor','name'=>'valor','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Valor','name'=>'valor','type'=>'number','validation'=>'required|double|min:0','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Categoría','name'=>'categoria_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'categorias,nombre'];
 			$this->form[] = ['label'=>'Iva','name'=>'tasa_iva_id','type'=>'select2','validation'=>'required','width'=>'col-sm-9','datatable'=>'tasas_iva,nombre'];
 			$this->form[] = ['label'=>'Activo','name'=>'activo_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'estados,nombre'];
@@ -56,10 +56,10 @@
 			//$this->form[] = ['label'=>'Código','name'=>'codigo','type'=>'text','validation'=>'required|min:1|max:255|unique:productos','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Nombre','name'=>'nombre','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Stock','name'=>'stock','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Valor','name'=>'valor','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Valor','name'=>'valor','type'=>'number','validation'=>'required|double','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Categoría','name'=>'categoria_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'categorias,nombre'];
 			//$this->form[] = ['label'=>'Iva','name'=>'tasa_iva_id','type'=>'select2','validation'=>'required','width'=>'col-sm-9','datatable'=>'tasas_iva,nombre'];
-			//$this->form[] = ['label'=>'Activo','name'=>'activo_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'SI;NO'];
+			//$this->form[] = ['label'=>'Activo','name'=>'activo_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'estados,nombre'];
 			# OLD END FORM
 
 			/*
