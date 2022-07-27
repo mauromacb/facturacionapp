@@ -27,7 +27,7 @@
 			$this->button_bulk_action = true;
 			$this->button_action_style = "button_icon";
 			$this->button_add = true;
-			$this->button_edit = true;
+			$this->button_edit = false;
 			$this->button_delete = true;
 			$this->button_detail = true;
 			$this->button_show = true;
@@ -376,6 +376,23 @@
 
             //Please use view method instead view method from laravel
             return $this->view('custom_edit_view',$data);
+        }
+
+
+        public function getDetail($id) {
+            //Create an Auth
+            if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {
+                CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
+            }
+
+            $data = [];
+            //$data['page_title'] = 'Detail Data';
+            $data = Factura::findOrFail($id)->first();
+            $dataDetalleFact = FacturaDetalle::where('factura_id',$id)->get();
+
+
+            //Please use view method instead view method from laravel
+            return $this->view('/verfacturacion', compact('data','dataDetalleFact'));
         }
 
 	    /*
