@@ -334,8 +334,9 @@
             $subtotal = 0;
             $totaliva = 0;
             foreach ($detalles as $detalle) {
+                $producto = Productos::where('codigo',$detalle->codigo)->first;
                 $factura_detalles = new FacturaDetalle();
-                $factura_detalles->producto_id = $detalle->codigo;
+                $factura_detalles->producto_id = $producto->id;
                 $factura_detalles->usuario_id = 1;
                 $factura_detalles->factura_id = $factura_cabecera->id;
                 $factura_detalles->fecha = $request['fecha_emision'];
@@ -351,7 +352,7 @@
                 $totaliva = $totaliva + $detalle->iva;
 
                 //resta de articulos del inventario
-                $producto = Productos::findOrFail($detalle->codigo);
+
                 $producto->stock = $producto->stock - $detalle->cantidad;
                 $producto->save();
             }
