@@ -336,7 +336,7 @@
 
         public function buscar(\Illuminate\Http\Request $request){
             $texto = $request->texto;
-            $productos = Productos::BuscarPorCodigo($texto)->with('iva')->get();
+            $productos = Productos::BuscarPorCodigo($texto)->with('iva')->where('stock','>',0)->get();
             if(count($productos) == 0){
                 $productos = Productos::FiltrarPorCodigo($texto)
                     ->FiltrarPorNombre($texto)

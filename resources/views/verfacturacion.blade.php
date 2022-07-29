@@ -107,11 +107,11 @@
             <tr><td colspan="4" align="center">CLIENTE: {{$factura->cliente->nombres}}{{$factura->consumidor->nombres}}</td></tr>
             <tr><td colspan="4" align="center">RUC/CED: {{$factura->cliente->identificacion}}{{$factura->consumidor->identificacion}}</td></tr>
             <tr><td colspan="4" align="center">DIRECCION: {{$factura->cliente->direccion}}{{$factura->consumidor->direccion}}</td></tr>
-            <tr><th>DESCRIPCION</th><th>CANT</th><th>P/U</th><th>TOTAL</th></tr>
+            <tr><th>DESCRIPCION</th><th>CANT</th><th>P / U</th><th>TOTAL</th></tr>
             @foreach($dataDetalleFact as $detalle)
                 <tr>
-                    <td class="text-right" align="right">{{$detalle->producto->nombre}}</td>
-                    <td class="text-right" align="right">{{$detalle->cantidad}}</td>
+                    <td class="text-right" align="left">{{$detalle->producto->nombre}}</td>
+                    <td class="text-right" align="center">{{$detalle->cantidad}}</td>
                     <td class="text-right" align="right">{{$detalle->precio_unitario}}</td>
                     <td class="text-right" align="right">{{$detalle->subtotal}}</td>
                 </tr>
@@ -134,8 +134,8 @@
             mywindow.document.write('</body></html>');
             mywindow.document.close(); // necesario para IE >= 10
             mywindow.focus(); // necesario para IE >= 10
-            mywindow.print();
-            mywindow.close();
+            //mywindow.print();
+            //mywindow.close();
             return true;}
     </script>
 @endsection
