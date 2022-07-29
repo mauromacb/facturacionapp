@@ -134,8 +134,8 @@
             mywindow.document.write('</body></html>');
             mywindow.document.close(); // necesario para IE >= 10
             mywindow.focus(); // necesario para IE >= 10
-            //mywindow.print();
-            //mywindow.close();
+            mywindow.print();
+            mywindow.close();
             return true;}
     </script>
 @endsection
