@@ -7,6 +7,7 @@
     use App\Models\FacturaDetalle;
     use App\Models\Facturero;
     use App\Models\FormasPago;
+    use App\Models\Productos;
     use Auth;
     use Illuminate\Support\Facades\Route;
     use Illuminate\Support\Facades\Schema;
@@ -348,6 +349,11 @@
 
                 $subtotal = $subtotal + $detalle->subTotal;
                 $totaliva = $totaliva + $detalle->iva;
+
+                //resta de articulos del inventario
+                $producto = Productos::findOrFail($detalle->codigo);
+                $producto->stock = $producto->stock - $detalle->cantidad;
+                $producto->save();
             }
             $totalfactura = $subtotal + $totaliva;
             $factura_cabecera->subtotal_12=$subtotal;
@@ -359,9 +365,7 @@
             $secuencial->inicio_facturero=$secuencial->inicio_facturero+1;
             $secuencial->save();
 
-            return redirect('/admin/facturas/add')->with('status', 'Profile updated!');
-            return redirect()->route('/admin/facturas');
-
+            return redirect('/admin/facturas/detail/'.$factura_cabecera->id)->with(['message' =>  'Agregado correctamente', 'message_type' => 'success']);
         }
 
         public function getEdit($id) {
@@ -492,8 +496,19 @@
 	    |
 	    */
 	    public function hook_before_delete($id) {
-	        dd($id);
+	        $factura = Factura::where('id',$id)->where('anulado',0)->first();
+	        $factura->anulado=1;
+	        $factura->save();
 
+            $detalles = FacturaDetalle::where('factura_id',$factura->id)->get();
+
+            foreach ($detalles as $detalle) {
+                $producto = Productos::findOrFail($detalle->producto_id);
+                $producto->stock = $producto->stock + $detalle->cantidad;
+                $producto->save();
+            }
+
+            return redirect('/admin/facturas')->with(['message' =>  'Anulado correctamente', 'message_type' => 'success']);
 	    }
 
 	    /*

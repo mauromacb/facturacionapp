@@ -114,17 +114,17 @@
             <tr><th>DESCRIPCION</th><th>CANT</th><th>P/U</th><th>TOTAL</th></tr>
             @foreach($dataDetalleFact as $detalle)
                 <tr>
-                    <td class="text-center" >{{$detalle->producto->nombre}}</td>
-                    <td class="text-center" >{{$detalle->cantidad}}</td>
-                    <td class="text-center" >{{$detalle->precio_unitario}}</td>
-                    <td class="text-center" >{{$detalle->subtotal}}</td>
+                    <td class="text-right" align="right">{{$detalle->producto->nombre}}</td>
+                    <td class="text-right" align="right">{{$detalle->cantidad}}</td>
+                    <td class="text-right" align="right">{{$detalle->precio_unitario}}</td>
+                    <td class="text-right" align="right">{{$detalle->subtotal}}</td>
                 </tr>
             @endforeach
-            <tr><td colspan="3">TARIFA 12%</td><td>{{$factura->subtotal_12}}</td></tr>
-            <tr><td colspan="3">TARIFA 0%</td><td>{{$factura->subtotal_0}}</td></tr>
-            <tr><td colspan="3">DESCUENTO</td><td>0</td></tr>
-            <tr><td colspan="3">IVA 12%</td><td>{{$factura->total_iva}}</td></tr>
-            <tr><td colspan="3">TOTAL</td><td>{{$factura->total_valor}}</td></tr>
+            <tr><td colspan="3" >TARIFA 12%</td><td align="right">{{$factura->subtotal_12}}</td></tr>
+            <tr><td colspan="3" >TARIFA 0%</td><td align="right">{{$factura->subtotal_0}}</td></tr>
+            <tr><td colspan="3" >DESCUENTO</td><td align="right">0</td></tr>
+            <tr><td colspan="3" >IVA 12%</td><td align="right">{{$factura->total_iva}}</td></tr>
+            <tr><td colspan="3" >TOTAL</td><td align="right">{{$factura->total_valor}}</td></tr>
         </table>
     </div>
 
