@@ -334,7 +334,7 @@
             $subtotal = 0;
             $totaliva = 0;
             foreach ($detalles as $detalle) {
-                $producto = Productos::where('codigo',$detalle->codigo)->first;
+                $producto = Productos::where('codigo',$detalle->codigo)->first();
                 $factura_detalles = new FacturaDetalle();
                 $factura_detalles->producto_id = $producto->id;
                 $factura_detalles->usuario_id = 1;
