@@ -413,11 +413,7 @@
                                 @if(CRUDBooster::isCreate() || CRUDBooster::isUpdate())
 
                                     @if(CRUDBooster::isCreate() && $button_addmore==TRUE && $command == 'add')
-                                        <input type="submit" name="submit" value='{{cbLang("button_save_more")}}' class='btn btn-success'>
-                                    @endif
-
-                                    @if($button_save && $command != 'detail')
-                                        <input type="submit" name="submit" value='{{cbLang("button_save")}}' class='btn btn-success'>
+                                        <input type="submit" name="submit" value='Guardar e Imprimir' class='btn btn-success'>
                                     @endif
 
                                 @endif
