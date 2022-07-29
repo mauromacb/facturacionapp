@@ -84,13 +84,9 @@
 
             <div class="form-group">
                 <div class="col-sm-10">
-                    @if(g('return_url'))
-                        <a href='{{g("return_url")}}' class='btn btn-default'><i
+                        <a href='{{url("admin/facturas/add")}}' class='btn btn-default'><i
                                 class='fa fa-chevron-circle-left'></i> {{cbLang("button_back")}}</a>
-                    @else
-                        <a href='{{CRUDBooster::mainpath("?".http_build_query(@$_GET)) }}' class='btn btn-default'><i
-                                class='fa fa-chevron-circle-left'></i> {{cbLang("button_back")}}</a>
-                    @endif
+
                     <button class="btn btn-primary"  onclick="javascript:imprim();"><i class="fa fa-print"></i> Imprimir</button>
 
                 </div>
@@ -130,7 +126,7 @@
 
     <script>
         function imprim(){
-            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+            var mywindow = window.open('', 'PRINT', 'width=600');
             mywindow.document.write('<html><head>');
             mywindow.document.write('');
             mywindow.document.write('</head><body >');
