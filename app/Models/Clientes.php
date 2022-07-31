@@ -25,4 +25,8 @@ class Clientes extends Model
         return $query->where('mail','like', '%'.$texto.'%', $boolean);
     }
 
+    public function tipo_documento(){
+        return $this->hasOne(TipoDocumento::class,'id','tipo_documento_id');
+    }
+
 }

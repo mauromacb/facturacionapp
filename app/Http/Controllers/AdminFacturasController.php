@@ -8,6 +8,7 @@
     use App\Models\Facturero;
     use App\Models\FormasPago;
     use App\Models\Productos;
+    use App\Models\TipoDocumento;
     use Auth;
     use Illuminate\Support\Facades\Route;
     use Illuminate\Support\Facades\Schema;
@@ -268,6 +269,7 @@
             $formapagos=FormasPago::where('activo_id',1)->limit('10')->pluck('forma_pago', 'id')->toArray();
             $facturero = Facturero::first();
             $consumidor_final = ConsumidorFinal::first();
+            $tipo_documentos = TipoDocumento::get();
 
             /*$this->addSelectTable("clientes","id",[
                 "table"         => "clientes",
@@ -276,7 +278,7 @@
                 "sql_condition" => "nombres = 'Cliente  k3mv7TjHjD kyE473Qf53'"
             ]);*/
 
-            return view('facturacion', compact('page_title', 'page_menu', 'command', 'clientes', 'formapagos','facturero','consumidor_final'));
+            return view('facturacion', compact('page_title', 'page_menu', 'command', 'clientes', 'formapagos','facturero','consumidor_final','tipo_documentos'));
         }
 
         public function postAddSave() {
@@ -532,7 +534,7 @@
 
         public function registrarCliente(\Illuminate\Http\Request $request){
             $cliente = new Clientes();
-            $cliente->identificacion = $request->identificacion;
+            $cliente->identificacion = $request->identificacion2;
             $cliente->tipo = $request->tipo;
             $cliente->nombres = $request->nombres;
             $cliente->correo = $request->correo;

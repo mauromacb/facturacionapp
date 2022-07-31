@@ -409,7 +409,13 @@ var delay = (function(){
 
 function check(element){
     if(element.checked) {
+        $('#identificacion').attr('readonly', true);
+        $('#nombres').attr('readonly', true);
+        $('#telefono').attr('readonly', true);
+        $('#direccion').attr('readonly', true);
+        $('#correo').attr('readonly', true);
         document.querySelector('#txtCliente').disabled = true;
+        document.querySelector('#btnAgregarCliente').disabled = true;
         document.querySelector('#identificacion').value = '99999999';
         document.querySelector('#nombres').value = 'CONSUMIDOR FINAL';
         document.querySelector('#telefono').value = '0999999999';
@@ -472,7 +478,13 @@ function check(element){
         });*/
 
     }else{
+        $('#identificacion').attr('readonly', false);
+        $('#nombres').attr('readonly', false);
+        $('#telefono').attr('readonly', false);
+        $('#direccion').attr('readonly', false);
+        $('#correo').attr('readonly', false);
         document.querySelector('#txtCliente').disabled = false;
+        document.querySelector('#btnAgregarCliente').disabled = false;
         document.querySelector('#identificacion').value = '';
         document.querySelector('#nombres').value = '';
         document.querySelector('#telefono').value = '';
@@ -504,3 +516,37 @@ document.querySelectorAll('.printbutton').forEach(function(element) {
         print();
     });
 });
+
+
+function getIdentificacion(selectObject) {
+    var value = selectObject.value;
+    if (value==1) {
+        $('input#identificacion2').attr('maxLength', '10').keypress(limitMe);
+        str = $('input#identificacion2').val();
+        if(str.length>10) {
+            $('input#identificacion2').val(str.slice(0, -(str.length-10)));
+        }
+    }
+    if (value==2) {
+        $('input#identificacion2').attr('maxLength', '13').keypress(limitMe);
+        str = $('input#identificacion2').val();
+        if(str.length>13) {
+            $('input#identificacion2').val(str.slice(0, -(str.length-13)));
+        }
+    }
+    if (value==3) {
+        $('input#identificacion2').attr('maxLength', '30').keypress(limitMe);
+    }
+}
+
+function limitMe(e) {
+    if (e.keyCode == 8) { return true; }
+    return this.value.length < $(this).attr("maxLength");
+}
+
+function soloNumeros(e){
+    if ($('#tipo').val()!=3) {
+        var key = window.Event ? e.which : e.keyCode
+        return (key >= 48 && key <= 57)
+    }
+}
