@@ -79,7 +79,7 @@
                             </label>
 
                             <div class="col-sm-2">
-                                <input type="number" step="1" title="Secuencial" required="" class="form-control" name="secuencial" id="secuencial" value="{{$facturero->inicio_facturero}}">
+                                <input type="number" step="1" title="Secuencial" required="" class="form-control" name="secuencial" id="secuencial" value="{{$facturero->inicio_facturero}}" readonly>
                                 <div class="text-danger"></div>
                                 <p class="help-block"></p>
                             </div>
@@ -104,7 +104,7 @@
                                     <input id="hiddenConsumidor" type="hidden" name="consumidor_final_id" value="{{$consumidor_final->id}}">
                                     <input name="cliente" type="text" id="txtCliente" placeholder="Ingrese los Nombres, razón social, cédula o ruc" oninvalid="this.setCustomValidity('Debe ingresar el nombre o la razón social del cliente')" oninput="setCustomValidity('')" class="form-control" disabled>
                                     <div class="input-group-btn">
-                                    <button id="btnAgregarCliente" data-toggle="modal" data-target="#modalAgregarCliente" class="btn btn-default">
+                                    <button id="btnAgregarCliente" data-toggle="modal" data-target="#modalAgregarCliente" class="btn btn-default" disabled>
                                         <i class="fa fa-search "></i>
                                     </button>
                                     </div>
@@ -126,7 +126,7 @@
                             </label>
 
                             <div class="col-sm-2">
-                                <input type="text" title="Identificacion" required="" class="form-control" name="identificacion" id="identificacion" value="{{$consumidor_final->identificacion}}">
+                                <input type="text" title="Identificacion" required="" class="form-control" name="identificacion" id="identificacion" value="{{$consumidor_final->identificacion}}" readonly>
                             </div>
                         </div>
 
@@ -136,7 +136,7 @@
                             </label>
 
                             <div class="col-sm-3">
-                                <input type="text" title="Nombres" required="" class="form-control" name="nombres" id="nombres" value="{{$consumidor_final->nombres}}">
+                                <input type="text" title="Nombres" required="" class="form-control" name="nombres" id="nombres" value="{{$consumidor_final->nombres}}" readonly>
                             </div>
 
                             <label class="control-label col-sm-1">Teléfono
@@ -144,7 +144,7 @@
                             </label>
 
                             <div class="col-sm-2">
-                                <input type="text" title="Teléfono" required="" class="form-control" name="telefono" id="telefono" value="{{$consumidor_final->telefono}}">
+                                <input type="text" title="Teléfono" required="" class="form-control" name="telefono" id="telefono" value="{{$consumidor_final->telefono}}" readonly>
                             </div>
 
                             <label class="control-label col-sm-1">Correo
@@ -152,7 +152,7 @@
                             </label>
 
                             <div class="col-sm-3">
-                                <input type="text" title="Correo" required="" class="form-control" name="correo" id="correo" value="{{$consumidor_final->correo}}">
+                                <input type="text" title="Correo" required="" class="form-control" name="correo" id="correo" value="{{$consumidor_final->correo}}" readonly>
                             </div>
                         </div>
 
@@ -162,23 +162,20 @@
                             </label>
 
                             <div class="col-sm-10">
-                                <input type="text" title="Dirección" required="" class="form-control" name="direccion" id="direccion" value="{{$consumidor_final->direcccion}}">
+                                <input type="text" title="Dirección" required="" class="form-control" name="direccion" id="direccion" value="{{$consumidor_final->direcccion}}" readonly>
                             </div>
                         </div>
                         <!--Fin Datos del cliente-->
                         <hr>
 
                         <!--Detalle factura-->
-                        <div class="form-group header-group-0 " id="form-group-total_sin_impuestos" style="">
-                            <h2 class="col-sm-12">Detalle Factura</h2>
-                        </div>
 
-                        <div class="row form_venta_contado form_factura_credito form_devolucion_contado form_compra_contado">
-                            <div class="col-md-8">
+                        <div class="row col-md-12 form_venta_contado form_factura_credito form_devolucion_contado form_compra_contado">
+                            <div class="col-md-5">
                                 <div class="input-group pull-right">
-                                    <input type="text" class="form-control input-sm" id="txtAgregarArticulo" list="listaBusquedaProducto" placeholder="Agregar un artículo..." onkeydown="if (event.keyCode == 13) return false;" tabindex="1">
+                                    <input type="text" class="form-control" id="txtAgregarArticulo" list="listaBusquedaProducto" placeholder="Agregar un artículo..." onkeydown="if (event.keyCode == 13) return false;" tabindex="1">
                                     <div class="input-group-btn">
-                                        <button id="btnAgregarArticulo" class="btn btn-default btn-sm">
+                                        <button id="btnAgregarArticulo" class="btn btn-default">
                                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
                                         </button>
                                     </div>
@@ -377,7 +374,7 @@
                             </label>
 
                             <div class="col-sm-2">
-                                <input type="text" title="Ingrese el valor" class="form-control" name="pago" id="pago"  placeholder="Ingrese el valor del pago">
+                                <input type="text" title="Ingrese el valor" class="form-control" name="pago" id="pago"  placeholder="Ingrese el valor del pago" onkeyup="return devolucionfunc()" >
                                 <div class="text-danger">
                                 </div><!--end-text-danger-->
                                 <p class="help-block"></p>
@@ -513,10 +510,11 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <select class="form-control" id="tipo" data-value="" required="" name="tipo">
+                                        <select class="form-control" id="tipo" data-value="" required="" name="tipo" onchange="getIdentificacion(this)">
                                             <option value="">** Selecciona un Tipo</option>
-                                            <option value="Cédula">Cédula</option>
-                                            <option value="Ruc">Ruc</option>
+                                            @foreach($tipo_documentos as $tipo)
+                                                <option value="{{$tipo->id}}">{{$tipo->nombres}}</option>
+                                            @endforeach
                                         </select>
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -529,7 +527,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" title="Identificación" required="" maxlength="255" class="form-control" name="identificacion" id="identificacion" value="">
+                                        <input type="text" title="Identificación" required="" maxlength="255" class="form-control" name="identificacion2" id="identificacion2" value="" onKeyPress="return soloNumeros(event)" >
 
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
