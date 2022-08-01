@@ -2,7 +2,15 @@
 
 	use App\Models\Clientes;
     use App\Models\ConsumidorFinal;
+    use App\Models\Factura;
+    use App\Models\FacturaDetalle;
+    use App\Models\Facturero;
+    use App\Models\FormasPago;
+    use App\Models\Productos;
+    use App\Models\TipoDocumento;
     use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Route;
+    use Illuminate\Support\Facades\Schema;
     use Session;
 	use DB;
 	use CRUDBooster;
@@ -37,12 +45,12 @@
 			$this->col[] = ["label"=>"Correo","name"=>"correo"];
 			$this->col[] = ["label"=>"Teléfono","name"=>"telefono"];
 			$this->col[] = ["label"=>"Dirección","name"=>"direccion"];
-			$this->col[] = ["label"=>"Tipo","name"=>"tipo"];
+			$this->col[] = ["label"=>"Tipo","name"=>"tipo_documento_id","join"=>"tipo_documento,nombres"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Tipo','name'=>'tipo','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Cédula;Ruc'];
+			$this->form[] = ['label'=>'Tipo','name'=>'tipo_documento_id','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'tipo_documento,nombres'];
 			$this->form[] = ['label'=>'Identificación','name'=>'identificacion','type'=>'text','validation'=>'required|min:1|max:255|unique:clientes','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Nombres','name'=>'nombres','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Correo','name'=>'correo','type'=>'email','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
@@ -52,11 +60,11 @@
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Tipo','name'=>'tipo','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Cédula;Ruc'];
+			//$this->form[] = ['label'=>'Tipo','name'=>'tipo','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'tipo_documento,nombres'];
 			//$this->form[] = ['label'=>'Identificación','name'=>'identificacion','type'=>'text','validation'=>'required|min:1|max:255|unique:clientes','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Nombres','name'=>'nombres','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Correo','name'=>'correo','type'=>'email','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Teléfono','name'=>'telefono','type'=>'number','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Teléfono','name'=>'telefono','type'=>'number','validation'=>'required|min:1','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Dirección','name'=>'direccion','type'=>'textarea','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# OLD END FORM
 
@@ -218,18 +226,86 @@
 	        */
 	        $this->load_css = array();
 
-
 	    }
 
 
-	    /*
-	    | ----------------------------------------------------------------------
-	    | Hook for button selected
-	    | ----------------------------------------------------------------------
-	    | @id_selected = the id selected
-	    | @button_name = the name of button
-	    |
-	    */
+        public function getAdd()
+        {
+
+            $this->cbLoader();
+            if (! CRUDBooster::isCreate() && $this->global_privilege == false || $this->button_add == false) {
+                CRUDBooster::insertLog(cbLang('log_try_add', ['module' => CRUDBooster::getCurrentModule()->name]));
+                CRUDBooster::redirect(CRUDBooster::adminPath(), cbLang("denied_access"));
+            }
+
+            $page_title = cbLang("add_data_page_title", ['module' => CRUDBooster::getCurrentModule()->name]);
+            $page_menu = Route::getCurrentRoute()->getActionName();
+            $command = 'add';
+
+            $consumidor_final = ConsumidorFinal::first();
+            $tipo_documentos = TipoDocumento::get();
+
+            return view('clientes', compact('page_title', 'page_menu', 'command', 'consumidor_final', 'tipo_documentos'));
+        }
+
+        public function postAddSave() {
+            $this->cbLoader();
+            if (! CRUDBooster::isCreate() && $this->global_privilege == false) {
+                CRUDBooster::insertLog(trans('crudbooster.log_try_add_save', [
+                    'name' => \http\Client\Request::input($this->title_field),
+                    'module' => CRUDBooster::getCurrentModule()->name,
+                ]));
+                CRUDBooster::redirect(CRUDBooster::adminPath(), trans("crudbooster.denied_access"));
+            }
+            $this->validation();
+            $this->input_assignment();
+            if (Schema::hasColumn($this->table, 'created_at')) {
+                $this->arr['created_at'] = date('Y-m-d H:i:s');
+            }
+
+            //Permite recibir toda la informacion ingresada en el formulario de facturacion
+            $request=Request()->request->all();
+            //dd( $request);
+            //dd('entro aqui ');
+
+
+            $cliente = new Clientes();
+            $cliente->identificacion = $request['identificacion2'];
+            $cliente->tipo_documento_id = $request['tipo'];
+            $cliente->nombres = $request['nombres'];
+            $cliente->correo = $request['correo'];
+            $cliente->telefono = $request['telefono'];
+            $cliente->direccion = $request['direccion'];
+            $cliente->save();
+
+            $this->return_url = ($this->return_url) ? $this->return_url : request('return_url');
+
+            //insert log
+            CRUDBooster::insertLog(cbLang("log_add", ['name' => $this->arr[$this->title_field], 'module' => CRUDBooster::getCurrentModule()->name]));
+
+            if ($this->return_url) {
+                if (request('submit') == cbLang('button_save_more')) {
+                    CRUDBooster::redirect(\Illuminate\Support\Facades\Request::server('HTTP_REFERER'), cbLang("alert_add_data_success"), 'success');
+                } else {
+                    CRUDBooster::redirect($this->return_url, cbLang("alert_add_data_success"), 'success');
+                }
+            } else {
+                if (request('submit') == cbLang('button_save_more')) {
+                    CRUDBooster::redirect(CRUDBooster::mainpath('add'), cbLang("alert_add_data_success"), 'success');
+                } else {
+                    CRUDBooster::redirect(CRUDBooster::mainpath(), cbLang("alert_add_data_success"), 'success');
+                }
+            }
+        }
+
+        /*
+        | ----------------------------------------------------------------------
+        | Hook for button selected
+        | ----------------------------------------------------------------------
+        | @id_selected = the id selected
+        | @button_name = the name of button
+        |
+        */
 	    public function actionButtonSelected($id_selected,$button_name) {
 	        //Your code here
 

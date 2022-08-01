@@ -518,6 +518,27 @@ document.querySelectorAll('.printbutton').forEach(function(element) {
 });
 
 
+function getIdentificacionForm(selectObject) {
+    var value = selectObject.value;
+    if (value==1) {
+        $('input#identificacion').attr('maxLength', '10').keypress(limitMe);
+        str = $('input#identificacion').val();
+        if(str.length>10) {
+            $('input#identificacion').val(str.slice(0, -(str.length-10)));
+        }
+    }
+    if (value==2) {
+        $('input#identificacion').attr('maxLength', '13').keypress(limitMe);
+        str = $('input#identificacion').val();
+        if(str.length>13) {
+            $('input#identificacion').val(str.slice(0, -(str.length-13)));
+        }
+    }
+    if (value==3) {
+        $('input#identificacion').attr('maxLength', '30').keypress(limitMe);
+    }
+}
+
 function getIdentificacion(selectObject) {
     var value = selectObject.value;
     if (value==1) {
