@@ -20,7 +20,7 @@ class CreateClientesTable extends Migration
             $table->string('correo','100');
             $table->string('telefono','200');
             $table->string('direccion');
-            $table->string('tipo', 50)->nullable();
+            $table->string('tipo_documento_id', 50);
             $table->timestamps();
         });
     }
