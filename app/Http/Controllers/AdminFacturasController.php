@@ -535,7 +535,7 @@
         public function registrarCliente(\Illuminate\Http\Request $request){
             $cliente = new Clientes();
             $cliente->identificacion = $request->identificacion2;
-            $cliente->tipo = $request->tipo;
+            $cliente->tipo_documento_id = $request->tipo;
             $cliente->nombres = $request->nombres;
             $cliente->correo = $request->correo;
             $cliente->telefono = $request->telefono;

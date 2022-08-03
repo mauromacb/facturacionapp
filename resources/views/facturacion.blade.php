@@ -463,7 +463,8 @@
                                 <tr>
                                     <th width="5%">ID</th>
                                     <th width="20%">Nombre / Razón Social</th>
-                                    <th width="20%">RUT</th>
+                                    <th width="20%">RUC</th>
+                                    <th width="20%">Telefono</th>
                                     <th width="20%">Mail</th>
                                     <th width="20%">Dirección</th>
                                     <th width="5%"></th>
