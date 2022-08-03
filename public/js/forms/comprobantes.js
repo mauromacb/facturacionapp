@@ -175,6 +175,7 @@ $(document).ready(function (){
 			    console.log(clientes[i]["nombres"]);
 				var cliente_id = clientes[i]["id"];
 				var cliente_nombre = clientes[i]["nombres"];
+                var cliente_telefono = clientes[i]["telefono"];
 
 				var cliente_apellido = "";
 				if(clientes[i]["apellido"] != null){
@@ -205,6 +206,8 @@ $(document).ready(function (){
                         + cliente_rut
                         + "<td class='td_cliente_id'>"
 						+ cliente_id
+                        + "<td class='td_cliente_telefono'>"
+                        + cliente_telefono
                         + "</td><td class='td_cliente_mail'>"
                         + cliente_mail
 						+ "</td><td class='td_cliente_direccion'>"
@@ -224,6 +227,7 @@ $(document).ready(function (){
 	$(document).on('click', '.btn-agregar-cliente', function() {
 		var cliente_id = $(this).parents("tr").find(".td_cliente_id").html();
 		var cliente_nombre = $(this).parents("tr").find(".td_cliente_nombre").html();
+        var cliente_telefono = $(this).parents("tr").find(".td_cliente_telefono").html();
 		var cliente_direccion = $(this).parents("tr").find(".td_cliente_direccion").html();
 		var cliente_rut = $(this).parents("tr").find(".td_cliente_rut").html();
         var cliente_correo = $(this).parents("tr").find(".td_cliente_mail").html();
@@ -240,6 +244,7 @@ $(document).ready(function (){
         $("#identificacion").val(cliente_rut);
         $("#identificacion").prop( "disabled", true );
 		$("#nombres").val(cliente_nombre);
+        $("#telefono").val(cliente_telefono);
         $("#direccion").val(cliente_direccion);
         $("#correo").val(cliente_correo);
 
@@ -558,6 +563,29 @@ function getIdentificacion(selectObject) {
     if (value==3) {
         $('input#identificacion2').attr('maxLength', '30').keypress(limitMe);
     }
+
+}
+
+function getIdentificacionEdit(selectObject) {
+    var value = selectObject.value;
+    if (value==1) {
+        $('input#identificacion').attr('maxLength', '10').keypress(limitMe);
+        str = $('input#identificacion').val();
+        if(str.length>10) {
+            $('input#identificacion').val(str.slice(0, -(str.length-10)));
+        }
+    }
+    if (value==2) {
+        $('input#identificacion').attr('maxLength', '13').keypress(limitMe);
+        str = $('input#identificacion').val();
+        if(str.length>13) {
+            $('input#identificacion').val(str.slice(0, -(str.length-13)));
+        }
+    }
+    if (value==3) {
+        $('input#identificacion').attr('maxLength', '30').keypress(limitMe);
+    }
+
 }
 
 function limitMe(e) {
