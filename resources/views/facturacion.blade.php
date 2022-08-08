@@ -11,6 +11,51 @@
         var buscar_cliente_url = "{{ url('clientes/buscar?texto=') }}";
         var buscar_prodcto_url = "{{ url('productos/buscar?texto=') }}";
         var comprobante_vistaprevia_url = "{{ url('comprobantes/vistaPrevia') }}";
+
+
+        var form = document.forms['formNuevoCliente'];
+        form.onsubmit = function(e){
+            e.preventDefault();
+            var select = document.form.tipo.value;
+            console.log(select);
+            //document.getElementById('print').innerHTML=select.toUpperCase();
+        }
+
+        function btnRegistrarNuevoCliente(){
+
+            var formObj = {};
+            var inputs = $('#formNuevoCliente').serializeArray();
+            $.each(inputs, function (i, input) {
+                formObj[input.name] = input.value;
+            });
+
+
+            var identificacion2 = formObj['identificacion2'];
+            var nombres = formObj['nombres'];
+            var correo = formObj['correo'];
+            var telefono = formObj['telefono'];
+            var direccion = formObj['direccion'];
+            var tipo = formObj['tipo'];
+            var str = identificacion2+'&nombres='+nombres+'&correo='+correo+'&telefono='+telefono+'&direccion='+direccion+'&tipo='+tipo;
+            var url = "{{ url('facturas/registrar/cliente?identificacion2=') }}" + str;
+            //var url = buscar_cliente_url + str;
+            $.get(url , function( data ){
+                console.log(data["clientes"]);
+                swal(data["cab"], data["message"], data["message_type"]);
+                var clientes = data["clientes"];
+                if(data["message_type"]=='success'){
+                    console.log(data["message_type"]);
+                    $('#modalRegistrarCliente').modal('hide');
+                    $('#modalAgregarCliente').modal('hide');
+                    $('input#identificacion').val(identificacion2);
+                    $('input#nombres').val(nombres);
+                    $('input#telefono').val(telefono);
+                    $('input#direccion').val(direccion);
+                    $('input#correo').val(correo);
+                }else{
+                }
+            });
+        }
     </script>
     <script src="{{ asset('js/forms/comprobantes.js') }}"></script>
 
@@ -101,7 +146,7 @@
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <input id="hiddenCliente" type="hidden" name="cliente_id" value="">
-                                    <input id="hiddenConsumidor" type="hidden" name="consumidor_final_id" value="{{$consumidor_final->id}}">
+                                    <input id="hiddenConsumidor" type="hidden" name="consumidor_final_id" value="{{$cliente ? $cliente->id : $consumidor_final->id}}">
                                     <input name="cliente" type="text" id="txtCliente" placeholder="Ingrese los Nombres, razón social, cédula o ruc" oninvalid="this.setCustomValidity('Debe ingresar el nombre o la razón social del cliente')" oninput="setCustomValidity('')" class="form-control" disabled>
                                     <div class="input-group-btn">
                                     <button id="btnAgregarCliente" data-toggle="modal" data-target="#modalAgregarCliente" class="btn btn-default" disabled>
@@ -118,7 +163,7 @@
                             </label>
 
                             <div class="col-sm-1">
-                                <input onchange="check(this)" type="checkbox" name="consumidor" id="consumidor" value="S" checked>
+                                <input onchange="check(this)" type="checkbox" name="consumidor" id="consumidor" value="S" {{$cliente ? '' : 'checked'}}>
                             </div>
 
                             <label class="control-label col-sm-2">Cédula/Ruc
@@ -126,7 +171,7 @@
                             </label>
 
                             <div class="col-sm-2">
-                                <input type="text" title="Identificacion" required="" class="form-control" name="identificacion" id="identificacion" value="{{$consumidor_final->identificacion}}" readonly>
+                                <input type="text" title="Identificacion" required="" class="form-control" name="identificacion" id="identificacion" value="{{$cliente ? $cliente->identificacion : $consumidor_final->identificacion}}" readonly>
                             </div>
                         </div>
 
@@ -136,7 +181,7 @@
                             </label>
 
                             <div class="col-sm-3">
-                                <input type="text" title="Nombres" required="" class="form-control" name="nombres" id="nombres" value="{{$consumidor_final->nombres}}" readonly>
+                                <input type="text" title="Nombres" required="" class="form-control" name="nombres" id="nombres" value="{{$cliente ? $cliente->nombres : $consumidor_final->nombres}}" {{$cliente ? '' : 'readonly'}}>
                             </div>
 
                             <label class="control-label col-sm-1">Teléfono
@@ -144,7 +189,7 @@
                             </label>
 
                             <div class="col-sm-2">
-                                <input type="text" title="Teléfono" required="" class="form-control" name="telefono" id="telefono" value="{{$consumidor_final->telefono}}" readonly>
+                                <input type="text" title="Teléfono" required="" class="form-control" name="telefono" id="telefono" value="{{$cliente ? $cliente->telefono : $consumidor_final->telefono}}" {{$cliente ? '' : 'readonly'}}>
                             </div>
 
                             <label class="control-label col-sm-1">Correo
@@ -152,7 +197,7 @@
                             </label>
 
                             <div class="col-sm-3">
-                                <input type="text" title="Correo" required="" class="form-control" name="correo" id="correo" value="{{$consumidor_final->correo}}" readonly>
+                                <input type="text" title="Correo" required="" class="form-control" name="correo" id="correo" value="{{$cliente ? $cliente->correo : $consumidor_final->correo}}" {{$cliente ? '' : 'readonly'}}>
                             </div>
                         </div>
 
@@ -162,7 +207,7 @@
                             </label>
 
                             <div class="col-sm-10">
-                                <input type="text" title="Dirección" required="" class="form-control" name="direccion" id="direccion" value="{{$consumidor_final->direcccion}}" readonly>
+                                <input type="text" title="Dirección" required="" class="form-control" name="direccion" id="direccion" value="{{$cliente ? $cliente->direccion : $consumidor_final->direcccion}}" {{$cliente ? '' : 'readonly'}}>
                             </div>
                         </div>
                         <!--Fin Datos del cliente-->
@@ -374,7 +419,7 @@
                             </label>
 
                             <div class="col-sm-2">
-                                <input type="text" title="Ingrese el valor" class="form-control" name="pago" id="pago"  placeholder="Ingrese el valor del pago" onkeyup="return devolucionfunc()" >
+                                <input type="text" title="Ingrese el valor" class="form-control" name="pago" id="pago"  placeholder="Ingrese el valor del pago" onkeyup="return devolucionfunc()" required>
                                 <div class="text-danger">
                                 </div><!--end-text-danger-->
                                 <p class="help-block"></p>
@@ -398,22 +443,12 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2"></label>
                             <div class="col-sm-10">
-                                @if($button_cancel && CRUDBooster::getCurrentMethod() != 'getDetail')
-                                    @if(g('return_url'))
-                                        <a href='{{g("return_url")}}' class='btn btn-default'><i
-                                                class='fa fa-chevron-circle-left'></i> {{cbLang("button_back")}}</a>
-                                    @else
+
                                         <a href='{{CRUDBooster::mainpath("?".http_build_query(@$_GET)) }}' class='btn btn-default'><i
                                                 class='fa fa-chevron-circle-left'></i> {{cbLang("button_back")}}</a>
-                                    @endif
-                                @endif
-                                @if(CRUDBooster::isCreate() || CRUDBooster::isUpdate())
 
-                                    @if(CRUDBooster::isCreate() && $button_addmore==TRUE && $command == 'add')
                                         <input type="submit" name="submit" value='Guardar e Imprimir' class='btn btn-success'>
-                                    @endif
 
-                                @endif
                             </div>
                         </div>
 
@@ -500,7 +535,7 @@
 					    </span>
                     </h4>
                 </div>
-                <form class="form-horizontal" method="post" id="formRegistrarCliente" enctype="multipart/form-data" action="{{url('facturas/registrar/cliente')}}">
+                <form id="formNuevoCliente" name="formNuevoCliente">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="modal-body">
                         <div class="box-body" id="parent-form-area">
@@ -584,15 +619,16 @@
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
                                     </div>
-                                </div>                                            </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button id="btnRegistrarCliente" class="btn btn-block btn-success">
-                            Guardar
-                        </button>
+                                </div>
+                        </div>
                     </div>
                 </form>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-block" onclick="btnRegistrarNuevoCliente()">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                    <button type = "submit">Hit</button>
+                </div>
             </div>
         </div>
     </div>
