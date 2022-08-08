@@ -588,6 +588,71 @@ function getIdentificacionEdit(selectObject) {
 
 }
 
+
+$('#btnRegistrarNuevoCliente').on('click', function(e) {
+
+    alert('dsdds');
+    e.preventDefault();
+    var str = $("#identificacion2").val();
+    //var url = "{{ url('facturas/registrar/cliente?texto=') }}" + str;
+    var url = buscar_cliente_url + str;
+    $.get(url , function( data ){
+        var clientes = data["clientes"]["data"];
+        $("#tablaClientes").html("");
+        for(i=0; i < clientes.length; i++){
+            console.log(clientes[i]["nombres"]);
+            var cliente_id = clientes[i]["id"];
+            var cliente_nombre = clientes[i]["nombres"];
+            var cliente_telefono = clientes[i]["telefono"];
+
+            var cliente_apellido = "";
+            if(clientes[i]["apellido"] != null){
+                var cliente_apellido = clientes[i]["apellido"];
+            }
+
+            var cliente_rut = "-";
+            if(clientes[i]["identificacion"] != null){
+                var cliente_rut = clientes[i]["identificacion"];
+            }
+
+            var cliente_mail = "-";
+            if(clientes[i]["correo"] != null){
+                var cliente_mail = clientes[i]["correo"];
+            }
+
+            var cliente_direccion = "-";
+            if(clientes[i]["direccion"] != null){
+                var cliente_direccion = clientes[i]["direccion"];
+            }
+            console.log(cliente_nombre);
+
+            $("#tablaClientes").append(
+                $('<tr></tr>').html(
+                    "</td><td class='td_cliente_nombre'>"
+                    + cliente_nombre + " " + cliente_apellido
+                    + "</td><td class='td_cliente_rut'>"
+                    + cliente_rut
+                    + "<td class='td_cliente_id'>"
+                    + cliente_id
+                    + "<td class='td_cliente_telefono'>"
+                    + cliente_telefono
+                    + "</td><td class='td_cliente_mail'>"
+                    + cliente_mail
+                    + "</td><td class='td_cliente_direccion'>"
+                    + cliente_direccion
+                    + "</td><td>"
+                    + "<a class='btn-agregar-cliente btn btn-sm btn-block btn-link'>"
+                    + '<i class="fa fa-share" aria-hidden="true"></i>'
+                    + "</a>"
+                    + "</td>"
+
+                )
+            );
+        }
+    });
+});
+
+
 function limitMe(e) {
     if (e.keyCode == 8) { return true; }
     return this.value.length < $(this).attr("maxLength");

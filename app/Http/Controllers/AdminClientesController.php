@@ -11,6 +11,7 @@
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Route;
     use Illuminate\Support\Facades\Schema;
+    use Illuminate\Support\Facades\Validator;
     use Session;
 	use DB;
 	use CRUDBooster;
@@ -257,17 +258,23 @@
                 ]));
                 CRUDBooster::redirect(CRUDBooster::adminPath(), trans("crudbooster.denied_access"));
             }
-            $this->validation();
-            $this->input_assignment();
-            if (Schema::hasColumn($this->table, 'created_at')) {
-                $this->arr['created_at'] = date('Y-m-d H:i:s');
-            }
+
+
 
             //Permite recibir toda la informacion ingresada en el formulario de facturacion
             $request=Request()->request->all();
             //dd( $request);
             //dd('entro aqui ');
 
+            $row = Clientes::findOrFail( $request['identificacion2']);
+            $this->validation($row->id);
+            $this->input_assignment($row->id);
+
+            dd($this->validation($row->id));
+
+            if (Schema::hasColumn($this->table, 'created_at')) {
+                $this->arr['created_at'] = date('Y-m-d H:i:s');
+            }
 
             $cliente = new Clientes();
             $cliente->identificacion = $request['identificacion2'];
@@ -279,7 +286,6 @@
             $cliente->save();
 
             $this->return_url = ($this->return_url) ? $this->return_url : request('return_url');
-
             //insert log
             CRUDBooster::insertLog(cbLang("log_add", ['name' => $this->arr[$this->title_field], 'module' => CRUDBooster::getCurrentModule()->name]));
 
@@ -450,5 +456,141 @@
 
 	    //By the way, you can still create your own method in here... :)
 
+        public function validation($id = null)
+        {
 
-	}
+            $request_all = \Illuminate\Support\Facades\Request::all();
+            $array_input = [];
+            foreach ($this->data_inputan as $di) {
+                $ai = [];
+                $name = $di['name'];
+
+                if (! isset($request_all[$name])) {
+                    continue;
+                }
+
+                if ($di['type'] != 'upload') {
+                    if (@$di['required']) {
+                        $ai[] = 'required';
+                    }
+                }
+
+                if ($di['type'] == 'upload') {
+                    if ($id) {
+                        $row = \Illuminate\Support\Facades\DB::table($this->table)->where($this->primary_key, $id)->first();
+                        if ($row->{$di['name']} == '') {
+                            $ai[] = 'required';
+                        }
+                    }
+                }
+
+                if (@$di['min']) {
+                    $ai[] = 'min:'.$di['min'];
+                }
+                if (@$di['max']) {
+                    $ai[] = 'max:'.$di['max'];
+                }
+                if (@$di['image']) {
+                    $ai[] = 'image';
+                }
+                if (@$di['mimes']) {
+                    $ai[] = 'mimes:'.$di['mimes'];
+                }
+                $name = $di['name'];
+                if (! $name) {
+                    continue;
+                }
+
+                if ($di['type'] == 'money') {
+                    $request_all[$name] = preg_replace('/[^\d-]+/', '', $request_all[$name]);
+                }
+
+                if ($di['type'] == 'child') {
+                    $slug_name = str_slug($di['label'], '');
+                    foreach ($di['columns'] as $child_col) {
+                        if (isset($child_col['validation'])) {
+                            //https://laracasts.com/discuss/channels/general-discussion/array-validation-is-not-working/
+                            if (strpos($child_col['validation'], 'required') !== false) {
+                                $array_input[$slug_name.'-'.$child_col['name']] = 'required';
+
+                                str_replace('required', '', $child_col['validation']);
+                            }
+
+                            $array_input[$slug_name.'-'.$child_col['name'].'.*'] = $child_col['validation'];
+                        }
+                    }
+                }
+
+                if (@$di['validation']) {
+
+                    $exp = explode('|', $di['validation']);
+                    if ($exp && count($exp)) {
+                        foreach ($exp as &$validationItem) {
+                            if (substr($validationItem, 0, 6) == 'unique') {
+                                $parseUnique = explode(',', str_replace('unique:', '', $validationItem));
+                                $uniqueTable = ($parseUnique[0]) ?: $this->table;
+                                $uniqueColumn = ($parseUnique[1]) ?: $name;
+                                $uniqueIgnoreId = ($parseUnique[2]) ?: (($id) ?: '');
+
+                                //Make sure table name
+                                $uniqueTable = CB::parseSqlTable($uniqueTable)['table'];
+
+                                //Rebuild unique rule
+                                $uniqueRebuild = [];
+                                $uniqueRebuild[] = $uniqueTable;
+                                $uniqueRebuild[] = $uniqueColumn;
+                                if ($uniqueIgnoreId) {
+                                    $uniqueRebuild[] = $uniqueIgnoreId;
+                                } else {
+                                    $uniqueRebuild[] = 'NULL';
+                                }
+
+                                //Check whether deleted_at exists or not
+                                if (CB::isColumnExists($uniqueTable, 'deleted_at')) {
+                                    $uniqueRebuild[] = CB::findPrimaryKey($uniqueTable);
+                                    $uniqueRebuild[] = 'deleted_at';
+                                    $uniqueRebuild[] = 'NULL';
+                                }
+                                $uniqueRebuild = array_filter($uniqueRebuild);
+                                $validationItem = 'unique:'.implode(',', $uniqueRebuild);
+                            }
+                        }
+                    } else {
+                        $exp = [];
+                    }
+
+                    $validation = implode('|', $exp);
+
+                    $array_input[$name] = $validation;
+                } else {
+                    $array_input[$name] = implode('|', $ai);
+                }
+            }
+
+            $validator = Validator::make($request_all, $array_input);
+
+            if ($validator->fails()) {
+                $message = $validator->messages();
+                $message_all = $message->all();
+
+                if (Request::ajax()) {
+                    $res = response()->json([
+                        'message' => cbLang('alert_validation_error', ['error' => implode(', ', $message_all)]),
+                        'message_type' => 'warning',
+                    ])->send();
+                    exit;
+                } else {
+                    $res = redirect()->back()->with("errors", $message)->with([
+                        'message' => cbLang('alert_validation_error', ['error' => implode(', ', $message_all)]),
+                        'message_type' => 'warning',
+                    ])->withInput();
+                    \Session::driver()->save();
+                    $res->send();
+                    exit;
+                }
+            }
+        }
+
+
+
+    }
