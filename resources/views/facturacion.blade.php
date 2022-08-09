@@ -11,17 +11,19 @@
         var buscar_cliente_url = "{{ url('clientes/buscar?texto=') }}";
         var buscar_prodcto_url = "{{ url('productos/buscar?texto=') }}";
         var comprobante_vistaprevia_url = "{{ url('comprobantes/vistaPrevia') }}";
-
+        var validador=1;
 
         var form = document.forms['formNuevoCliente'];
-        form.onsubmit = function(e){
+        form.click = function(e){
             e.preventDefault();
-            var select = document.form.tipo.value;
-            console.log(select);
+            btnRegistrarNuevoCliente();
+            return false;
             //document.getElementById('print').innerHTML=select.toUpperCase();
         }
 
-        function btnRegistrarNuevoCliente(){
+
+        function btnRegistrarNuevoCliente(e){
+            e.preventDefault();
 
             var formObj = {};
             var inputs = $('#formNuevoCliente').serializeArray();
@@ -36,14 +38,14 @@
             var telefono = formObj['telefono'];
             var direccion = formObj['direccion'];
             var tipo = formObj['tipo'];
-            var str = identificacion2+'&nombres='+nombres+'&correo='+correo+'&telefono='+telefono+'&direccion='+direccion+'&tipo='+tipo;
+            var str = identificacion2 + '&nombres=' + nombres + '&correo=' + correo + '&telefono=' + telefono + '&direccion=' + direccion + '&tipo=' + tipo;
             var url = "{{ url('facturas/registrar/cliente?identificacion2=') }}" + str;
             //var url = buscar_cliente_url + str;
-            $.get(url , function( data ){
-                console.log(data["clientes"]);
+            $.get(url, function (data) {
+                console.log(data["clientes"]["id"]);
                 swal(data["cab"], data["message"], data["message_type"]);
                 var clientes = data["clientes"];
-                if(data["message_type"]=='success'){
+                if (data["message_type"] == 'success') {
                     console.log(data["message_type"]);
                     $('#modalRegistrarCliente').modal('hide');
                     $('#modalAgregarCliente').modal('hide');
@@ -52,9 +54,11 @@
                     $('input#telefono').val(telefono);
                     $('input#direccion').val(direccion);
                     $('input#correo').val(correo);
-                }else{
+                    $('input#hiddenCliente').val(clientes['id']);
+                } else {
                 }
             });
+
         }
     </script>
     <script src="{{ asset('js/forms/comprobantes.js') }}"></script>
@@ -535,8 +539,7 @@
 					    </span>
                     </h4>
                 </div>
-                <form id="formNuevoCliente" name="formNuevoCliente">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <form onsubmit="btnRegistrarNuevoCliente(event);" id="formNuevoCliente" name="formNuevoCliente" action="">
                     <div class="modal-body">
                         <div class="box-body" id="parent-form-area">
 
@@ -622,13 +625,13 @@
                                 </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Guardar
+                        </button>
+                    </div>
                 </form>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-block" onclick="btnRegistrarNuevoCliente()">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </button>
-                    <button type = "submit">Hit</button>
-                </div>
+
             </div>
         </div>
     </div>

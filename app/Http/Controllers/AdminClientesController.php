@@ -8,6 +8,7 @@
     use App\Models\FormasPago;
     use App\Models\Productos;
     use App\Models\TipoDocumento;
+    use crocodicstudio\crudbooster\helpers\CB;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Route;
     use Illuminate\Support\Facades\Schema;
@@ -266,11 +267,11 @@
             //dd( $request);
             //dd('entro aqui ');
 
-            $row = Clientes::findOrFail( $request['identificacion2']);
+            $row = Clientes::where('identificacion',$request['identificacion2'])->first();
             $this->validation($row->id);
             $this->input_assignment($row->id);
 
-            dd($this->validation($row->id));
+            //dd($this->validation($row->id));
 
             if (Schema::hasColumn($this->table, 'created_at')) {
                 $this->arr['created_at'] = date('Y-m-d H:i:s');

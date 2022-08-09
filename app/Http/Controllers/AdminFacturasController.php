@@ -544,8 +544,6 @@
             }
 
             $row = Clientes::where('identificacion',$request->identificacion2)->first();
-            $this->validation($row->id);
-            $this->input_assignment($row->id);
 
             if (empty($row)) {
                 $cliente = new Clientes();
