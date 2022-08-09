@@ -98,15 +98,15 @@
 
 
     <div id="muestra" style="visibility: hidden;">
-        <table id="muestra" class="tabla">
-            <tr><th colspan="4" align="center">{{$empresa->nombre}}</th></tr>
-            <tr><td colspan="4" align="center">RUC: {{$empresa->ruc}}</td></tr>
-            <tr><td colspan="4" align="center">TELEFONO: {{$empresa->telefono}}</td></tr>
-            <tr><td colspan="4" align="center">FACTURA: {{$factura->secuencial}}</td></tr>
-            <tr><td colspan="4" align="center">FECHA: {{$factura->fecha_emision}}</td></tr>
-            <tr><td colspan="4" align="center">CLIENTE: {{$factura->cliente->nombres}}{{$factura->consumidor->nombres}}</td></tr>
-            <tr><td colspan="4" align="center">RUC/CED: {{$factura->cliente->identificacion}}{{$factura->consumidor->identificacion}}</td></tr>
-            <tr><td colspan="4" align="center">DIRECCION: {{$factura->cliente->direccion}}{{$factura->consumidor->direccion}}</td></tr>
+        <table id="muestra" class="tabla" style="font-size: 10px">
+            <tr><th colspan="4" align="left">{{$empresa->nombre}}</th></tr>
+            <tr><td colspan="4" align="left">RUC: {{$empresa->ruc}}</td></tr>
+            <tr><td colspan="4" align="left">TELEFONO: {{$empresa->telefono}}</td></tr>
+            <tr><td colspan="4" align="left">FACTURA: {{$factura->secuencial}}</td></tr>
+            <tr><td colspan="4" align="left">FECHA: {{$factura->fecha_emision}}</td></tr>
+            <tr><td colspan="4" align="left">CLIENTE: {{$factura->cliente->nombres}}{{$factura->consumidor->nombres}}</td></tr>
+            <tr><td colspan="4" align="left">RUC/CED: {{$factura->cliente->identificacion}}{{$factura->consumidor->identificacion}}</td></tr>
+            <tr><td colspan="4" align="left">DIRECCION: {{$factura->cliente->direccion}}{{$factura->consumidor->direccion}}</td></tr>
             <tr><th>DESCRIPCION</th><th>CANT</th><th>P / U</th><th>TOTAL</th></tr>
             @foreach($dataDetalleFact as $detalle)
                 <tr>
@@ -116,11 +116,11 @@
                     <td class="text-right" align="right">{{$detalle->subtotal}}</td>
                 </tr>
             @endforeach
-            <tr><td colspan="3" >TARIFA 12%</td><td align="right">{{$factura->subtotal_12}}</td></tr>
-            <tr><td colspan="3" >TARIFA 0%</td><td align="right">{{$factura->subtotal_0}}</td></tr>
-            <tr><td colspan="3" >DESCUENTO</td><td align="right">0</td></tr>
-            <tr><td colspan="3" >IVA 12%</td><td align="right">{{$factura->total_iva}}</td></tr>
-            <tr><td colspan="3" >TOTAL</td><td align="right">{{$factura->total_valor}}</td></tr>
+            <tr><td colspan="3" >TARIFA 12%</td><td align="left">{{$factura->subtotal_12}}</td></tr>
+            <tr><td colspan="3" >TARIFA 0%</td><td align="left">{{$factura->subtotal_0}}</td></tr>
+            <tr><td colspan="3" >DESCUENTO</td><td align="left">0</td></tr>
+            <tr><td colspan="3" >IVA 12%</td><td align="left">{{$factura->total_iva}}</td></tr>
+            <tr><td colspan="3" >TOTAL</td><td align="left">{{$factura->total_valor}}</td></tr>
         </table>
     </div>
 
