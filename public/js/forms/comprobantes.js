@@ -548,6 +548,7 @@ function getIdentificacion(selectObject) {
     var value = selectObject.value;
     if (value==1) {
         $('input#identificacion2').attr('maxLength', '10').keypress(limitMe);
+        $('input#identificacion2').attr('minlength', '10').keypress(limitMe);
         str = $('input#identificacion2').val();
         if(str.length>10) {
             $('input#identificacion2').val(str.slice(0, -(str.length-10)));
@@ -555,6 +556,7 @@ function getIdentificacion(selectObject) {
     }
     if (value==2) {
         $('input#identificacion2').attr('maxLength', '13').keypress(limitMe);
+        $('input#identificacion2').attr('minlength', '13').keypress(limitMe);
         str = $('input#identificacion2').val();
         if(str.length>13) {
             $('input#identificacion2').val(str.slice(0, -(str.length-13)));
@@ -562,6 +564,7 @@ function getIdentificacion(selectObject) {
     }
     if (value==3) {
         $('input#identificacion2').attr('maxLength', '30').keypress(limitMe);
+        $('input#identificacion2').attr('minlength', '10').keypress(limitMe);
     }
 
 }
@@ -570,6 +573,7 @@ function getIdentificacionEdit(selectObject) {
     var value = selectObject.value;
     if (value==1) {
         $('input#identificacion').attr('maxLength', '10').keypress(limitMe);
+        $('input#identificacion').attr('minlength', '10').keypress(limitMe);
         str = $('input#identificacion').val();
         if(str.length>10) {
             $('input#identificacion').val(str.slice(0, -(str.length-10)));
@@ -577,6 +581,7 @@ function getIdentificacionEdit(selectObject) {
     }
     if (value==2) {
         $('input#identificacion').attr('maxLength', '13').keypress(limitMe);
+        $('input#identificacion').attr('minlength', '13').keypress(limitMe);
         str = $('input#identificacion').val();
         if(str.length>13) {
             $('input#identificacion').val(str.slice(0, -(str.length-13)));
@@ -584,6 +589,7 @@ function getIdentificacionEdit(selectObject) {
     }
     if (value==3) {
         $('input#identificacion').attr('maxLength', '30').keypress(limitMe);
+        $('input#identificacion').attr('minlength', '10').keypress(limitMe);
     }
 
 }

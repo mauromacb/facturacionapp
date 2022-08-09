@@ -71,7 +71,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" title="Identificación" required="" maxlength="255" class="form-control" name="identificacion2" id="identificacion2" value="" onKeyPress="return soloNumeros(event)" >
+                                        <input type="text" title="Identificación" required="" minlength="10" class="form-control" name="identificacion2" id="identificacion2" value="" onKeyPress="return soloNumeros(event)" >
 
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -113,7 +113,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="number" step="1" title="Teléfono" required="" min="1" class="form-control" name="telefono" id="telefono" value="">
+                                        <input type="number" step="1" title="Teléfono" required="" minlength="2" class="form-control" name="telefono" id="telefono" value="">
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
                                     </div>
