@@ -50,34 +50,15 @@
                         <div class="modal-body">
                             <div class="box-body" id="parent-form-area">
 
-                                <div class="form-group header-group-0 col-sm-12" id="form-group-tipo" style="">
-                                    <label class="control-label col-sm-3">Tipo
-                                        <span class="text-danger" title="Este campo es requerido">*</span>
-                                    </label>
-
-                                    <div class="col-sm-8">
-                                        <select class="form-control" id="tipo_documento_id" data-value="" required="" name="tipo_documento_id" onchange="getIdentificacionEdit(this)">
-                                            <option value="">** Selecciona un Tipo</option>
-                                            @foreach($tipo_documentos as $tipo)
-                                                @if($row->tipo_documento_id==$tipo->id)
-                                                    <option value="{{$tipo->id}}" selected>{{$tipo->nombres}}</option>
-                                                @else
-                                                    <option value="{{$tipo->id}}">{{$tipo->nombres}}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                        <div class="text-danger"></div>
-                                        <p class="help-block"></p>
-                                    </div>
-                                </div>
+                               
                                 <div class="form-group header-group-0 col-sm-12" id="form-group-identificacion" style="">
                                     <label class="control-label col-sm-3">
-                                        Identificación
+                                        Nombre:
                                         <span class="text-danger" title="Este campo es requerido">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" title="Identificación" required="" maxlength="255" class="form-control" name="identificacion" id="identificacion" value="{{$row->identificacion}}" onKeyPress="return soloNumeros(event)" >
+                                        <input type="text" title="Nombre" required="" minlength="10" class="form-control" name="nombre" id="nombre" value="{{$row->nombre}}" >
 
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -86,20 +67,33 @@
                                 </div>
                                 <div class="form-group header-group-0 col-sm-12" id="form-group-nombres" style="">
                                     <label class="control-label col-sm-3">
-                                        Nombres
+                                        Ruc:
                                         <span class="text-danger" title="Este campo es requerido">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" title="Nombres" required="" maxlength="255" class="form-control" name="nombres" id="nombres" value="{{$row->nombres}}">
+                                        <input type="text" title="Ruc" required="" maxlength="255" class="form-control" name="ruc" id="ruc" value="{{$row->ruc}}">
 
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
 
                                     </div>
                                 </div>
+                                <div class="form-group header-group-0 col-sm-12" id="form-group-telefono" style="">
+                                    <label class="control-label col-sm-3">
+                                        Telefono:
+                                        <span class="text-danger" title="Este campo es requerido">*</span>
+                                    </label>
+
+                                    <div class="col-sm-8">
+                                        <input type="number" step="1" title="Teléfono" required="" minlength="2" class="form-control" name="telefonos" id="telefonos" value="{{$row->telefonos}}">
+                                        <div class="text-danger"></div>
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
                                 <div class="form-group header-group-0 col-sm-12" id="form-group-correo" style="">
-                                    <label class="control-label col-sm-3">Correo
+                                    <label class="control-label col-sm-3">
+                                        Email:
                                         <span class="text-danger" title="Este campo es requerido">*</span>
                                     </label>
 
@@ -113,23 +107,13 @@
                                         <p class="help-block"></p>
                                     </div>
                                 </div>
-                                <div class="form-group header-group-0 col-sm-12" id="form-group-telefono" style="">
-                                    <label class="control-label col-sm-3">Teléfono
-                                        <span class="text-danger" title="Este campo es requerido">*</span>
-                                    </label>
 
-                                    <div class="col-sm-8">
-                                        <input type="number" step="1" title="Teléfono" required="" min="1" class="form-control" name="telefono" id="telefono" value="{{$row->telefono}}">
-                                        <div class="text-danger"></div>
-                                        <p class="help-block"></p>
-                                    </div>
-                                </div>
                                 <div class="form-group header-group-0 col-sm-12" id="form-group-direccion" style="">
                                     <label class="control-label col-sm-3">Dirección
                                         <span class="text-danger" title="Este campo es requerido">*</span>
                                     </label>
                                     <div class="col-sm-8">
-                                        <textarea name="direccion" id="direccion" required="" maxlength="255" class="form-control" rows="5">{{$row->direccion}}</textarea>
+                                        <textarea name="direccion" id="direccion" required="" maxlength="255"  class="form-control" rows="5" value="{{$row->direccion}}"></textarea>
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
                                     </div>
@@ -179,19 +163,16 @@
 
         rules:{
         
-          tipo:{
+          nombre:{
             required:true
           },
-          identificacion2:{
+          ruc:{
             required:true
           },
-          nombres:{
+          telefonos:{
             required:true
           },
-          correo:{
-            required:true
-          },
-          telefono:{
+          email:{
             required:true
           },
           direccion:{
@@ -200,23 +181,20 @@
         },
         messages:{
           
-          tipo:{
-            required:"Ingrese el  tipo porfavor"
+          nombre:{
+            required:"Ingrese el nombre de la empresa porfavor"
           },
-          identificacion2:{
-            required:"Ingrese la identificación porfavor"
+          ruc:{
+            required:"Ingrese el ruc porfavor"
           },
-          nombres:{
-            required:"Ingrese el nombre porfavor"
+          telefonos:{
+            required:"Ingrese el telefonoo porfavor"
           },
           correo:{
-            required:"Ingrese el correo porfavor"
-          },
-          telefono:{
-            required:"Ingrese el correo porfavor"
+            required:"Ingrese el email porfavor"
           },
           direccion:{
-            required:"Ingrese el dirección porfavor"
+            required:"Ingrese la direccion porfavor"
           }
 
         }
@@ -224,13 +202,5 @@
 
         </script>
 
-<style media="screen">
-    .error{
-      color:red;
-      font-size: 16px;
-    }
-    input.error, select.error{
-      border: 2px solid red;
-    }
-</style>
+
 @endsection

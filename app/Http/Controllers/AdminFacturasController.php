@@ -535,14 +535,14 @@
 
         public function registrarCliente(\Illuminate\Http\Request $request){
             $this->cbLoader();
-            if (! CRUDBooster::isCreate() && $this->global_privilege == false) {
+        /*if (! CRUDBooster::isCreate() && $this->global_privilege == false) {
                 CRUDBooster::insertLog(cbLang('log_try_add_save', [
                     'name' => \Illuminate\Support\Facades\Request::input($this->title_field),
                     'module' => CRUDBooster::getCurrentModule()->name,
                 ]));
                 CRUDBooster::redirect(CRUDBooster::adminPath(), cbLang("denied_access"));
-            }
-
+            }*/
+            
             $row = Clientes::where('identificacion',$request->identificacion2)->first();
 
             if (empty($row)) {

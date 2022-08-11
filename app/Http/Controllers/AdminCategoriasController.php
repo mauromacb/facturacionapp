@@ -293,8 +293,10 @@
 	    |
 	    */
 	    public function hook_before_edit(&$postdata,$id) {
-	        //Your code here
 
+	        //Your code here
+		
+			
 	    }
 
 	    /*
@@ -304,10 +306,29 @@
 	    | @id       = current id
 	    |
 	    */
-	    public function hook_after_edit($id) {
-	        //Your code here
+		public function getEdit($id)
+        {
+            $this->cbLoader();
+            $row = \Illuminate\Support\Facades\DB::table($this->table)->where($this->primary_key, $id)->first();
 
-	    }
+            if (! CRUDBooster::isRead() && $this->global_privilege == false || $this->button_edit == false) {
+                CRUDBooster::insertLog(cbLang("log_try_edit", [
+                    'name' => $row->{$this->title_field},
+                    'module' => CRUDBooster::getCurrentModule()->name,
+                ]));
+                CRUDBooster::redirect(CRUDBooster::adminPath(), cbLang('denied_access'));
+            }
+
+
+            $page_menu = Route::getCurrentRoute()->getActionName();
+            $page_title = cbLang("edit_data_page_title", ['module' => CRUDBooster::getCurrentModule()->name, 'name' => $row->{$this->title_field}]);
+            $command = 'edit';
+            \Illuminate\Support\Facades\Session::put('current_row_id', $id);
+           
+
+            return view('categoriasEdit', compact('id', 'row', 'page_menu', 'page_title', 'command'));
+        }
+
 
 	    /*
 	    | ----------------------------------------------------------------------

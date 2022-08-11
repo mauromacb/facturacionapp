@@ -215,7 +215,23 @@
 	        
 	        
 	    }
+		
+		public function getAdd()
+        {
 
+            $this->cbLoader();
+            if (! CRUDBooster::isCreate() && $this->global_privilege == false || $this->button_add == false) {
+                CRUDBooster::insertLog(cbLang('log_try_add', ['module' => CRUDBooster::getCurrentModule()->name]));
+                CRUDBooster::redirect(CRUDBooster::adminPath(), cbLang("denied_access"));
+            }
+
+            $page_title = cbLang("add_data_page_title", ['module' => CRUDBooster::getCurrentModule()->name]);
+            
+            $command = 'add';
+
+
+            return view('empresas', compact('page_title', 'page_menu', 'command'));
+        }
 
 	    /*
 	    | ---------------------------------------------------------------------- 
@@ -297,10 +313,7 @@
 	    | @id       = current id 
 	    | 
 	    */
-	    public function hook_after_edit($id) {
-	        //Your code here 
-
-	    }
+		
 
 	    /* 
 	    | ---------------------------------------------------------------------- 
