@@ -6,6 +6,8 @@
 
 @section('content')
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+    
     <script type="text/javascript">
 
         var buscar_cliente_url = "{{ url('clientes/buscar?texto=') }}";
@@ -30,7 +32,8 @@
             $.each(inputs, function (i, input) {
                 formObj[input.name] = input.value;
             });
-
+            
+            alert('ingresa');
 
             var identificacion2 = formObj['identificacion2'];
             var nombres = formObj['nombres'];
@@ -123,7 +126,7 @@
                                 <p class="help-block"></p>
                             </div>
 
-                            <label class="control-label col-sm-2">Factura #
+                            <label class="control-label col-sm-1">Factura #:
                                 <span class="text-danger" title="Este campo es requerido">*</span>
                             </label>
 
@@ -193,24 +196,24 @@
                             </label>
 
                             <div class="col-sm-2">
-                                <input type="text" title="Teléfono" required="" class="form-control" name="telefono" id="telefono" value="{{$cliente ? $cliente->telefono : $consumidor_final->telefono}}" {{$cliente ? '' : 'readonly'}}>
+                                <input type="text" title="Teléfono" required=""  class="form-control" name="telefono" id="telefono" value="{{$cliente ? $cliente->telefono : $consumidor_final->telefono}}" {{$cliente ? '' : 'readonly'}}>
                             </div>
 
                             <label class="control-label col-sm-1">Correo
                                 <span class="text-danger" title="Este campo es requerido">*</span>
                             </label>
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <input type="text" title="Correo" required="" class="form-control" name="correo" id="correo" value="{{$cliente ? $cliente->correo : $consumidor_final->correo}}" {{$cliente ? '' : 'readonly'}}>
                             </div>
                         </div>
 
-                        <div class="form-group header-group-0 " id="form-group-total_sin_impuestos" style="">
+                        <div class="form-group header-group-0" id="form-group-total_sin_impuestos" style="">
                             <label class="control-label col-sm-2">Dirección
                                 <span class="text-danger" title="Este campo es requerido">*</span>
                             </label>
 
-                            <div class="col-sm-10">
+                            <div class="col-sm-3">
                                 <input type="text" title="Dirección" required="" class="form-control" name="direccion" id="direccion" value="{{$cliente ? $cliente->direccion : $consumidor_final->direcccion}}" {{$cliente ? '' : 'readonly'}}>
                             </div>
                         </div>
@@ -220,7 +223,7 @@
                         <!--Detalle factura-->
 
                         <div class="row col-md-12 form_venta_contado form_factura_credito form_devolucion_contado form_compra_contado">
-                            <div class="col-md-5">
+                            <div class="col-md-7">
                                 <div class="input-group pull-right">
                                     <input type="text" class="form-control" id="txtAgregarArticulo" list="listaBusquedaProducto" placeholder="Agregar un artículo..." onkeydown="if (event.keyCode == 13) return false;" tabindex="1">
                                     <div class="input-group-btn">
@@ -249,8 +252,8 @@
                                     <th class="text-center" width="75px">Cantidad</th>
                                     <th class="text-center" width="80px">Subtotal</th>
                                     <th class="text-center" width="80px">IVA</th>
-                                    <th class="text-center" width="80px">Total</th>
-                                    <th class="text-center" width="30px"></th>
+                                    <th class="text-center" width="100px">Total</th>
+                                    
                                 </tr>
                                 </thead>
                                 <tbody id="tablaProductos">
@@ -461,10 +464,6 @@
 
                 </form>
 
-
-
-
-
             </div>
         </div>
     </div><!--END AUTO MARGIN-->
@@ -474,7 +473,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4>
-                        Buscar cliente
+                        <b>Buscar cliente</b>
                         <span class="pull-right">
                         <button id="btnRegistrarCliente" data-toggle="modal" data-target="#modalRegistrarCliente" class="btn btn-success">
 							<i class="fa fa-user-plus" aria-hidden="true"></i> Agregar nuevo cliente
@@ -491,7 +490,7 @@
                                     <input id="txtBuscadorCliente" class="form-control" type="text" name="BuscadorCliente" placeholder="Buscar cliente...">
                                 </div>
                                 <div class="col-md-2">
-                                    <button id="btnBuscarCliente" type="submit" class="btn btn-primary btn-block">
+                                    <button id="btnBuscarCliente" type="submit" class="btn btn-warning btn-block">
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -518,7 +517,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button id="btnOkModalAgregarCliente" class="btn btn-block btn-primary" data-dismiss="modal">
+                    <button id="btnOkModalAgregarCliente" class="btn btn-success" data-dismiss="modal">
                         Confirmar
                     </button>
                 </div>
@@ -531,10 +530,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4>
-                        Agregar nuevo cliente
+                        <b>Agregar nuevo cliente</b>
                         <span class="pull-right">
-                            <button class="btn btn-default btn-sm text-center" data-dismiss="modal">
-                                <i class="fa fa-close" aria-hidden="true"></i> Cerrar
+                            <button class="btn btn-success btn-sm text-center" data-dismiss="modal">
+                                <i class="fa fa-close" aria-hidden="true"></i> <b>Cerrar</b>
                             </button>
 					    </span>
                     </h4>
@@ -549,7 +548,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <select class="form-control" id="tipo" data-value="" required="" name="tipo" onchange="getIdentificacion(this)">
+                                        <select class="form-control" id="tipo" data-value="" required=""  name="tipo" onchange="getIdentificacion(this)">
                                             <option value="">** Selecciona un Tipo</option>
                                             @foreach($tipo_documentos as $tipo)
                                                 <option value="{{$tipo->id}}">{{$tipo->nombres}}</option>
@@ -566,7 +565,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" title="Identificación" required="" maxlength="255" class="form-control" name="identificacion2" id="identificacion2" value="" onKeyPress="return soloNumeros(event)" >
+                                        <input type="text" title="Identificación" required="" placeholder="Ingrese la identificación" maxlength="255" class="form-control" name="identificacion2" id="identificacion2" value="" onKeyPress="return soloNumeros(event)" >
 
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -580,7 +579,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" title="Nombres" required="" maxlength="255" class="form-control" name="nombres" id="nombres" value="">
+                                        <input type="text" title="Nombres" required="" placeholder="Ingrese la nombre" maxlength="255" class="form-control" name="nombres" id="nombres" value="">
 
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -618,7 +617,7 @@
                                         <span class="text-danger" title="Este campo es requerido">*</span>
                                     </label>
                                     <div class="col-sm-8">
-                                        <textarea name="direccion" id="direccion" required="" maxlength="255" class="form-control" rows="5"></textarea>
+                                        <textarea name="direccion" id="direccion" required="" maxlength="255" class="form-control" rows="2"></textarea>
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
                                     </div>
@@ -636,4 +635,25 @@
         </div>
     </div>
 
+
+
+    <script type="text/javascript">
+    $("#formNuevoCliente").validate({
+
+        rules:{
+        
+          nombres:{
+            required:true
+          }
+        },
+        messages:{
+          
+          nombres:{
+            required:"Ingrese el  nombre"
+          }
+
+        }
+      });
+
+        </script>
 @endsection
