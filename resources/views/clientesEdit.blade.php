@@ -56,7 +56,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <select class="form-control" id="tipo_documento_id" data-value="" required="" name="tipo_documento_id" onchange="getIdentificacionEdit(this)">
+                                        <select class="form-control" id="tipo_documento_id" data-value="" required="" placeholder="Ingrese el tipo" ="tipo_documento_id" onchange="getIdentificacionEdit(this)">
                                             <option value="">** Selecciona un Tipo</option>
                                             @foreach($tipo_documentos as $tipo)
                                                 @if($row->tipo_documento_id==$tipo->id)
@@ -77,7 +77,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" title="Identificación" required="" maxlength="255" class="form-control" name="identificacion" id="identificacion" value="{{$row->identificacion}}" onKeyPress="return soloNumeros(event)" >
+                                        <input type="text" title="Identificación" required="" placeholder="Ingrese la identificación" maxlength="255" class="form-control" name="identificacion" id="identificacion" value="{{$row->identificacion}}" onKeyPress="return soloNumeros(event)" >
 
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -91,7 +91,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" title="Nombres" required="" maxlength="255" class="form-control" name="nombres" id="nombres" value="{{$row->nombres}}">
+                                        <input type="text" title="Nombres" required="" placeholder="Ingrese el nombre" maxlength="255" class="form-control" name="nombres" id="nombres" value="{{$row->nombres}}">
 
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -107,7 +107,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                                             <input type="email" name="correo" style="display: none">
-                                            <input type="email" title="Correo" required="" maxlength="255" class="form-control" name="correo" id="correo" value="{{$row->correo}}">
+                                            <input type="email" title="Correo" required="" placeholder="Ingrese el correo" maxlength="255" class="form-control" name="correo" id="correo" value="{{$row->correo}}">
                                         </div>
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -119,7 +119,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="number" step="1" title="Teléfono" required="" min="1" class="form-control" name="telefono" id="telefono" value="{{$row->telefono}}">
+                                        <input type="number" step="1" title="Teléfono" required="" placeholder="Ingrese la teléfono" min="1" class="form-control" name="telefono" id="telefono" value="{{$row->telefono}}">
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
                                     </div>
@@ -129,7 +129,7 @@
                                         <span class="text-danger" title="Este campo es requerido">*</span>
                                     </label>
                                     <div class="col-sm-8">
-                                        <textarea name="direccion" id="direccion" required="" maxlength="255" class="form-control" rows="5">{{$row->direccion}}</textarea>
+                                        <textarea name="direccion" id="direccion" required="" placeholder="Ingrese la dirección" maxlength="255" class="form-control" rows="5">{{$row->direccion}}</textarea>
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
                                     </div>

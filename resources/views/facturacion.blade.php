@@ -594,7 +594,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                                             <input type="email" name="correo" style="display: none">
-                                            <input type="email" title="Correo" required="" maxlength="255" class="form-control" name="correo" id="correo" value="">
+                                            <input type="email" title="Correo" required="" placeholder="Ingrese el correo" maxlength="255" class="form-control" name="correo" id="correo" value="">
                                         </div>
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -606,7 +606,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="number" step="1" title="Teléfono" required="" min="1" class="form-control" name="telefono" id="telefono" value="">
+                                        <input type="number" step="1" title="Teléfono" required="" placeholder="Ingrese el telefono" min="1" class="form-control" name="telefono" id="telefono" value="">
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
                                     </div>
@@ -616,7 +616,7 @@
                                         <span class="text-danger" title="Este campo es requerido">*</span>
                                     </label>
                                     <div class="col-sm-8">
-                                        <textarea name="direccion" id="direccion" required="" maxlength="255" class="form-control" rows="2"></textarea>
+                                        <textarea name="direccion" id="direccion" required="" placeholder="Ingrese la dirección" maxlength="255" class="form-control" rows="2"></textarea>
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
                                     </div>
