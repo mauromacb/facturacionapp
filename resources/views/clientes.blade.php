@@ -1,9 +1,5 @@
 @extends('crudbooster::admin_template')
 
-
-
-
-
 @section('content')
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
@@ -174,7 +170,7 @@
     $("#formNuevoComprobante").validate({
 
         rules:{
-        
+
           tipo:{
             required:true
           },
@@ -188,14 +184,17 @@
             required:true
           },
           telefono:{
-            required:true
+            required:true,
+            digits:true,
+            maxlength:10,
+            minlength:10
           },
           direccion:{
             required:true
           }
         },
         messages:{
-          
+
           tipo:{
             required:"Ingrese el  tipo porfavor"
           },
@@ -209,10 +208,13 @@
             required:"Ingrese el correo porfavor"
           },
           telefono:{
-            required:"Ingrese el correo porfavor"
+            required:"Por favor  ingrese el telefono",
+            digits:"El telefono debe tener 10 numeros",
+            maxlength:"El telefono debe teber maximo 10 digitos",
+            minlength:"El telefono debe tener minimo 10 digitos"
           },
-          telefono:{
-            required:"Ingrese el dirección porfavor"
+          direccion:{
+            required:"Ingrese la dirección porfavor"
           }
 
         }
@@ -228,5 +230,6 @@
       border: 2px solid red;
     }
 </style>
+
 
 @endsection

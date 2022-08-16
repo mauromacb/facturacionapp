@@ -50,7 +50,7 @@
                         <div class="modal-body">
                             <div class="box-body" id="parent-form-area">
 
-                               
+
                                 <div class="form-group header-group-0 col-sm-12" id="form-group-identificacion" style="">
                                     <label class="control-label col-sm-3">
                                         Nombre:
@@ -100,8 +100,8 @@
                                     <div class="col-sm-8">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                            <input type="email" name="correo" style="display: none">
-                                            <input type="email" title="Correo" required="" maxlength="255" class="form-control" name="correo" id="correo" value="">
+                                            <input type="email" name="email" style="display: none">
+                                            <input type="email" title="Correo" required="" maxlength="255" class="form-control" name="email" id="email" value="">
                                         </div>
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -162,15 +162,21 @@
     $("#formNuevoComprobante").validate({
 
         rules:{
-        
+
           nombre:{
             required:true
           },
           ruc:{
-            required:true
+            required:true,
+            digits:true,
+            maxlength:13,
+            minlength:13
           },
           telefonos:{
-            required:true
+            required:true,
+            digits:true,
+            maxlength:10,
+            minlength:10
           },
           email:{
             required:true
@@ -180,21 +186,28 @@
           }
         },
         messages:{
-          
+
           nombre:{
             required:"Ingrese el nombre de la empresa porfavor"
           },
           ruc:{
-            required:"Ingrese el ruc porfavor"
+
+            required:"Por favor  ingrese el Ruc",
+            digits:"El Ruc debe tener 13 numeros",
+            maxlength:"El Ruc debe teber maximo 13 digitos",
+            minlength:"El Ruc debe tener minimo 13 digitos"
           },
           telefonos:{
-            required:"Ingrese el telefonoo porfavor"
+            required:"Por favor  ingrese el telefono",
+            digits:"El telefono debe tener 10 numeros",
+            maxlength:"El telefono debe teber maximo 10 digitos",
+            minlength:"El telefono debe tener minimo 10 digitos"
           },
-          correo:{
+          email:{
             required:"Ingrese el email porfavor"
           },
           direccion:{
-            required:"Ingrese la direccion porfavor"
+            required:"Ingrese la dirección porfavor"
           }
 
         }
@@ -202,5 +215,14 @@
 
         </script>
 
-
+      </script>
+    <style media="screen">
+    .error{
+    color:red;
+    font-size: 16px;
+    }
+    input.error, select.error{
+    border: 2px solid red;
+    }
+    </style>
 @endsection
