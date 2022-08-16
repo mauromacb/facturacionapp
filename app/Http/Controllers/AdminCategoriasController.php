@@ -295,8 +295,8 @@
 	    public function hook_before_edit(&$postdata,$id) {
 
 	        //Your code here
-		
-			
+
+
 	    }
 
 	    /*
@@ -324,7 +324,7 @@
             $page_title = cbLang("edit_data_page_title", ['module' => CRUDBooster::getCurrentModule()->name, 'name' => $row->{$this->title_field}]);
             $command = 'edit';
             \Illuminate\Support\Facades\Session::put('current_row_id', $id);
-           
+
 
             return view('categoriasEdit', compact('id', 'row', 'page_menu', 'page_title', 'command'));
         }

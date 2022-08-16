@@ -7,7 +7,7 @@
 @section('content')
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
-    
+
     <script type="text/javascript">
 
         var buscar_cliente_url = "{{ url('clientes/buscar?texto=') }}";
@@ -32,8 +32,7 @@
             $.each(inputs, function (i, input) {
                 formObj[input.name] = input.value;
             });
-            
-            alert('ingresa');
+
 
             var identificacion2 = formObj['identificacion2'];
             var nombres = formObj['nombres'];
@@ -253,7 +252,7 @@
                                     <th class="text-center" width="80px">Subtotal</th>
                                     <th class="text-center" width="80px">IVA</th>
                                     <th class="text-center" width="100px">Total</th>
-                                    
+
                                 </tr>
                                 </thead>
                                 <tbody id="tablaProductos">
@@ -637,23 +636,75 @@
 
 
 
-    <script type="text/javascript">
-    $("#formNuevoCliente").validate({
+        <script type="text/javascript">
+        $("#formNuevoCliente").validate({
 
-        rules:{
-        
-          nombres:{
-            required:true
-          }
-        },
-        messages:{
-          
-          nombres:{
-            required:"Ingrese el  nombre"
-          }
+            rules:{
 
-        }
-      });
+              nombres:{
+                required:true
+              },
+              tipo:{
+                required:true
+              },
+              identificacion2:{
+                required:true
+              },
+              ruc:{
+                required:true
+              },
+              telefono:{
+                required:true,
+                digits:true,
+                maxlength:10,
+                minlength:10
+              },
+              email:{
+                required:true
+              },
+              direccion:{
+                required:true
+              }
+            },
+            messages:{
 
-        </script>
+              nombres:{
+                required:"Ingrese el nombre porfavor"
+              },
+              identificacion2:{
+                required:"Ingrese la identificacion porfavor"
+              },
+              ruc:{
+                required:"Ingrese el ruc porfavor"
+              },
+              telefono:{
+                required:"Por favor  ingrese el telefono",
+                digits:"El telefono debe tener 10 numeros",
+                maxlength:"El telefono debe teber maximo 10 digitos",
+                minlength:"El telefono debe tener minimo 10 digitos"
+              },
+              correo:{
+                required:"Ingrese el email porfavor"
+              },
+              direccion:{
+                required:"Ingrese la dirección porfavor"
+              },
+              tipo:{
+                required:"Ingrese el tipo porfavor"
+              }
+
+            }
+          });
+
+            </script>
+
+            <style media="screen">
+            .error{
+            color:red;
+            font-size: 16px;
+            }
+            input.error, select.error{
+            border: 2px solid red;
+            }
+            </style>
 @endsection

@@ -59,7 +59,7 @@
 
                                     <div class="col-sm-8">
                                         <input type="text" title="Nombre" required="" placeholder="Ingrese el nombre de la categorias" minlength="" class="form-control" name="nombre" id="nombre" value="" >
-                                        <h5>Ej. Avatar</h5>
+                                        <h5>Ej. Snack</h5>
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
 
@@ -110,13 +110,13 @@
     $("#formNuevoComprobante").validate({
 
         rules:{
-        
+
           nombre:{
             required:true
           }
         },
         messages:{
-          
+
           nombre:{
             required:"Ingrese el  nombre de la categoria"
           }
@@ -125,15 +125,15 @@
       });
 
         </script>
-<style media="screen">
-    .error{
-      color:red;
-      font-size: 16px;
-    }
-    input.error, select.error{
-      border: 2px solid red;
-    }
-</style>
 
+        <style media="screen">
+        .error{
+        color:red;
+        font-size: 16px;
+        }
+        input.error, select.error{
+        border: 2px solid red;
+        }
+        </style>
 
 @endsection

@@ -58,7 +58,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" title="Nombre" required=""  sminlength="" class="form-control" name="nombre" id="nombre" value="{{$row->Nombre}}" >
+                                        <input type="text" title="Nombre" required=""  sminlength="" class="form-control" name="nombre" id="nombre" value="{{$row->nombre}}" >
                                         <h6>Ej. Snack</h6>
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -110,13 +110,13 @@
     $("#formNuevoComprobante").validate({
 
         rules:{
-        
+
           nombre:{
             required:true
           }
         },
         messages:{
-          
+
           nombre:{
             required:"Ingrese el  nombre de la categoria"
           }
@@ -126,14 +126,14 @@
 
         </script>
 
-<style media="screen">
-    .error{
-      color:red;
-      font-size: 16px;
-    }
-    input.error, select.error{
-      border: 2px solid red;
-    }
-</style>
+        <style media="screen">
+        .error{
+        color:red;
+        font-size: 16px;
+        }
+        input.error, select.error{
+        border: 2px solid red;
+        }
+        </style>
 
 @endsection

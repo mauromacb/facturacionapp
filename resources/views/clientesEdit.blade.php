@@ -178,7 +178,7 @@
     $("#formNuevoComprobante").validate({
 
         rules:{
-        
+
           tipo:{
             required:true
           },
@@ -192,14 +192,17 @@
             required:true
           },
           telefono:{
-            required:true
+            required:true,
+            digits:true,
+            maxlength:10,
+            minlength:10
           },
           direccion:{
             required:true
           }
         },
         messages:{
-          
+
           tipo:{
             required:"Ingrese el  tipo porfavor"
           },
@@ -213,10 +216,13 @@
             required:"Ingrese el correo porfavor"
           },
           telefono:{
-            required:"Ingrese el correo porfavor"
+            required:"Por favor  ingrese el telefono",
+            digits:"El telefono debe tener 10 numeros",
+            maxlength:"El telefono debe teber maximo 10 digitos",
+            minlength:"El telefono debe tener minimo 10 digitos"
           },
           direccion:{
-            required:"Ingrese el dirección porfavor"
+            required:"Ingrese la dirección porfavor"
           }
 
         }
@@ -224,13 +230,14 @@
 
         </script>
 
-<style media="screen">
-    .error{
-      color:red;
-      font-size: 16px;
-    }
-    input.error, select.error{
-      border: 2px solid red;
-    }
-</style>
+  <style media="screen">
+  .error{
+    color:red;
+    font-size: 16px;
+  }
+  input.error, select.error{
+    border: 2px solid red;
+  }
+  </style>
+
 @endsection
