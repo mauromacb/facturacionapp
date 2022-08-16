@@ -58,7 +58,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" title="Nombre" required="" minlength="10" class="form-control" name="nombre" id="nombre" value="" >
+                                        <input type="text" title="Nombre" required="" placeholder="Ingrese el nombre"  minlength="10" class="form-control" name="nombre" id="nombre" value="" >
 
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -72,7 +72,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" title="Ruc" required="" maxlength="255" class="form-control" name="ruc" id="ruc" value="" onKeyPress="return soloNumeros(event)" >
+                                        <input type="text" title="Ruc" required="" placeholder="Ingrese e ruc" maxlength="255" class="form-control" name="ruc" id="ruc" value="" onKeyPress="return soloNumeros(event)" >
 
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -86,7 +86,7 @@
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="number" step="1" title="Teléfono" required="" minlength="2" class="form-control" name="telefonos" id="telefonos" value="">
+                                        <input type="number" step="1" title="Teléfono" required="" placeholder="Ingrese el teléfono" minlength="2" class="form-control" name="telefonos" id="telefonos" value="">
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
                                     </div>
@@ -101,7 +101,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                                             <input type="email" name="email" style="display: none">
-                                            <input type="email" title="Correo" required="" maxlength="255" class="form-control" name="email" id="email" value="">
+                                            <input type="email" title="Correo" required="" placeholder="Ingrese el email" maxlength="255" class="form-control" name="email" id="email" value="">
                                         </div>
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -113,7 +113,7 @@
                                         <span class="text-danger" title="Este campo es requerido">*</span>
                                     </label>
                                     <div class="col-sm-8">
-                                        <textarea name="direccion" id="direccion" required="" maxlength="255"  class="form-control" rows="5"></textarea>
+                                        <textarea name="direccion" id="direccion" required="" placeholder="Ingrese la dirección" maxlength="255"  class="form-control" rows="5"></textarea>
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
                                     </div>
