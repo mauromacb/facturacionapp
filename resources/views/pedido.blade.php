@@ -10,6 +10,7 @@
 
     <script type="text/javascript">
 
+        var buscar_prodcto_categoria = "{{ url('productos/buscarPorCategoria?texto=') }}";
         var buscar_cliente_url = "{{ url('clientes/buscar?texto=') }}";
         var buscar_prodcto_url = "{{ url('productos/buscar?texto=') }}";
         var comprobante_vistaprevia_url = "{{ url('comprobantes/vistaPrevia') }}";
@@ -62,6 +63,18 @@
             });
 
         }
+
+        function agregarArticuloPedido(codigo){
+            var producto_codigo = codigo;
+            if(producto_codigo.length > 2){
+                //url = "{{ url('productos/buscar?texto=') }}" + producto_codigo;
+                url = buscar_prodcto_url + producto_codigo;
+                $.get(url , function( data ){
+                    agregarArticulo(data);
+                });
+            }
+        }
+
     </script>
     <script src="{{ asset('js/forms/comprobantes.js') }}"></script>
 
@@ -125,7 +138,7 @@
                                 <p class="help-block"></p>
                             </div>
 
-                            <label class="control-label col-sm-1">Factura #:
+                            <label class="control-label col-sm-1">Pedido #
                                 <span class="text-danger" title="Este campo es requerido">*</span>
                             </label>
 
@@ -142,7 +155,7 @@
 
                         </div>
 
-
+                        @if(!$clientes)
                         <div class="form-group header-group-0 " id="form-group-cliente_id" style="">
                             <label class="control-label col-sm-2">Buscar Cliente
                                 <span class="text-danger" title="Este campo es requerido">*</span>
@@ -153,9 +166,9 @@
                                 <div class="input-group">
                                     <input id="hiddenCliente" type="hidden" name="cliente_id" value="">
                                     <input id="hiddenConsumidor" type="hidden" name="consumidor_final_id" value="{{$cliente ? $cliente->id : $consumidor_final->id}}">
-                                    <input name="cliente" type="text" id="txtCliente" placeholder="Ingrese los Nombres, razón social, cédula o ruc" oninvalid="this.setCustomValidity('Debe ingresar el nombre o la razón social del cliente')" oninput="setCustomValidity('')" class="form-control" disabled>
+                                    <input name="cliente" type="text" id="txtCliente" placeholder="Ingrese los Nombres, razón social, cédula o ruc" oninvalid="this.setCustomValidity('Debe ingresar el nombre o la razón social del cliente')" oninput="setCustomValidity('')" class="form-control" >
                                     <div class="input-group-btn">
-                                    <button id="btnAgregarCliente" data-toggle="modal" data-target="#modalAgregarCliente" class="btn btn-default" disabled>
+                                    <button id="btnAgregarCliente" data-toggle="modal" data-target="#modalAgregarCliente" class="btn btn-default" >
                                         <i class="fa fa-search "></i>
                                     </button>
                                     </div>
@@ -164,20 +177,13 @@
                                 </div><!--end-text-danger-->
                             </div>
 
-                            <label class="control-label col-sm-1">Consumidor Final
-                                <span class="text-danger" title="Este campo es requerido">*</span>
-                            </label>
-
-                            <div class="col-sm-1">
-                                <input onchange="check(this)" type="checkbox" name="consumidor" id="consumidor" value="S" {{$cliente ? '' : 'checked'}}>
-                            </div>
 
                             <label class="control-label col-sm-2">Cédula/Ruc
                                 <span class="text-danger" title="Este campo es requerido">*</span>
                             </label>
 
                             <div class="col-sm-2">
-                                <input type="text" title="Identificacion" required="" class="form-control" name="identificacion" id="identificacion" value="{{$cliente ? $cliente->identificacion : $consumidor_final->identificacion}}" readonly>
+                                <input type="text" title="Identificacion" required="" class="form-control" name="identificacion" id="identificacion" readonly required>
                             </div>
                         </div>
 
@@ -187,7 +193,7 @@
                             </label>
 
                             <div class="col-sm-3">
-                                <input type="text" title="Nombres" required="" class="form-control" name="nombres" id="nombres" value="{{$cliente ? $cliente->nombres : $consumidor_final->nombres}}" {{$cliente ? '' : 'readonly'}}>
+                                <input type="text" title="Nombres" required="" class="form-control" name="nombres" id="nombres" >
                             </div>
 
                             <label class="control-label col-sm-1">Teléfono
@@ -195,7 +201,7 @@
                             </label>
 
                             <div class="col-sm-2">
-                                <input type="text" title="Teléfono" required=""  class="form-control" name="telefono" id="telefono" value="{{$cliente ? $cliente->telefono : $consumidor_final->telefono}}" {{$cliente ? '' : 'readonly'}}>
+                                <input type="text" title="Teléfono" required=""  class="form-control" name="telefono" id="telefono" >
                             </div>
 
                             <label class="control-label col-sm-1">Correo
@@ -203,7 +209,7 @@
                             </label>
 
                             <div class="col-sm-2">
-                                <input type="text" title="Correo" required="" class="form-control" name="correo" id="correo" value="{{$cliente ? $cliente->correo : $consumidor_final->correo}}" {{$cliente ? '' : 'readonly'}}>
+                                <input type="text" title="Correo" required="" class="form-control" name="correo" id="correo" >
                             </div>
                         </div>
 
@@ -213,32 +219,49 @@
                             </label>
 
                             <div class="col-sm-3">
-                                <input type="text" title="Dirección" required="" class="form-control" name="direccion" id="direccion" value="{{$cliente ? $cliente->direccion : $consumidor_final->direcccion}}" {{$cliente ? '' : 'readonly'}}>
+                                <input type="text" title="Dirección" required="" class="form-control" name="direccion" id="direccion" >
                             </div>
                         </div>
                         <!--Fin Datos del cliente-->
                         <hr>
+                        @else
+                            <input id="hiddenCliente" type="hidden" name="cliente_id" value="{{$clientes[0]->id}}">
+                        @endif
+
 
                         <!--Detalle factura-->
 
-                        <div class="row col-md-12 form_venta_contado form_factura_credito form_devolucion_contado form_compra_contado">
-                            <div class="col-md-7">
+                        <div class="form-group">
+                            <div class="form-group header-group-0 col-md-6" id="form-group-tipo" style="">
+                                <label class="control-label col-sm-3">Categoría
+                                    <span class="text-danger" title="Este campo es requerido">*</span>
+                                </label>
+
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="categoria" data-value=""  name="categoria" onchange="getProductosCategoria(this)">
+                                        <option value="">** Selecciona una categoría</option>
+                                        @foreach($categorias as $categoria)
+                                            <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="text-danger"></div>
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="input-group pull-right">
-                                    <input type="text" class="form-control" id="txtAgregarArticulo" list="listaBusquedaProducto" placeholder="Agregar un artículo..." onkeydown="if (event.keyCode == 13) return false;" tabindex="1">
+                                    <input type="text" class="form-control" id="txtAgregarArticuloPedido" list="listaBusquedaProductoPedido" placeholder="Buscar un artículo..." onkeydown="if (event.keyCode == 13) return false;" tabindex="1">
                                     <div class="input-group-btn">
-                                        <button id="btnAgregarArticulo" class="btn btn-default">
+                                        <button id="btnAgregarArticuloPedido" class="btn btn-default">
                                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <datalist id="listaBusquedaProducto">
-                                <!--
-                                <option value="a"/>
-                                <option value="b"/>
-                                <option value="c"/>
-                                -->
-                            </datalist>
+                            <div class="col-md-12" id="listaBusquedaProductoPedido">
+
+
+                            </div>
                         </div>
 
                         <div class="col-md-12 pre-scrollable div-detalle-comprobante form_venta_contado form_factura_credito form_devolucion_contado form_compra_contado">
@@ -273,119 +296,6 @@
 
                         </div>
 
-
-                        {{--
-                        <div class="form-group header-group-0 " id="form-group-total_sin_impuestos" style="">
-                            <label class="control-label col-sm-offset-8 col-sm-2">Total Sin Impuestos
-                                <span class="text-danger" title="Este campo es requerido">*</span>
-                            </label>
-
-                            <div class="col-sm-2">
-                                <input type="text" title="Total Sin Impuestos" required="" class="form-control inputMoney" name="total_sin_impuestos" id="total_sin_impuestos" value="">
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-                        <div class="form-group header-group-0 " id="form-group-subtotal_12" style="">
-                            <label class="control-label col-sm-offset-8 col-sm-2">Subtotal 12
-                                <span class="text-danger" title="Este campo es requerido">*</span>
-                            </label>
-
-                            <div class="col-sm-2">
-                                <input type="text" title="Subtotal 12" required="" class="form-control inputMoney" name="subtotal_12" id="subtotal_12" value="">
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-                        <div class="form-group header-group-0 " id="form-group-subtotal_0" style="">
-                            <label class="control-label col-sm-offset-8 col-sm-2">Subtotal 0
-                                <span class="text-danger" title="Este campo es requerido">*</span>
-                            </label>
-
-                            <div class="col-sm-2">
-                                <input type="text" title="Subtotal 0" required="" class="form-control inputMoney" name="subtotal_0" id="subtotal_0" value="">
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-                        <div class="form-group header-group-0 " id="form-group-subtotal_no_iva" style="">
-                            <label class="control-label col-sm-offset-8 col-sm-2">Subtotal No Iva
-                                <span class="text-danger" title="Este campo es requerido">*</span>
-                            </label>
-
-                            <div class="col-sm-2">
-                                <input type="text" title="Subtotal No Iva" required="" class="form-control inputMoney" name="subtotal_no_iva" id="subtotal_no_iva" value="">
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-                        <div class="form-group header-group-0 " id="form-group-subtotal_extento_iva" style="">
-                            <label class="control-label col-sm-offset-8 col-sm-2">Subtotal Extento Iva
-                                <span class="text-danger" title="Este campo es requerido">*</span>
-                            </label>
-
-                            <div class="col-sm-2">
-                                <input type="text" title="Subtotal Extento Iva" required="" class="form-control inputMoney" name="subtotal_extento_iva" id="subtotal_extento_iva" value="">
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-                        <div class="form-group header-group-0 " id="form-group-total_ice" style="">
-                            <label class="control-label col-sm-offset-8 col-sm-2">Total Ice
-                                <span class="text-danger" title="Este campo es requerido">*</span>
-                            </label>
-
-                            <div class="col-sm-2">
-                                <input type="text" title="Total Ice" required="" class="form-control inputMoney" name="total_ice" id="total_ice" value="">
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-                        <div class="form-group header-group-0 " id="form-group-total_iva" style="">
-                            <label class="control-label col-sm-offset-8 col-sm-2">Total Iva
-                                <span class="text-danger" title="Este campo es requerido">*</span>
-                            </label>
-
-                            <div class="col-sm-2">
-                                <input type="text" title="Total Iva" required="" class="form-control inputMoney" name="total_iva" id="total_iva" value="">
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-                        <div class="form-group header-group-0 " id="form-group-total_descuento" style="">
-                            <label class="control-label col-sm-offset-8 col-sm-2">Total Descuento
-                                <span class="text-danger" title="Este campo es requerido">*</span>
-                            </label>
-
-                            <div class="col-sm-2">
-                                <input type="text" title="Total Descuento" required="" class="form-control inputMoney" name="total_descuento" id="total_descuento" value="">
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-                        <div class="form-group header-group-0 " id="form-group-total_propina" style="">
-                            <label class="control-label col-sm-offset-8 col-sm-2">Total Propina
-                                <span class="text-danger" title="Este campo es requerido">*</span>
-                            </label>
-
-                            <div class="col-sm-2">
-                                <input type="text" title="Total Propina" required="" class="form-control inputMoney" name="total_propina" id="total_propina" value="">
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-                        <div class="form-group header-group-0 " id="form-group-total_valor" style="">
-                            <label class="control-label col-sm-offset-8 col-sm-2">Total Valor
-                                <span class="text-danger" title="Este campo es requerido">*</span>
-                            </label>
-
-                            <div class="col-sm-2">
-                                <input type="text" title="Total Valor" required="" class="form-control inputMoney" name="total_valor" id="total_valor" value="">
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-                        --}}
                         <input id="hiddenListado" type="hidden" name="listadoArticulos">
                         <div class="form-group header-group-0 " id="form-group-observacion" style="">
                             <label class="control-label col-sm-2">Observacion
@@ -397,51 +307,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group header-group-0 " id="form-group-forma_pago_id" style="">
-                            <label class="control-label col-sm-2">Forma Pago
-                                <span class="text-danger" title="Este campo es requerido">*</span>
-                            </label>
-
-                            <div class="col-sm-10">
-                                <select class="form-control select2-hidden-accessible" id="forma_pago_id" required="" name="forma_pago_id" tabindex="-1" aria-hidden="true">
-                                    <option value="">** Selecciona una forma de pago</option>
-                                    @foreach($formapagos as $k=>$v)
-                                        @if ($loop->first)
-                                            <option value="{{$k}}" selected>{{$v}}</option>
-                                        @else
-                                            <option value="{{$k}}">{{$v}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                                <div class="text-danger">
-
-                                </div><!--end-text-danger-->
-                                <p class="help-block"></p>
-
-                            </div>
-
-                            <label class="control-label col-sm-2">
-
-                            </label>
-
-                            <div class="col-sm-2">
-                                <input type="text" title="Ingrese el valor" class="form-control" name="pago" id="pago"  placeholder="Ingrese el valor del pago" onkeyup="return devolucionfunc()" required>
-                                <div class="text-danger">
-                                </div><!--end-text-danger-->
-                                <p class="help-block"></p>
-                            </div>
-
-                            <div class="col-sm-2">
-                                <div class="input-group">
-                                    <input type="text" title="Devolución" required="" class="form-control" name="devolucion" id="devolucion" value="" placeholder="Valor devolución" disabled>
-                                    <div class="input-group-btn">
-                                        <div class="btn btn-default" onclick="devolucionfunc()">
-                                            <i class="fa fa-refresh "></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div><!-- /.box-body -->
 
                     <div class="box-footer" style="background: #F5F5F5">
@@ -453,7 +318,7 @@
                                         <a href='{{CRUDBooster::mainpath("?".http_build_query(@$_GET)) }}' class='btn btn-default'><i
                                                 class='fa fa-chevron-circle-left'></i> {{cbLang("button_back")}}</a>
 
-                                        <input type="submit" name="submit" value='Guardar e Imprimir' class='btn btn-success'>
+                                        <input type="submit" name="submit" value='Guardar' class='btn btn-success'>
 
                             </div>
                         </div>
@@ -637,6 +502,7 @@
 
 
         <script type="text/javascript">
+
         $("#formNuevoCliente").validate({
 
             rules:{

@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::get('/clientes/buscar', [AdminClientesController::class, 'buscar']);
 Route::get('/clientes/buscar_consumidor_final', [AdminClientesController::class, 'buscarConsumidorFinal']);
 Route::get('/productos/buscar', [AdminProductosController::class, 'buscar']);
+Route::get('/productos/buscarPorCategoria', [AdminProductosController::class, 'buscarPorCategoria']);
 Route::get('/facturas/imprimir/{facturaId}',[AdminFacturasController::class, 'imprimir']);
 Route::get('/facturas/registrar/cliente',[AdminFacturasController::class, 'registrarCliente']);
 

@@ -109,6 +109,67 @@ $(document).ready(function (){
 		}
 	});
 
+    $("#txtAgregarArticuloPedido").on('keyup', function(e){
+        e.preventDefault();
+        if(e.keyCode == 13){
+            $("#btnAgregarArticuloPedidoLista").click();
+        }
+        var str = $("#txtAgregarArticuloPedido").val();
+        if(str != ""){
+            //url = "{{ url('productos/buscar?texto=') }}" + str;
+            url = buscar_prodcto_url + str;
+            delay(function(){
+                $.get(url , function( data ){
+                    $("#divData").html( data );
+                    var productos = data["productos"];
+                    if(productos.length == 0){
+                        $("#listaBusquedaProductoPedido").html("");
+                    }else{
+                        let imagen='';
+                        if (productos[i].imagen==null){
+                            imagen='../../vendor/crudbooster/avatar.jpg';
+                        }else{
+                            imagen='../../'+productos[i].imagen;
+                        }
+                        $("#listaBusquedaProductoPedido").html("");
+                        for (i = 0; i < productos.length; i++) {
+                            $(document).find('#listaBusquedaProductoPedido').get(0).innerHTML +=
+                                '<div class="col-md-3">\n' +
+                                ' <div class="panel panel-success">\n' +
+                                '  <div class="panel-heading" align="center">\n' +
+                                '   <h3 class="panel-title">'+productos[i].nombre+'</h3>\n' +
+                                '  </div>\n' +
+                                '  <div class="panel-body" align="center">\n' +
+                                '    <p class="card-text">'+productos[i].codigo +' unidades</p>\n' +
+                                '    <img class="card-img-top img-responsive" src="../../'+imagen+'">\n' +
+                                '    <p class="card-text">'+productos[i].stock +'</p>\n' +
+                                '    <div class="btn btn-primary" onclick="agregarArticuloPedido(\''+productos[i].codigo +'\')"><i class="fa fa-cart-plus" aria-hidden="true" ></i> Agregar</div>\n' +
+                                '  <div>\n' +
+                                ' </div>\n' +
+                                '</div>';
+                        }
+                    }
+                });
+            }, 600);
+        }else{
+            $("#listaBusquedaProductoPedido").html("");
+        }
+    });
+
+    $('#btnAgregarArticuloPedido').on('click', function(e) {
+        e.preventDefault();
+        var producto_codigo = $("#txtAgregarArticuloPedido").val();
+        if(producto_codigo.length > 2){
+            //url = "{{ url('productos/buscar?texto=') }}" + producto_codigo;
+            url = buscar_prodcto_url + producto_codigo;
+            $.get(url , function( data ){
+                agregarArticulo(data);
+            });
+        }
+    });
+
+
+
 	$("#formNuevoComprobante").on('submit', function(e){
 		if(! confirm("¿Guardar comprobante?, una vez ingresado al sistema no podrá ser modificado.")){
 			e.preventDefault();
@@ -669,4 +730,51 @@ function soloNumeros(e){
         var key = window.Event ? e.which : e.keyCode
         return (key >= 48 && key <= 57)
     }
+}
+
+
+function getProductosCategoria(selectObject) {
+    var value = selectObject.value;
+    var str = selectObject.value;
+    if(str != ""){
+        //url = "{{ url('productos/buscar?texto=') }}" + str;
+        url = buscar_prodcto_categoria + str;
+        delay(function(){
+            $.get(url , function( data ){
+                $("#divData").html( data );
+                var productos = data["productos"];
+                if(productos.length == 0){
+                    $("#listaBusquedaProductoPedido").html("");
+                }else{
+                    $("#listaBusquedaProductoPedido").html("");
+                    for (i = 0; i < productos.length; i++) {
+                        let imagen='';
+                        if (productos[i].imagen==null){
+                            imagen='../../vendor/crudbooster/avatar.jpg';
+                        }else{
+                            imagen='../../'+productos[i].imagen;
+                        }
+
+                        $(document).find('#listaBusquedaProductoPedido').get(0).innerHTML +=
+                            '<div class="col-md-3">\n' +
+                            ' <div class="panel panel-success">\n' +
+                            '  <div class="panel-heading" align="center">\n' +
+                            '   <h3 class="panel-title">'+productos[i].nombre+'</h3>\n' +
+                            '  </div>\n' +
+                            '  <div class="panel-body" align="center">\n' +
+                            '    <p class="card-text">'+productos[i].codigo +' unidades</p>\n' +
+                            '    <img class="card-img-top img-responsive" src="../../'+imagen+'">\n' +
+                            '    <p class="card-text">'+productos[i].stock +'</p>\n' +
+                            '    <div class="btn btn-primary" onclick="agregarArticuloPedido(\''+productos[i].codigo +'\')"><i class="fa fa-cart-plus" aria-hidden="true" ></i> Agregar</div>\n' +
+                            '  <div>\n' +
+                            ' </div>\n' +
+                            '</div>';
+                    }
+                }
+            });
+        }, 600);
+    }else{
+        $("#listaBusquedaProductoPedido").html("");
+    }
+
 }

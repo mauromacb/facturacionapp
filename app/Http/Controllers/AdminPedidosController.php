@@ -1,14 +1,28 @@
 <?php namespace App\Http\Controllers;
 
-	use App\Models\ConsumidorFinal;
+	use App\Models\Categorias;
+    use App\Models\Clientes;
+    use App\Models\CmsUser;
+    use App\Models\ConsumidorFinal;
+    use App\Models\Empresa;
+    use App\Models\Factura;
+    use App\Models\FacturaDetalle;
+    use App\Models\Facturero;
+    use App\Models\FormasPago;
+    use App\Models\Pedido;
+    use App\Models\PedidoDetalles;
+    use App\Models\Productos;
     use App\Models\TipoDocumento;
+    use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Route;
+    use Illuminate\Support\Facades\Schema;
+    use Psy\Util\Str;
     use Session;
 	use Request;
 	use DB;
 	use CRUDBooster;
 
-	class AdminCategoriasController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminPedidosController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
@@ -28,22 +42,40 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "categorias";
+			$this->table = "pedidos";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Nombre","name"=>"nombre"];
+            $this->col[] = ["label"=>"Secuencial Cliente","name"=>"secuencial_cliente"];
+            $this->col[] = ["label"=>"Codigo de pedido","name"=>"codigo"];
+            $this->col[] = ["label"=>"Cliente Id","name"=>"cliente_id","join"=>"clientes,nombres"];
+            $this->col[] = ["label"=>"Empresa Id","name"=>"empresa_id","join"=>"empresas,nombre"];
+			$this->col[] = ["label"=>"Fecha Emision","name"=>"fecha_emision"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Nombre','name'=>'nombre','type'=>'text','validation'=>'required|min:1|max:255|unique:categorias','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Código','name'=>'codigo','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Cliente Id','name'=>'cliente_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'clientes,id'];
+			$this->form[] = ['label'=>'Consumidor Final','name'=>'consumidor_final_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'consumidor_final,id'];
+			$this->form[] = ['label'=>'Secuencial','name'=>'secuencial','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Observacion','name'=>'observacion','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Fecha Emision','name'=>'fecha_emision','type'=>'date','validation'=>'required|date','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Total Valor','name'=>'total_valor','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Estado','name'=>'estado','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Nombre','name'=>'nombre','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Código','name'=>'codigo','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Cliente','name'=>'cliente_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'cliente,id'];
+			//$this->form[] = ['label'=>'Consumidor Final','name'=>'consumidor_final_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'consumidor_final,id'];
+			//$this->form[] = ['label'=>'Secuencial','name'=>'secuencial','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Observacion','name'=>'observacion','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Fecha Emision','name'=>'fecha_emision','type'=>'date','validation'=>'required|date','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Total Valor','name'=>'total_valor','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Estado','name'=>'estado','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# OLD END FORM
 
 			/*
@@ -207,31 +239,143 @@
 
 	    }
 
-
         public function getAdd()
         {
-
             $this->cbLoader();
-            if (! CRUDBooster::isCreate() && $this->global_privilege == false || $this->button_add == false) {
+            /*if (! CRUDBooster::isCreate() && $this->global_privilege == false || $this->button_add == false) {
                 CRUDBooster::insertLog(cbLang('log_try_add', ['module' => CRUDBooster::getCurrentModule()->name]));
                 CRUDBooster::redirect(CRUDBooster::adminPath(), cbLang("denied_access"));
-            }
+            }*/
+
+            $cmsuser=CmsUser::findOrFail(CRUDBooster::myId());
 
             $page_title = cbLang("add_data_page_title", ['module' => CRUDBooster::getCurrentModule()->name]);
             $page_menu = Route::getCurrentRoute()->getActionName();
             $command = 'add';
+            if ($cmsuser->id_cms_privileges==4){
+                $clientes=Clientes::where('identificacion',$cmsuser->identificacion)->get();
+            }
 
-            return view('categorias', compact('page_title', 'page_menu', 'command'));
+            $tipo_documentos = TipoDocumento::get();
+            $categorias = Categorias::orderBy('nombre')->get();
+
+            return view('pedido', compact('page_title', 'page_menu', 'command', 'clientes', 'tipo_documentos', 'categorias'));
         }
 
-	    /*
-	    | ----------------------------------------------------------------------
-	    | Hook for button selected
-	    | ----------------------------------------------------------------------
-	    | @id_selected = the id selected
-	    | @button_name = the name of button
-	    |
-	    */
+
+        public function postAddSave() {
+            $this->cbLoader();
+            /*if (! CRUDBooster::isCreate() && $this->global_privilege == false) {
+                CRUDBooster::insertLog(trans('crudbooster.log_try_add_save', [
+                    'name' => \http\Client\Request::input($this->title_field),
+                    'module' => CRUDBooster::getCurrentModule()->name,
+                ]));
+                CRUDBooster::redirect(CRUDBooster::adminPath(), trans("crudbooster.denied_access"));
+            }*/
+            $this->validation();
+            $this->input_assignment();
+            if (Schema::hasColumn($this->table, 'created_at')) {
+                $this->arr['created_at'] = date('Y-m-d H:i:s');
+            }
+
+            //Permite recibir toda la informacion ingresada en el formulario de facturacion
+            $request=Request()->request->all();
+            $cliente=Clientes::findOrFail($request['cliente_id']);
+            $user=CmsUser::where('identificacion',$cliente->identificacion)->first();
+            $pedido=Pedido::where('cliente_id',$cliente->id)->orderBy('id','desc')->first();
+            $secuencial=1;
+            if ($pedido)$secuencial=$pedido->secuencial_cliente+1;
+
+
+            $pedido_cabecera = new Pedido();
+
+            if ($user)$pedido_cabecera->user_id=$user->id;
+
+            $pedido_cabecera->codigo=Str::random(15);
+            $pedido_cabecera->cliente_id=$request['cliente_id'];
+            $pedido_cabecera->empresa_id=1;
+            $pedido_cabecera->secuencial_cliente=$secuencial;
+            $pedido_cabecera->fecha_emision=$request['fecha_emision'];
+            $pedido_cabecera->observacion=$request['observacion'];
+            $pedido_cabecera->total_sin_impuestos=0;
+            $pedido_cabecera->subtotal_12=0;
+            $pedido_cabecera->subtotal_0=0;
+            $pedido_cabecera->subtotal_no_iva=0;
+            $pedido_cabecera->subtotal_extento_iva=0;
+            $pedido_cabecera->total_ice=0;
+            $pedido_cabecera->total_iva=0;
+            $pedido_cabecera->total_descuento=0;
+            $pedido_cabecera->total_propina=0;
+            $pedido_cabecera->total_valor=0;
+            $pedido_cabecera->created_by_id=$user->id;
+            $pedido_cabecera->updated_by_id=$user->id;
+            $pedido_cabecera->saveOrFail();
+
+
+            $detalles = json_decode($request['listadoArticulos']);
+
+            $subtotal = 0;
+            $totaliva = 0;
+            foreach ($detalles as $detalle) {
+                $producto = Productos::where('codigo',$detalle->codigo)->first();
+                $pedido_detalles = new PedidoDetalles();
+                $pedido_detalles->producto_id = $producto->id;
+                $pedido_detalles->usuario_id = 1;
+                $pedido_detalles->pedido_id = $pedido_cabecera->id;
+                $pedido_detalles->fecha = $request['fecha_emision'];
+                //$pedido_detalles->tasa_iva_id =
+                $pedido_detalles->precio_unitario = $detalle->precio;
+                $pedido_detalles->cantidad = $detalle->cantidad;
+                $pedido_detalles->subtotal = $detalle->subTotal;
+                $pedido_detalles->iva = $detalle->iva;
+                $pedido_detalles->total = $detalle->total;
+                $pedido_detalles->saveOrFail();
+
+                $subtotal = $subtotal + $detalle->subTotal;
+                $totaliva = $totaliva + $detalle->iva;
+
+                //resta de articulos del inventario
+
+                $producto->stock = $producto->stock - $detalle->cantidad;
+                $producto->save();
+            }
+            $totalfactura = $subtotal + $totaliva;
+            $pedido_cabecera->subtotal_12=$subtotal;
+            $pedido_cabecera->total_iva=$totaliva;
+            $pedido_cabecera->total_valor=$totalfactura;
+            $pedido_cabecera->saveOrFail();
+
+            return redirect('/admin/pedidos/detail/'.$pedido_cabecera->id)->with(['message' =>  'Agregado correctamente', 'message_type' => 'success']);
+        }
+
+        public function getDetail($id) {
+            //Create an Auth
+            if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {
+                CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
+            }
+
+            $data = [];
+            //$data['page_title'] = 'Detail Data';
+
+
+            $pedido = Pedido::findOrFail($id);
+            $dataDetallePed = PedidoDetalles::where('pedido_id',$pedido->id)->get();
+            $empresa = Empresa::first();
+
+
+            //Please use view method instead view method from laravel
+            return $this->view('/verPedido', compact('pedido','dataDetallePed', 'empresa'));
+        }
+
+
+        /*
+        | ----------------------------------------------------------------------
+        | Hook for button selected
+        | ----------------------------------------------------------------------
+        | @id_selected = the id selected
+        | @button_name = the name of button
+        |
+        */
 	    public function actionButtonSelected($id_selected,$button_name) {
 	        //Your code here
 
@@ -293,9 +437,7 @@
 	    |
 	    */
 	    public function hook_before_edit(&$postdata,$id) {
-
 	        //Your code here
-
 
 	    }
 
@@ -306,29 +448,10 @@
 	    | @id       = current id
 	    |
 	    */
-		public function getEdit($id)
-        {
-            $this->cbLoader();
-            $row = \Illuminate\Support\Facades\DB::table($this->table)->where($this->primary_key, $id)->first();
+	    public function hook_after_edit($id) {
+	        //Your code here
 
-            if (! CRUDBooster::isRead() && $this->global_privilege == false || $this->button_edit == false) {
-                CRUDBooster::insertLog(cbLang("log_try_edit", [
-                    'name' => $row->{$this->title_field},
-                    'module' => CRUDBooster::getCurrentModule()->name,
-                ]));
-                CRUDBooster::redirect(CRUDBooster::adminPath(), cbLang('denied_access'));
-            }
-
-
-            $page_menu = Route::getCurrentRoute()->getActionName();
-            $page_title = cbLang("edit_data_page_title", ['module' => CRUDBooster::getCurrentModule()->name, 'name' => $row->{$this->title_field}]);
-            $command = 'edit';
-            \Illuminate\Support\Facades\Session::put('current_row_id', $id);
-
-
-            return view('categoriasEdit', compact('id', 'row', 'page_menu', 'page_title', 'command'));
-        }
-
+	    }
 
 	    /*
 	    | ----------------------------------------------------------------------
