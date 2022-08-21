@@ -16,7 +16,7 @@
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Route;
     use Illuminate\Support\Facades\Schema;
-    use Psy\Util\Str;
+    use Illuminate\Support\Str;
     use Session;
 	use Request;
 	use DB;
