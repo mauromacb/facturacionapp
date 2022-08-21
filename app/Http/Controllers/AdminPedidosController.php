@@ -307,8 +307,7 @@
             $pedido_cabecera->total_descuento=0;
             $pedido_cabecera->total_propina=0;
             $pedido_cabecera->total_valor=0;
-            $pedido_cabecera->created_by_id=$user->id;
-            $pedido_cabecera->updated_by_id=$user->id;
+            
             $pedido_cabecera->saveOrFail();
 
 
