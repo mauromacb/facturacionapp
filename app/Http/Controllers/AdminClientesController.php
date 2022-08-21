@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 	use App\Models\Clientes;
+    use App\Models\CmsUser;
     use App\Models\ConsumidorFinal;
     use App\Models\Factura;
     use App\Models\FacturaDetalle;
@@ -10,6 +11,7 @@
     use App\Models\TipoDocumento;
     use crocodicstudio\crudbooster\helpers\CB;
     use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Hash;
     use Illuminate\Support\Facades\Route;
     use Illuminate\Support\Facades\Schema;
     use Illuminate\Support\Facades\Validator;
@@ -285,6 +287,14 @@
             $cliente->telefono = $request['telefono'];
             $cliente->direccion = $request['direccion'];
             $cliente->save();
+
+            $crmuser=new CmsUser();
+            $crmuser->name=$request['nombres'];
+            $crmuser->email=$request['correo'];
+            $crmuser->password=Hash::make($request['identificacion2']);
+            $crmuser->id_cms_privileges=4;
+            $crmuser->created_at=date('Y-m-d H:i:s');
+            $crmuser->save();
 
             $this->return_url = ($this->return_url) ? $this->return_url : request('return_url');
             //insert log

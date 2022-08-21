@@ -38,6 +38,7 @@
 			$this->col[] = ["label"=>"Iva","name"=>"tasa_iva_id","join"=>"tasas_iva,nombre"];
 			$this->col[] = ["label"=>"Categoría","name"=>"categoria_id","join"=>"categorias,nombre"];
 			$this->col[] = ["label"=>"Activo","name"=>"activo_id","join"=>"estados,nombre"];
+			$this->col[] = ["label"=>"Imagen","name"=>"imagen","image"=>true];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
@@ -49,6 +50,7 @@
 			$this->form[] = ['label'=>'Categoría','name'=>'categoria_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'categorias,nombre'];
 			$this->form[] = ['label'=>'Iva','name'=>'tasa_iva_id','type'=>'select2','validation'=>'required','width'=>'col-sm-9','datatable'=>'tasas_iva,nombre'];
 			$this->form[] = ['label'=>'Activo','name'=>'activo_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'estados,nombre'];
+			$this->form[] = ['label'=>'Imagen','name'=>'imagen','type'=>'upload','validation'=>'required','width'=>'col-sm-9'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -56,7 +58,7 @@
 			//$this->form[] = ['label'=>'Código','name'=>'codigo','type'=>'text','validation'=>'required|min:1|max:255|unique:productos','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Nombre','name'=>'nombre','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Stock','name'=>'stock','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Valor','name'=>'valor','type'=>'text','validation'=>'required|double|min:0','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Valor','name'=>'valor','type'=>'text','validation'=>'required|min:0','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Categoría','name'=>'categoria_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'categorias,nombre'];
 			//$this->form[] = ['label'=>'Iva','name'=>'tasa_iva_id','type'=>'select2','validation'=>'required','width'=>'col-sm-9','datatable'=>'tasas_iva,nombre'];
 			//$this->form[] = ['label'=>'Activo','name'=>'activo_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'estados,nombre'];
@@ -347,6 +349,22 @@
                 'productos' => $productos
             ]);
         }
+
+        public function buscarPorCategoria(\Illuminate\Http\Request $request){
+            $texto = $request->texto;
+            $productos = Productos::where('categoria_id',$texto)->with('iva')->where('stock','>',0)->get();
+            if(count($productos) == 0){
+                $productos = Productos::FiltrarPorCodigo($texto)
+                    ->FiltrarPorNombre($texto)
+                    ->with('iva')
+                    ->get();
+            }
+            return Response()->json([
+                'productos' => $productos
+            ]);
+        }
+
+
 
 	    //By the way, you can still create your own method in here... :)
 
