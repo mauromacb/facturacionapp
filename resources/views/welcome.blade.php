@@ -21,6 +21,7 @@
                 font-family: 'Nunito';
             }
         </style>
+        @laravelPWA
     </head>
     <body class="anti" align="center">
         <div align="cemter" >

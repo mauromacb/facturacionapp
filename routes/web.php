@@ -19,7 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/offline', function () {    
+    return view('vendor/laravelpwa/offline');
+});
 Route::get('/clientes/buscar', [AdminClientesController::class, 'buscar']);
 Route::get('/clientes/buscar_consumidor_final', [AdminClientesController::class, 'buscarConsumidorFinal']);
 Route::get('/productos/buscar', [AdminProductosController::class, 'buscar']);
