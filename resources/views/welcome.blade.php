@@ -25,7 +25,9 @@
     </head>
     <body class="anti" align="center">
         <div align="cemter" >
+            <div class="resposive">
             <a href="{{url('admin/login')}}"><img src="thumbnail_Don_Cando.jpg"></a>
+            </div>
         </div>
     </body>
 </html>
