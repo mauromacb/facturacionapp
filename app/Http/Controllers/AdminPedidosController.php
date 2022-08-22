@@ -16,7 +16,7 @@
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Route;
     use Illuminate\Support\Facades\Schema;
-    use Psy\Util\Str;
+    use Illuminate\Support\Str;
     use Session;
 	use Request;
 	use DB;
@@ -307,8 +307,8 @@
             $pedido_cabecera->total_descuento=0;
             $pedido_cabecera->total_propina=0;
             $pedido_cabecera->total_valor=0;
-            $pedido_cabecera->created_by_id=$user->id;
-            $pedido_cabecera->updated_by_id=$user->id;
+            $pedido_cabecera->created_by_id=CRUDBooster::myId();
+            $pedido_cabecera->updated_by_id=CRUDBooster::myId();
             $pedido_cabecera->saveOrFail();
 
 

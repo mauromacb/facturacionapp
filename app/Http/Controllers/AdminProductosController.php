@@ -363,8 +363,16 @@
                 'productos' => $productos
             ]);
         }
+// conectar el menu que cree
+public function catalogo(){
+
+	$productos = Productos::with('iva')->where('stock','>',0)->get();
+	dd($productos);
+	return view('pedido', compact('productos' ));
+// compact variabel e
 
 
+}
 
 	    //By the way, you can still create your own method in here... :)
 
