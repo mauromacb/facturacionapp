@@ -4,7 +4,6 @@ use App\Http\Controllers\AdminClientesController;
 use App\Http\Controllers\AdminFacturasController;
 use App\Http\Controllers\AdminProductosController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/offline', function () {    
+Route::get('/offline', function () {  
+    // para pwa  
     return view('vendor/laravelpwa/offline');
 });
 Route::get('/clientes/buscar', [AdminClientesController::class, 'buscar']);
