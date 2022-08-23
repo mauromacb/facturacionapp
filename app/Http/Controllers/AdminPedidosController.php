@@ -348,6 +348,91 @@
             return redirect('/admin/pedidos/detail/'.$pedido_cabecera->id)->with(['message' =>  'Agregado correctamente', 'message_type' => 'success']);
         }
 
+        public function save() {
+            $this->cbLoader();
+            /*if (! CRUDBooster::isCreate() && $this->global_privilege == false) {
+                CRUDBooster::insertLog(trans('crudbooster.log_try_add_save', [
+                    'name' => \http\Client\Request::input($this->title_field),
+                    'module' => CRUDBooster::getCurrentModule()->name,
+                ]));
+                CRUDBooster::redirect(CRUDBooster::adminPath(), trans("crudbooster.denied_access"));
+            }*/
+            $this->validation();
+            $this->input_assignment();
+            if (Schema::hasColumn($this->table, 'created_at')) {
+                $this->arr['created_at'] = date('Y-m-d H:i:s');
+            }
+
+            //Permite recibir toda la informacion ingresada en el formulario de facturacion
+            $request=Request()->request->all();
+            $cliente=Clientes::findOrFail($request['cliente_id']);
+            $user=CmsUser::where('identificacion',$cliente->identificacion)->first();
+            $pedido=Pedido::where('cliente_id',$cliente->id)->orderBy('id','desc')->first();
+            $secuencial=1;
+            if ($pedido)$secuencial=$pedido->secuencial_cliente+1;
+
+
+            $pedido_cabecera = new Pedido();
+
+            if ($user)$pedido_cabecera->user_id=$user->id;
+
+            $pedido_cabecera->codigo=Str::random(15);
+            $pedido_cabecera->cliente_id=$request['cliente_id'];
+            $pedido_cabecera->empresa_id=1;
+            $pedido_cabecera->secuencial_cliente=$secuencial;
+            $pedido_cabecera->fecha_emision=$request['fecha_emision'];
+            $pedido_cabecera->observacion=$request['observacion'];
+            $pedido_cabecera->total_sin_impuestos=0;
+            $pedido_cabecera->subtotal_12=0;
+            $pedido_cabecera->subtotal_0=0;
+            $pedido_cabecera->subtotal_no_iva=0;
+            $pedido_cabecera->subtotal_extento_iva=0;
+            $pedido_cabecera->total_ice=0;
+            $pedido_cabecera->total_iva=0;
+            $pedido_cabecera->total_descuento=0;
+            $pedido_cabecera->total_propina=0;
+            $pedido_cabecera->total_valor=0;
+            $pedido_cabecera->created_by_id=CRUDBooster::myId();
+            $pedido_cabecera->updated_by_id=CRUDBooster::myId();
+            $pedido_cabecera->saveOrFail();
+
+
+            $detalles = json_decode($request['listadoArticulos']);
+
+            $subtotal = 0;
+            $totaliva = 0;
+            foreach ($detalles as $detalle) {
+                $producto = Productos::where('codigo',$detalle->codigo)->first();
+                $pedido_detalles = new PedidoDetalles();
+                $pedido_detalles->producto_id = $producto->id;
+                $pedido_detalles->usuario_id = 1;
+                $pedido_detalles->pedido_id = $pedido_cabecera->id;
+                $pedido_detalles->fecha = $request['fecha_emision'];
+                //$pedido_detalles->tasa_iva_id =
+                $pedido_detalles->precio_unitario = $detalle->precio;
+                $pedido_detalles->cantidad = $detalle->cantidad;
+                $pedido_detalles->subtotal = $detalle->subTotal;
+                $pedido_detalles->iva = $detalle->iva;
+                $pedido_detalles->total = $detalle->total;
+                $pedido_detalles->saveOrFail();
+
+                $subtotal = $subtotal + $detalle->subTotal;
+                $totaliva = $totaliva + $detalle->iva;
+
+                //resta de articulos del inventario
+
+                $producto->stock = $producto->stock - $detalle->cantidad;
+                $producto->save();
+            }
+            $totalfactura = $subtotal + $totaliva;
+            $pedido_cabecera->subtotal_12=$subtotal;
+            $pedido_cabecera->total_iva=$totaliva;
+            $pedido_cabecera->total_valor=$totalfactura;
+            $pedido_cabecera->saveOrFail();
+
+            return redirect('/admin/pedidos/detail/'.$pedido_cabecera->id)->with(['message' =>  'Agregado correctamente', 'message_type' => 'success']);
+        }
+
         public function getDetail($id) {
             //Create an Auth
             if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {

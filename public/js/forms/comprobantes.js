@@ -115,6 +115,7 @@ $(document).ready(function (){
             $("#btnAgregarArticuloPedidoLista").click();
         }
         var str = $("#txtAgregarArticuloPedido").val();
+         str += '&categoria='+$("#categoria").val();
         if(str != ""){
             //url = "{{ url('productos/buscar?texto=') }}" + str;
             url = buscar_prodcto_url + str;
@@ -126,13 +127,13 @@ $(document).ready(function (){
                         $("#listaBusquedaProductoPedido").html("");
                     }else{
                         let imagen='';
-                        if (productos[i].imagen==null){
-                            imagen='../../vendor/crudbooster/avatar.jpg';
-                        }else{
-                            imagen='../../'+productos[i].imagen;
-                        }
                         $("#listaBusquedaProductoPedido").html("");
                         for (i = 0; i < productos.length; i++) {
+                            if (productos[i].imagen == null){
+                                imagen='../../vendor/crudbooster/avatar.jpg';
+                            }else{
+                                imagen='../../'+productos[i].imagen;
+                            }
                             $(document).find('#listaBusquedaProductoPedido').get(0).innerHTML +=
                                 '<div class="col-md-3">\n' +
                                 ' <div class="panel panel-success">\n' +
@@ -140,9 +141,9 @@ $(document).ready(function (){
                                 '   <h3 class="panel-title">'+productos[i].nombre+'</h3>\n' +
                                 '  </div>\n' +
                                 '  <div class="panel-body" align="center">\n' +
-                                '    <p class="card-text">'+productos[i].codigo +' unidades</p>\n' +
+                                '    <p class="card-text">'+productos[i].codigo +'</p>\n' +
                                 '    <img class="card-img-top img-responsive" src="../../'+imagen+'">\n' +
-                                '    <p class="card-text">'+productos[i].stock +'</p>\n' +
+                                '    <p class="card-text">'+productos[i].stock +' unidades</p>\n' +
                                 '    <div class="btn btn-primary" onclick="agregarArticuloPedido(\''+productos[i].codigo +'\')"><i class="fa fa-cart-plus" aria-hidden="true" ></i> Agregar</div>\n' +
                                 '  <div>\n' +
                                 ' </div>\n' +
@@ -762,9 +763,9 @@ function getProductosCategoria(selectObject) {
                             '   <h3 class="panel-title">'+productos[i].nombre+'</h3>\n' +
                             '  </div>\n' +
                             '  <div class="panel-body" align="center">\n' +
-                            '    <p class="card-text">'+productos[i].codigo +' unidades</p>\n' +
+                            '    <p class="card-text">'+productos[i].codigo +'</p>\n' +
                             '    <img class="card-img-top img-responsive" src="../../'+imagen+'">\n' +
-                            '    <p class="card-text">'+productos[i].stock +'</p>\n' +
+                            '    <p class="card-text">'+productos[i].stock +' unidades</p>\n' +
                             '    <div class="btn btn-primary" onclick="agregarArticuloPedido(\''+productos[i].codigo +'\')"><i class="fa fa-cart-plus" aria-hidden="true" ></i> Agregar</div>\n' +
                             '  <div>\n' +
                             ' </div>\n' +
