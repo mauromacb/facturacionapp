@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7827057-71e2-48f8-88ba-e1bf7fe279ba" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/symfony2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/facturacionapp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/facturacionapp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminPedidosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminPedidosController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminProductosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminProductosController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/forms/comprobantes.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/forms/comprobantes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/catalogo.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/catalogo.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pedido.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pedido.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -188,6 +185,8 @@
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf" />
       <path value="$PROJECT_DIR$/vendor/sabberworm/php-css-parser" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-searchable" />
+      <path value="$PROJECT_DIR$/vendor/silviolleite/laravelpwa" />
+      <path value="$PROJECT_DIR$/vendor/phpmailer/phpmailer" />
     </include_path>
   </component>
   <component name="ProjectId" id="2AMUHLBB5Qgosi3qqX0KSuVkdW8" />
@@ -198,7 +197,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -265,6 +264,7 @@
       <workItem from="1659668554873" duration="24563000" />
       <workItem from="1660006850917" duration="7638000" />
       <workItem from="1660958886723" duration="26660000" />
+      <workItem from="1661225623552" duration="8459000" />
     </task>
     <servers />
   </component>
