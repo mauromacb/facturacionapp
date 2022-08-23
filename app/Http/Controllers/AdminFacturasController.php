@@ -571,7 +571,6 @@
             }
         }
 
-
         //By the way, you can still create your own method in here... :)
 
         public function validation($id = null)
