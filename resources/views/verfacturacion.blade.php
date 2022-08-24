@@ -103,7 +103,7 @@
             <H1>----------------------</H1>
             <tr><th colspan="4" align="left">{{$empresa->nombre}}</th></tr>
             <tr><td colspan="4" align="left">RUC: {{$empresa->ruc}}</td></tr>
-            <tr><td colspan="4" align="left">TELÉFONO: {{$empresa->telefono}}</td></tr>
+            <tr><td colspan="4" align="left">TELÉFONO: {{$empresa->telefonos}}</td></tr>
             <tr><td colspan="4" align="left">FACTURA: {{$factura->secuencial}}</td></tr>
             <tr><td colspan="4" align="left">FECHA: {{$factura->fecha_emision}}</td></tr>
             <tr><td colspan="4" align="left">CLIENTE: {{$factura->cliente->nombres}}{{$factura->consumidor->nombres}}</td></tr>
@@ -124,7 +124,7 @@
             <tr><td colspan="3" >DESCUENTO</td><td align="center">0</td></tr>
             <tr><td colspan="3" >IVA 12%</td><td align="center">{{$factura->total_iva}}</td></tr>
             <tr><td colspan="3" >TOTAL</td><td align="center">{{$factura->total_valor}}</td></tr>
-           
+
         </table> <center>
         <h3>GRACIAS POR SU COMPRA...</h3></center>
         <H1>----------------------</H1>

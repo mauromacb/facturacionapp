@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminClientesController;
 use App\Http\Controllers\AdminFacturasController;
+use App\Http\Controllers\AdminPedidosController;
 use App\Http\Controllers\AdminProductosController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -17,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/offline', function () {  
-    // para pwa  
+Route::get('/offline', function () {
+    // para pwa
     return view('vendor/laravelpwa/offline');
 });
 Route::get('/clientes/buscar', [AdminClientesController::class, 'buscar']);
@@ -27,4 +28,6 @@ Route::get('/productos/buscar', [AdminProductosController::class, 'buscar']);
 Route::get('/productos/buscarPorCategoria', [AdminProductosController::class, 'buscarPorCategoria']);
 Route::get('/facturas/imprimir/{facturaId}',[AdminFacturasController::class, 'imprimir']);
 Route::get('/facturas/registrar/cliente',[AdminFacturasController::class, 'registrarCliente']);
+Route::post('/facturas/registrar/cliente',[AdminClientesController::class, 'registrarClientePost']);
 Route::get('/productos/catalogo', [AdminProductosController::class, 'catalogo']);
+Route::post('/admin/pedidos/save', [AdminPedidosController::class, 'save']);

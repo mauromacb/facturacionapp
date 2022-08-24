@@ -338,13 +338,11 @@
 
         public function buscar(\Illuminate\Http\Request $request){
             $texto = $request->texto;
-            $productos = Productos::BuscarPorCodigo($texto)->with('iva')->where('stock','>',0)->get();
-            if(count($productos) == 0){
-                $productos = Productos::FiltrarPorCodigo($texto)
-                    ->FiltrarPorNombre($texto)
-                    ->with('iva')
-                    ->get();
-            }
+            $categoria = $request->categoria;
+            $productos = Productos::where('codigo','like','%'.$texto.'%')->where('stock','>',0);
+            if(!empty($categoria))$productos=$productos->where('categoria_id',$categoria);
+            $productos=$productos->with('iva')->get();
+
             return Response()->json([
                 'productos' => $productos
             ]);
@@ -367,8 +365,7 @@
 public function catalogo(){
 
 	$productos = Productos::with('iva')->where('stock','>',0)->get();
-	dd($productos);
-	return view('pedido', compact('productos' ));
+	return view('catalogo', compact('productos' ));
 // compact variabel e
 
 
