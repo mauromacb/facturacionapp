@@ -610,8 +610,6 @@
             //dd('entro aqui ');
 
             $row = Clientes::where('identificacion',$request['identificacion2'])->first();
-            $this->validation($row->id);
-            $this->input_assignment($row->id);
 
             //dd($this->validation($row->id));
 
@@ -631,6 +629,7 @@
 
                 $crmuser = new CmsUser();
                 $crmuser->name = $request['nombres'];
+                $crmuser->identificacion = $request['identificacion2'];
                 $crmuser->email = $request['correo'];
                 $crmuser->password = Hash::make($request['identificacion2']);
                 $crmuser->id_cms_privileges = 4;

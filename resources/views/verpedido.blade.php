@@ -103,8 +103,8 @@
             <H1>----------------------</H1>
             <tr><th colspan="4" align="left">{{$empresa->nombre}}</th></tr>
             <tr><td colspan="4" align="left">RUC: {{$empresa->ruc}}</td></tr>
-            <tr><td colspan="4" align="left">TELÉFONO: {{$empresa->telefono}}</td></tr>
-            <tr><td colspan="4" align="left">FACTURA: {{$pedido->secuencial}}</td></tr>
+            <tr><td colspan="4" align="left">TELÉFONO: {{$empresa->telefonos}}</td></tr>
+            <tr><td colspan="4" align="left">PEDIDO: {{$pedido->secuencial_cliente}}</td></tr>
             <tr><td colspan="4" align="left">FECHA: {{$pedido->fecha_emision}}</td></tr>
             <tr><td colspan="4" align="left">CLIENTE: {{$pedido->cliente->nombres}}{{$pedido->consumidor->nombres}}</td></tr>
             <tr><td colspan="4" align="left">RUC/CED: {{$pedido->cliente->identificacion}}{{$pedido->consumidor->identificacion}}</td></tr>
