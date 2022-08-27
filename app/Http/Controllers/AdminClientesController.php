@@ -19,6 +19,8 @@
 	use DB;
 	use CRUDBooster;
 
+	
+
 	class AdminClientesController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
@@ -262,14 +264,13 @@
                 CRUDBooster::redirect(CRUDBooster::adminPath(), trans("crudbooster.denied_access"));
             }
 
-
-
+			
             //Permite recibir toda la informacion ingresada en el formulario de facturacion
             $request=Request()->request->all();
             //dd( $request);
             //dd('entro aqui ');
 
-            $row = Clientes::where('identificacion',$request['identificacion2'])->first();
+			            $row = Clientes::where('identificacion',$request['identificacion2'])->first();
             $this->validation($row->id);
             $this->input_assignment($row->id);
 
