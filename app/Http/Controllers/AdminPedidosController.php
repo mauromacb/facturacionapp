@@ -533,8 +533,7 @@
                     }
 
                     if(!CRUDBooster::isSuperadmin()){
-                        $cmsuser=CmsUser::findOrFail(CRUDBooster::myId());
-                        $result->where($table.'.'.'user_id', $cmsuser);
+                        $result->where($table.'.'.'user_id', CRUDBooster::myId());
                     }
 
                     $data['result'] = $result->paginate($limit);
@@ -796,10 +795,10 @@
 
             //Permite recibir toda la informacion ingresada en el formulario de facturacion
             //$request=Request()->request->all();
-
             if (empty($request->cliente_id)){
                 $user=CmsUser::findOrFail(CRUDBooster::myId());
-                $cliente=Clientes::where('identifacion',$user->identificacion);
+                $cliente=Clientes::where('identificacion',$user->identificacion)->first();
+
             }else{
                 $cliente=Clientes::findOrFail($request['cliente_id']);
                 $user=CmsUser::where('identificacion',$cliente->identificacion)->first();

@@ -410,11 +410,15 @@ function descartarArticulo(posicion){
 	actualizarTablaArticulos();
 }
 
+
+
+
 function actualizarTablaArticulos(){
 	$("#tablaProductos").html("");
 	var resumen_sub_total = 0;
 	var resumen_iva = 0;
 	var resumen_total = 0;
+
 	for(i=0; i < listadoArticulos.length; i++){
 		$("#tablaProductos").append(
 			$('<tr></tr>').html(
@@ -442,6 +446,8 @@ function actualizarTablaArticulos(){
 		resumen_iva += parseFloat(listadoArticulos[i]["iva"]);
 		resumen_total += parseFloat(listadoArticulos[i]["total"]);
 	}
+
+
 	$("#tablaResumen").html("");
 	$("#tablaResumen").append(
 		$('<tr></tr>').html(

@@ -71,6 +71,8 @@
                 url = buscar_prodcto_url + producto_codigo;
                 $.get(url , function( data ){
                     agregarArticulo(data);
+                    swal('Producto '+producto_codigo, 'Agregado Exitosamente', 'success');
+
                 });
             }
         }
