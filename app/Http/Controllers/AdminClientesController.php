@@ -603,6 +603,45 @@
             }
         }
 
+        public function registrarClientePost(Request $request){
+            $this->cbLoader();
+
+            //Permite recibir toda la informacion ingresada en el formulario de facturacion
+            $request=Request()->request->all();
+            //dd('entro aqui ');
+
+            $row = Clientes::where('identificacion',$request['identificacion2'])->first();
+
+            //dd($this->validation($row->id));
+
+            if (Schema::hasColumn($this->table, 'created_at')) {
+                $this->arr['created_at'] = date('Y-m-d H:i:s');
+            }
+
+            try {
+                $cliente = new Clientes();
+                $cliente->identificacion = $request['identificacion2'];
+                $cliente->tipo_documento_id = $request['tipo'];
+                $cliente->nombres = $request['nombres'];
+                $cliente->correo = $request['correo'];
+                $cliente->telefono = $request['telefono'];
+                $cliente->direccion = $request['direccion'];
+                $cliente->save();
+
+                $crmuser = new CmsUser();
+                $crmuser->name = $request['nombres'];
+                $crmuser->identificacion = $request['identificacion2'];
+                $crmuser->email = $request['correo'];
+                $crmuser->password = Hash::make($request['identificacion2']);
+                $crmuser->id_cms_privileges = 4;
+                $crmuser->created_at = date('Y-m-d H:i:s');
+                $crmuser->save();
+                return redirect()->route('getLogin')->with('message', "Registro exitoso!");
+            }catch (\Exception $e){
+                return redirect()->route('getLogin')->with('message', "El usuario ya existe!!!!");
+            }
+
+        }
 
 
     }

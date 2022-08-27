@@ -28,5 +28,6 @@ Route::get('/productos/buscar', [AdminProductosController::class, 'buscar']);
 Route::get('/productos/buscarPorCategoria', [AdminProductosController::class, 'buscarPorCategoria']);
 Route::get('/facturas/imprimir/{facturaId}',[AdminFacturasController::class, 'imprimir']);
 Route::get('/facturas/registrar/cliente',[AdminFacturasController::class, 'registrarCliente']);
+Route::post('/facturas/registrar/cliente',[AdminClientesController::class, 'registrarClientePost']);
 Route::get('/productos/catalogo', [AdminProductosController::class, 'catalogo']);
 Route::post('/admin/pedidos/save', [AdminPedidosController::class, 'save']);

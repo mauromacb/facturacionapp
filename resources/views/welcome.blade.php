@@ -1,8 +1,14 @@
-<title>super</title>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>super</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
 
 
         <!-- Styles -->
@@ -17,12 +23,23 @@
         </style>
         @laravelPWA
     </head>
-    <body class="anti" align="center">
+    <body style="background-color:#EF9307;" class="anti" align="center" >
         <div align="cemter" >
             <div class="resposive">
-        
-           
-           <a href="{{url('admin/login')}}" class="btn btn-primary"><i class="fa fa-chevron-circle-left"></i> Inicio Sessión</a>
+            <a href="http://app.supermercadodoncando.com/admin/login"><img src="thumbnail_Don_Cando.png"></a>
+             <center>
+            <h2><b> Nombre: </b> </h2>
+            <h2>Alexander Cando Defaz</h2>
+            <h2><b> Direcci&oacute;n: </b> </h2>
+            <h2>Calle 10 de agosto y México</h2>
+            <h2><b> Correo: </b> </h2>
+            <h2>alexander1997cando@gmail.com</h2>
+            <h2><b> Ciudad: </b></h2>
+            <h1> Latacunga</h1>
+            <h2><b> Tel&eacute;fono: </b> </h2>
+            <h2>0983160503</h2>
+            </center>
             </div>
         </div>
     </body>
+</html>
