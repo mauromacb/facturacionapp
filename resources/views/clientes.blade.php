@@ -167,6 +167,23 @@
     </div><!--END AUTO MARGIN-->
 
     <script type="text/javascript">
+// $( "#identificacion2" ).change(()=>{
+//     $.ajax({
+//         url: "{{route('validar_ci')}}",
+//         type: 'POST',
+//         data: {
+//             identificacion2: $( "#identificacion2" ).val(),
+//         },
+//         success: function(data) {
+//             // var resultados = JSON.parse(data);
+//             console.log(data);
+//         },
+//         error: function(data) {
+//             console.log(data.responseText);
+//         }
+//     });
+// });
+
     $("#formNuevoComprobante").validate({
 
         rules:{
@@ -175,7 +192,16 @@
             required:true
           },
           identificacion2:{
-            required:true
+            required:true,
+            remote: {
+                url: "{{route('validar_ci')}}",
+                type: "POST",
+                data: {
+                    identificacion2: function () {
+                        return $( "#identificacion2" ).val();
+                    },
+                }     
+            }
           },
           nombres:{
             required:true
@@ -199,7 +225,7 @@
             required:"Ingrese el  tipo porfavor"
           },
           identificacion2:{
-            required:"Ingrese la identificación porfavor"
+            required:"Ingrese la identificación porfavor",
           },
           nombres:{
             required:"Ingrese el nombre porfavor"

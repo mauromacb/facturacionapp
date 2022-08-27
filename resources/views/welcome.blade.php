@@ -23,10 +23,22 @@
         </style>
         @laravelPWA
     </head>
-    <body class="anti" align="center">
+    <body style="background-color:#EF9307;" class="anti" align="center" >
         <div align="cemter" >
             <div class="resposive">
-            <a href="{{url('admin/login')}}"><img src="thumbnail_Don_Cando.jpg"></a>
+            <a href="http://app.supermercadodoncando.com/admin/login"><img src="thumbnail_Don_Cando.png"></a>
+             <center>
+            <h2><b> Nombre: </b> </h2>
+            <h2>Alexander Cando Defaz</h2>
+            <h2><b> Direcci&oacute;n: </b> </h2>
+            <h2>Calle 10 de agosto y México</h2>
+            <h2><b> Correo: </b> </h2>
+            <h2>alexander1997cando@gmail.com</h2>
+            <h2><b> Ciudad: </b></h2>
+            <h1> Latacunga</h1>
+            <h2><b> Tel&eacute;fono: </b> </h2>
+            <h2>0983160503</h2>
+            </center>
             </div>
         </div>
     </body>
