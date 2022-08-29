@@ -11,18 +11,18 @@
             </div>
 
             <div class='form-group col-sm-12'>
-                <label class="control-label col-sm-1">Cédula/Ruc</label>
+                <label class="control-label col-sm-1">C&eacute;dula/Ruc</label>
                 <div class="col-sm-2">{{$pedido->cliente->identificacion}}{{$pedido->consumidor->identificacion}}</div>
                 <label class="control-label col-sm-1">Nombres</label>
                 <div class="col-sm-2">{{$pedido->cliente->nombres}}{{$pedido->consumidor->nombres}}</div>
-                <label class="control-label col-sm-1">Teléfono</label>
+                <label class="control-label col-sm-1">Tel&eacute;fono</label>
                 <div class="col-sm-2">{{$pedido->cliente->telefono}}{{$pedido->consumidor->telefono}}</div>
             </div>
 
             <div class='form-group col-sm-12'>
                 <label class="control-label col-sm-1">Correo</label>
                 <div class="col-sm-2">{{$pedido->cliente->correo}}{{$pedido->consumidor->correo}}</div>
-                <label class="control-label col-sm-1">Dirección</label>
+                <label class="control-label col-sm-1">Direcci&oacute;n</label>
                 <div class="col-sm-4">{{$pedido->cliente->direccion}}{{$pedido->consumidor->direccion}}</div>
             </div>
 
@@ -31,8 +31,8 @@
                     <table width="100%" class="table-condensed table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th class="text-center" >Código</th>
-                            <th class="text-center">Artículo</th>
+                            <th class="text-center" >C&oacute;digo</th>
+                            <th class="text-center">Art&iacute;culo</th>
                             <th class="text-center" width="80px">Precio</th>
                             <th class="text-center" width="75px">Cantidad</th>
                             <th class="text-center" width="80px">Subtotal</th>
@@ -103,13 +103,13 @@
             <H1>----------------------</H1>
             <tr><th colspan="4" align="left">{{$empresa->nombre}}</th></tr>
             <tr><td colspan="4" align="left">RUC: {{$empresa->ruc}}</td></tr>
-            <tr><td colspan="4" align="left">TELÉFONO: {{$empresa->telefonos}}</td></tr>
+            <tr><td colspan="4" align="left">TEL&eacute;FONO: {{$empresa->telefonos}}</td></tr>
             <tr><td colspan="4" align="left">PEDIDO: {{$pedido->secuencial_cliente}}</td></tr>
             <tr><td colspan="4" align="left">FECHA: {{$pedido->fecha_emision}}</td></tr>
             <tr><td colspan="4" align="left">CLIENTE: {{$pedido->cliente->nombres}}{{$pedido->consumidor->nombres}}</td></tr>
             <tr><td colspan="4" align="left">RUC/CED: {{$pedido->cliente->identificacion}}{{$pedido->consumidor->identificacion}}</td></tr>
-            <tr><td colspan="4" align="left">DIRECCIÓN: {{$pedido->cliente->direccion}}{{$pedido->consumidor->direccion}}</td></tr>
-            <tr><th>DESCRIPCIÓN</th><th>CANT</th><th>P/U</th><th>TOTAL</th></tr>
+            <tr><td colspan="4" align="left">DIRECCI&oacute;N: {{$pedido->cliente->direccion}}{{$pedido->consumidor->direccion}}</td></tr>
+            <tr><th>DESCRIPCI&oacute;N</th><th>CANT</th><th>P/U</th><th>TOTAL</th></tr>
             @foreach($dataDetallePed as $detalle)
             <br>
                 <tr>

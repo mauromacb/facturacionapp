@@ -773,7 +773,7 @@ function getProductosCategoria(selectObject) {
                             '    <p class="card-text">'+productos[i].codigo +'</p>\n' +
                             '    <img src="../../'+imagen+'" height="120">\n' +
                             '    <p class="card-text">'+productos[i].stock +' unidades</p>\n' +
-                            '    <div class="btn btn-primary" onclick="agregarArticuloPedido(\''+productos[i].codigo +'\')"><i class="fa fa-cart-plus" aria-hidden="true" ></i> Agregar</div>\n' +
+                            '    <div class="btn btn-primary" onclick="agregarArticuloPedido(\''+productos[i].codigo +'\',\''+productos[i].nombre +'\')"><i class="fa fa-cart-plus" aria-hidden="true" ></i> Agregar</div>\n' +
                             '  <div>\n' +
                             ' </div>\n' +
                             '</div>';

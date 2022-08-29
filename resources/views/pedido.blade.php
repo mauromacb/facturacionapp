@@ -64,14 +64,14 @@
 
         }
 
-        function agregarArticuloPedido(codigo){
+        function agregarArticuloPedido(codigo,nombre){
             var producto_codigo = codigo;
             if(producto_codigo.length > 2){
                 //url = "{{ url('productos/buscar?texto=') }}" + producto_codigo;
                 url = buscar_prodcto_url + producto_codigo;
                 $.get(url , function( data ){
                     agregarArticulo(data);
-                    swal('Producto '+producto_codigo, 'Agregado Exitosamente', 'success');
+                    swal(nombre, 'Agregado Exitosamente', 'success');
 
                 });
             }
