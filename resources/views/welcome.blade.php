@@ -31,7 +31,7 @@
             <h2><b> Nombre: </b> </h2>
             <h2>Alexander Cando Defaz</h2>
             <h2><b> Direcci&oacute;n: </b> </h2>
-            <h2>Calle 10 de agosto y México</h2>
+            <h2>Calle 10 de agosto y M&eacute;xico</h2>
             <h2><b> Correo: </b> </h2>
             <h2>alexander1997cando@gmail.com</h2>
             <h2><b> Ciudad: </b></h2>

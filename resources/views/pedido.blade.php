@@ -121,7 +121,7 @@
                             <div class="col-sm-2">
                                 <div class="input-group">
                                     <span class="input-group-addon open-datetimepicker"><a><i class="fa fa-calendar "></i></a></span>
-                                    <input type="date" title="Fecha Emisión" readonly="" required="" class="form-control notfocus input_date" name="fecha_emision" id="fecha_emision" value="{{date('Y-m-d')}}">
+                                    <input type="date" title="Fecha Emisi&oacute;n" readonly="" required="" class="form-control notfocus input_date" name="fecha_emision" id="fecha_emision" value="{{date('Y-m-d')}}">
                                 </div>
                                 <div class="text-danger"></div>
                                 <p class="help-block"></p>
@@ -134,7 +134,7 @@
                             <div class="col-sm-2">
                                 <div class="input-group">
                                     <span class="input-group-addon open-datetimepicker"><a><i class="fa fa-calendar "></i></a></span>
-                                    <input type="time" title="Hora Emisión" readonly="" required="" class="form-control notfocus input_date" name="hora_emision" id="hora_emision" value="{{date('H:i')}}">
+                                    <input type="time" title="Hora Emisi&oacute;n" readonly="" required="" class="form-control notfocus input_date" name="hora_emision" id="hora_emision" value="{{date('H:i')}}">
                                 </div>
                                 <div class="text-danger"></div>
                                 <p class="help-block"></p>
@@ -168,7 +168,7 @@
                                 <div class="input-group">
                                     <input id="hiddenCliente" type="hidden" name="cliente_id" value="">
                                     <input id="hiddenConsumidor" type="hidden" name="consumidor_final_id" value="{{$cliente ? $cliente->id : $consumidor_final->id}}">
-                                    <input name="cliente" type="text" id="txtCliente" placeholder="Ingrese los Nombres, razón social, cédula o ruc" oninvalid="this.setCustomValidity('Debe ingresar el nombre o la razón social del cliente')" oninput="setCustomValidity('')" class="form-control" >
+                                    <input name="cliente" type="text" id="txtCliente" placeholder="Ingrese los Nombres, raz&oacute;n social, c&eacute;dula o ruc" oninvalid="this.setCustomValidity('Debe ingresar el nombre o la raz&oacute;n social del cliente')" oninput="setCustomValidity('')" class="form-control" >
                                     <div class="input-group-btn">
                                     <button id="btnAgregarCliente" data-toggle="modal" data-target="#modalAgregarCliente" class="btn btn-default" >
                                         <i class="fa fa-search "></i>
@@ -180,7 +180,7 @@
                             </div>
 
 
-                            <label class="control-label col-sm-2">Cédula/Ruc
+                            <label class="control-label col-sm-2">C&eacute;dula/Ruc
                                 <span class="text-danger" title="Este campo es requerido">*</span>
                             </label>
 
@@ -198,12 +198,12 @@
                                 <input type="text" title="Nombres" required="" class="form-control" name="nombres" id="nombres" >
                             </div>
 
-                            <label class="control-label col-sm-1">Teléfono
+                            <label class="control-label col-sm-1">Tel&eacute;fono
                                 <span class="text-danger" title="Este campo es requerido">*</span>
                             </label>
 
                             <div class="col-sm-2">
-                                <input type="text" title="Teléfono" required=""  class="form-control" name="telefono" id="telefono" >
+                                <input type="text" title="Tel&eacute;fono" required=""  class="form-control" name="telefono" id="telefono" >
                             </div>
 
                             <label class="control-label col-sm-1">Correo
@@ -216,12 +216,12 @@
                         </div>
 
                         <div class="form-group header-group-0" id="form-group-total_sin_impuestos" style="">
-                            <label class="control-label col-sm-2">Dirección
+                            <label class="control-label col-sm-2">Direcci&oacute;n
                                 <span class="text-danger" title="Este campo es requerido">*</span>
                             </label>
 
                             <div class="col-sm-3">
-                                <input type="text" title="Dirección" required="" class="form-control" name="direccion" id="direccion" >
+                                <input type="text" title="Direcci&oacute;n" required="" class="form-control" name="direccion" id="direccion" >
                             </div>
                         </div>
                         <!--Fin Datos del cliente-->
@@ -235,13 +235,13 @@
 
                         <div class="form-group">
                             <div class="form-group header-group-0 col-md-6" id="form-group-tipo" style="">
-                                <label class="control-label col-sm-3">Categoría
+                                <label class="control-label col-sm-3">Categor&iacute;a
                                     <span class="text-danger" title="Este campo es requerido">*</span>
                                 </label>
 
                                 <div class="col-sm-9">
                                     <select class="form-control" id="categoria" data-value=""  name="categoria" onchange="getProductosCategoria(this)">
-                                        <option value="">** Selecciona una categoría</option>
+                                        <option value="">** Selecciona una categor&iacute;a</option>
                                         @foreach($categorias as $categoria)
                                             <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                                         @endforeach
@@ -252,7 +252,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="input-group pull-right">
-                                    <input type="text" class="form-control" id="txtAgregarArticuloPedido" list="listaBusquedaProductoPedido" placeholder="Buscar un artículo..." onkeydown="if (event.keyCode == 13) return false;" tabindex="1">
+                                    <input type="text" class="form-control" id="txtAgregarArticuloPedido" list="listaBusquedaProductoPedido" placeholder="Buscar un art&iacute;culo..." onkeydown="if (event.keyCode == 13) return false;" tabindex="1">
                                     <div class="input-group-btn">
                                         <button id="btnAgregarArticuloPedido" class="btn btn-default">
                                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
@@ -270,8 +270,8 @@
                             <table width="100%" class="table-condensed table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th class="text-center" width="100px">Código</th>
-                                    <th class="text-center">Artículo</th>
+                                    <th class="text-center" width="100px">C&oacute;digo</th>
+                                    <th class="text-center">Art&iacute;culo</th>
                                     <th class="text-center" width="80px">Precio</th>
                                     <th class="text-center" width="75px">Cantidad</th>
                                     <th class="text-center" width="80px">Subtotal</th>
@@ -366,11 +366,11 @@
                                 <thead>
                                 <tr>
                                     <th width="5%">ID</th>
-                                    <th width="20%">Nombre / Razón Social</th>
+                                    <th width="20%">Nombre / Raz&oacute;n Social</th>
                                     <th width="20%">RUC</th>
                                     <th width="20%">Telefono</th>
                                     <th width="20%">Mail</th>
-                                    <th width="20%">Dirección</th>
+                                    <th width="20%">Direcci&oacute;n</th>
                                     <th width="5%"></th>
                                 </tr>
                                 </thead>
@@ -426,12 +426,12 @@
                                 </div>
                                 <div class="form-group header-group-0 col-sm-12" id="form-group-identificacion" style="">
                                     <label class="control-label col-sm-3">
-                                        Identificación
+                                        Identificaci&oacute;n
                                         <span class="text-danger" title="Este campo es requerido">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="text" title="Identificación" required="" placeholder="Ingrese la identificación" maxlength="255" class="form-control" name="identificacion2" id="identificacion2" value="" onKeyPress="return soloNumeros(event)" >
+                                        <input type="text" title="Identificaci&oacute;n" required="" placeholder="Ingrese la identificaci&oacute;n" maxlength="255" class="form-control" name="identificacion2" id="identificacion2" value="" onKeyPress="return soloNumeros(event)" >
 
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -468,22 +468,22 @@
                                     </div>
                                 </div>
                                 <div class="form-group header-group-0 col-sm-12" id="form-group-telefono" style="">
-                                    <label class="control-label col-sm-3">Teléfono
+                                    <label class="control-label col-sm-3">Tel&eacute;fono
                                         <span class="text-danger" title="Este campo es requerido">*</span>
                                     </label>
 
                                     <div class="col-sm-8">
-                                        <input type="number" step="1" title="Teléfono" required="" placeholder="Ingrese el telefono" min="1" class="form-control" name="telefono" id="telefono" value="">
+                                        <input type="number" step="1" title="Tel&eacute;fono" required="" placeholder="Ingrese el telefono" min="1" class="form-control" name="telefono" id="telefono" value="">
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
                                     </div>
                                 </div>
                                 <div class="form-group header-group-0 col-sm-12" id="form-group-direccion" style="">
-                                    <label class="control-label col-sm-3">Dirección
+                                    <label class="control-label col-sm-3">Direcci&oacute;n
                                         <span class="text-danger" title="Este campo es requerido">*</span>
                                     </label>
                                     <div class="col-sm-8">
-                                        <textarea name="direccion" id="direccion" required="" placeholder="Ingrese la dirección" maxlength="255" class="form-control" rows="2"></textarea>
+                                        <textarea name="direccion" id="direccion" required="" placeholder="Ingrese la direcci&oacute;n" maxlength="255" class="form-control" rows="2"></textarea>
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
                                     </div>
@@ -555,7 +555,7 @@
                 required:"Ingrese el email porfavor"
               },
               direccion:{
-                required:"Ingrese la dirección porfavor"
+                required:"Ingrese la direcci&oacute;n porfavor"
               },
               tipo:{
                 required:"Ingrese el tipo porfavor"
