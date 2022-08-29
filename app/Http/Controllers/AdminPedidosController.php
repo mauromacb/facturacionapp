@@ -532,7 +532,7 @@
                         }
                     }
 
-                    if(!CRUDBooster::isSuperadmin()){
+                    if(CRUDBooster::me()->id_cms_privileges==4){
                         $result->where($table.'.'.'user_id', CRUDBooster::myId());
                     }
 
