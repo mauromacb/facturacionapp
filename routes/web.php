@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminClientesController;
 use App\Http\Controllers\AdminFacturasController;
 use App\Http\Controllers\AdminPedidosController;
 use App\Http\Controllers\AdminProductosController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,13 @@ Route::get('/facturas/registrar/cliente',[AdminFacturasController::class, 'regis
 Route::post('/facturas/registrar/cliente',[AdminClientesController::class, 'registrarClientePost']);
 Route::get('/productos/catalogo', [AdminProductosController::class, 'catalogo']);
 Route::post('/admin/pedidos/save', [AdminPedidosController::class, 'save']);
+
+
+Route::post('validar_ci', function (Request $request) {
+// Inicio validacion
+    $respuesta = validar_cedula($request->identificacion2);
+//    Fin Válidacion
+    return json_encode($respuesta?:'Cédula inválida');
+
+})->name("validar_ci");
+
