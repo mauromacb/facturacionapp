@@ -410,11 +410,15 @@ function descartarArticulo(posicion){
 	actualizarTablaArticulos();
 }
 
+
+
+
 function actualizarTablaArticulos(){
 	$("#tablaProductos").html("");
 	var resumen_sub_total = 0;
 	var resumen_iva = 0;
 	var resumen_total = 0;
+
 	for(i=0; i < listadoArticulos.length; i++){
 		$("#tablaProductos").append(
 			$('<tr></tr>').html(
@@ -442,6 +446,8 @@ function actualizarTablaArticulos(){
 		resumen_iva += parseFloat(listadoArticulos[i]["iva"]);
 		resumen_total += parseFloat(listadoArticulos[i]["total"]);
 	}
+
+
 	$("#tablaResumen").html("");
 	$("#tablaResumen").append(
 		$('<tr></tr>').html(
@@ -761,12 +767,13 @@ function getProductosCategoria(selectObject) {
                             ' <div class="panel panel-success">\n' +
                             '  <div class="panel-heading" align="center">\n' +
                             '   <h3 class="panel-title">'+productos[i].nombre+'</h3>\n' +
+                            '   <center>Precio: '+productos[i].valor+'</center>\n' +
                             '  </div>\n' +
                             '  <div class="panel-body" align="center">\n' +
                             '    <p class="card-text">'+productos[i].codigo +'</p>\n' +
-                            '    <img class="card-img-top img-responsive" src="../../'+imagen+'">\n' +
+                            '    <img src="../../'+imagen+'" height="120">\n' +
                             '    <p class="card-text">'+productos[i].stock +' unidades</p>\n' +
-                            '    <div class="btn btn-primary" onclick="agregarArticuloPedido(\''+productos[i].codigo +'\')"><i class="fa fa-cart-plus" aria-hidden="true" ></i> Agregar</div>\n' +
+                            '    <div class="btn btn-primary" onclick="agregarArticuloPedido(\''+productos[i].codigo +'\',\''+productos[i].nombre +'\')"><i class="fa fa-cart-plus" aria-hidden="true" ></i> Agregar</div>\n' +
                             '  <div>\n' +
                             ' </div>\n' +
                             '</div>';

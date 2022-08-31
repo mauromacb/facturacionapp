@@ -19,7 +19,7 @@
 	use DB;
 	use CRUDBooster;
 
-	
+
 
 	class AdminClientesController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -264,7 +264,7 @@
                 CRUDBooster::redirect(CRUDBooster::adminPath(), trans("crudbooster.denied_access"));
             }
 
-			
+
             //Permite recibir toda la informacion ingresada en el formulario de facturacion
             $request=Request()->request->all();
             //dd( $request);
@@ -602,7 +602,7 @@
                 }
             }
         }
-
+// notificacion del correo 
         public function registrarClientePost(Request $request){
             $this->cbLoader();
 
@@ -632,15 +632,35 @@
                 $crmuser->name = $request['nombres'];
                 $crmuser->identificacion = $request['identificacion2'];
                 $crmuser->email = $request['correo'];
-                $crmuser->password = Hash::make($request['identificacion2']);
+                $crmuser->password = Hash::make($request['password']);
                 $crmuser->id_cms_privileges = 4;
                 $crmuser->created_at = date('Y-m-d H:i:s');
                 $crmuser->save();
+
+                $data= Array(
+                    "name" => $request['nombres'],
+                    "email" => $request['correo'],
+                    "password" => $request['password']
+                );
+// registro del correo notificacio 
+                CRUDBooster::sendEmail(['to' => $crmuser->email, 'data' => $data, 'template' => 'register_backend']);
+
                 return redirect()->route('getLogin')->with('message', "Registro exitoso!");
             }catch (\Exception $e){
                 return redirect()->route('getLogin')->with('message', "El usuario ya existe!!!!");
             }
 
+        }
+        public function acticarClientes($id_users){
+            $user= CmsUser::findOrfail($id_users);
+            if(!empty($user)) {
+                $user->status="Active";
+                $user->save();
+                echo"Usuario activado correctamente";
+            
+            }else{
+                echo"revisa el emial";
+            }
         }
 
 

@@ -363,9 +363,15 @@
         }
 // conectar el menu que cree
 public function catalogo(){
+	$nombre = isset($_GET["nombre"])?$_GET["nombre"]:'';
+	$productos = Productos::with('iva')
+							->where('stock','>',0)
+							->where('nombre', 'like', '%' .$nombre. '%')
+							->get();
 
-	$productos = Productos::with('iva')->where('stock','>',0)->get();
-	return view('catalogo', compact('productos' ));
+	$data["searched"] = $nombre;
+	$data["productos"] = $productos;
+	return view('catalogo', $data);
 // compact variabel e
 
 
