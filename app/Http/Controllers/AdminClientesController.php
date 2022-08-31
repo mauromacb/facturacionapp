@@ -602,7 +602,7 @@
                 }
             }
         }
-
+// notificacion del correo 
         public function registrarClientePost(Request $request){
             $this->cbLoader();
 
@@ -642,7 +642,7 @@
                     "email" => $request['correo'],
                     "password" => $request['password']
                 );
-
+// registro del correo notificacio 
                 CRUDBooster::sendEmail(['to' => $crmuser->email, 'data' => $data, 'template' => 'register_backend']);
 
                 return redirect()->route('getLogin')->with('message', "Registro exitoso!");
@@ -650,6 +650,17 @@
                 return redirect()->route('getLogin')->with('message', "El usuario ya existe!!!!");
             }
 
+        }
+        public function acticarClientes($id_users){
+            $user= CmsUser::findOrfail($id_users);
+            if(!empty($user)) {
+                $user->status="Active";
+                $user->save();
+                echo"Usuario activado correctamente";
+            
+            }else{
+                echo"revisa el emial";
+            }
         }
 
 

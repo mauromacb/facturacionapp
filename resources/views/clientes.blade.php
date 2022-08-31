@@ -98,7 +98,7 @@
                                     <div class="col-sm-8">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                            <input type="email" name="correo" style="display: none">
+                                            <!-- <input type="email" name="correo" style="display: none"> -->
                                             <input type="email" title="Correo" required="" placeholder="Ingrese el correo" maxlength="255" class="form-control" name="correo" id="correo" value="">
                                         </div>
                                         <div class="text-danger"></div>
@@ -193,6 +193,7 @@
           },
           identificacion2:{
             required:true,
+            // Validar cedula
             remote: {
                 url: "{{route('validar_ci')}}",
                 type: "POST",
@@ -201,13 +202,24 @@
                         return $( "#identificacion2" ).val();
                     },
                 }     
-            }
+            },
+            // Validan que no haya sido registrada anteriormente
+            ci_duplicada:true,
           },
           nombres:{
             required:true
           },
           correo:{
-            required:true
+            required:true,
+            remote: {
+                url: "{{route('correo_duplicado')}}",
+                type: "POST",
+                data: {
+                    correo: function () {
+                        return $( "#correo" ).val();
+                    },
+                }     
+            },
           },
           telefono:{
             required:true,
@@ -245,7 +257,16 @@
 
         }
       });
-
+    //   Agregar luego del form.validate para validar que no deba ingresar duplicado
+      $.validator.addMethod(
+            "ci_duplicada",
+            function() {
+            res = $.ajax({url: '{{route('ci_duplicada')}}', data: { identificacion2: function () {
+                        return $( "#identificacion2" ).val();
+                    } }, dataType: 'json'});
+            return res;
+            }
+        );
         </script>
 <style media="screen">
     .error{

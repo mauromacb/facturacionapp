@@ -1,10 +1,25 @@
 <!-- First, extends to the CRUDBooster Layout -->
 @extends('crudbooster::admin_template')
 @section('content')
+    <!--  -->
     <!-- Your html goes here -->
     <div class='panel panel-default'>
         <div class='panel-heading'>CATALOGO DE PRODUCTOS</div>
         <div class='panel-body'>
+            <!--  -->
+            <form class="row" style="display:flex; align-items: end;">
+                <div class="col-sm-10">
+                  <label for="">Ingrese nombre del producto:</label>  
+                  <input type="text" name='nombre' class="form-control" value="{{$searched}}">
+                </div>
+                <div class="col-sm-2">
+                  <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+            </form>
+            <br>
+            <br>
+            <br>
+            <!--  -->
             <div class='form-group col-sm-12'>
                 @foreach($productos as $detalle)
                     <div class="col-md-3">

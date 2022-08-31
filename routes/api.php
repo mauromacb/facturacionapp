@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Models\Clientes;
 use Illuminate\Support\Facades\Route;
 use App\Rules\validacionCI as cedula;
 /*
@@ -19,12 +20,44 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('validar_ci', function (Request $request) {
-// Inicio validacion    
+    // Inicio validacion    
        $respuesta = validar_cedula($request->identificacion2);
-//    Fin Válidacion
-    return json_encode($respuesta?:'Cédula inválida');
+    //    Fin Válidacion
+    if($respuesta){
+// Paso validacion CI Original
+// Validar que no exita ese registro
+        $existe = Clientes::where('identificacion',$request->identificacion2)->get();
+        if(count($existe)){
+            return json_encode('Cédula ya registrada');
+        }else{
+            return json_encode(true);
+        }
+    }else{
+
+        return json_encode('Cédula inválida');
+    }
    
 })->name("validar_ci");
+
+Route::post('ci_duplicada', function (Request $request) {
+    $existe = Clientes::where('identificacion',$request->identificacion2)->get();
+    if(count($existe)){
+        return json_encode('Cédula ya registrada');
+    }else{
+        return json_encode(true);
+    }
+   
+})->name("ci_duplicada");
+
+Route::post('correo_duplicado', function (Request $request) {
+    $existe = Clientes::where('correo',$request->correo)->get();
+    if(count($existe)){
+        return json_encode('Correo ya registrado');
+    }else{
+        return json_encode(true);
+    }
+   
+})->name("correo_duplicado");
 
 function validar_cedula($value)
 {
