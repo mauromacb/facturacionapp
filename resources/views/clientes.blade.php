@@ -117,8 +117,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group header-group-0 col-sm-12" id="form-group-direccion" style="">
-                                    <label class="control-label col-sm-3">Dirección
-                                        <span class="text-danger" title="Este campo es requerido">*</span>
+                                    <label class="contdanger" title="Este campo es requerido">*</span>
                                     </label>
                                     <div class="col-sm-8">
                                         <textarea name="direccion" id="direccion" required="" placeholder="Ingrese el teléfono" maxlength="255"  class="form-control" rows="5"></textarea>
@@ -134,7 +133,8 @@
                             <label class="control-label col-sm-2"></label>
                             <div class="col-sm-10">
                                 @if($button_cancel && CRUDBooster::getCurrentMethod() != 'getDetail')
-                                    @if(g('return_url'))
+                                    @if(g('return_rol-label col-sm-3">Dirección
+                                        <span class="text-url'))
                                         <a href='{{g("return_url")}}' class='btn btn-default'><i
                                                 class='fa fa-chevron-circle-left'></i> {{cbLang("button_back")}}</a>
                                     @else
