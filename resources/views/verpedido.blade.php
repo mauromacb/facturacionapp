@@ -1,6 +1,7 @@
 <!-- First, extends to the CRUDBooster Layout -->
 @extends('crudbooster::admin_template')
 @section('content')
+    <script src="{{asset('js/jspdf/jspdf.min.js')}}"></script>
     <!-- Your html goes here -->
     <div class='panel panel-default'>
         <div class='panel-heading'>PEDIDO #{{$pedido->secuencial_cliente}}</div>
@@ -28,7 +29,7 @@
 
             <div class='form-group col-sm-12'>
                 <div class="col-md-12 pre-scrollable div-detalle-comprobante form_venta_contado form_factura_credito form_devolucion_contado form_compra_contado">
-                    <table width="100%" class="table-condensed table-striped table-bordered">
+                    <table id="" width="100%" class="table-condensed table-striped table-bordered">
                         <thead>
                         <tr>
                             <th class="text-center" >C&oacute;digo</th>
@@ -88,6 +89,7 @@
                                 class='fa fa-chevron-circle-left'></i> {{cbLang("button_back")}}</a>
 
                     <button class="btn btn-primary"  onclick="javascript:imprim();"><i class="fa fa-print"></i> Imprimir</button>
+                    <a class="btn btn-success"  onclick="javascript:descargar();"><i class="fa fa-save"></i> Descargar</a>
 
                 </div>
             </div>
@@ -130,6 +132,7 @@
         <H1>----------------------</H1>
     </div>
 
+
     <script>
         function imprim(){
             var mywindow = window.open('', 'PRINT', 'width=600');
@@ -142,6 +145,19 @@
             mywindow.focus(); // necesario para IE >= 10
             mywindow.print();
             mywindow.close();
-            return true;}
+            return true;
+        }
+
+        function descargar(){
+            var doc = new jsPDF({
+                orientation: 'landscape'
+            });
+
+            doc.text(20, 20, 'Aqui se genera');
+            doc.text(20, 30, 'El contenido del pedido.');
+
+// Save the PDF
+            doc.save('pedido.pdf');
+        }
     </script>
 @endsection
