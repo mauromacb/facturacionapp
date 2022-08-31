@@ -32,8 +32,6 @@ Route::get('/facturas/registrar/cliente',[AdminFacturasController::class, 'regis
 Route::post('/facturas/registrar/cliente',[AdminClientesController::class, 'registrarClientePost']);
 Route::get('/productos/catalogo', [AdminProductosController::class, 'catalogo']);
 Route::post('/admin/pedidos/save', [AdminPedidosController::class, 'save']);
-<<<<<<< Updated upstream
-
 
 Route::post('validar_ci', function (Request $request) {
 // Inicio validacion
@@ -43,6 +41,4 @@ Route::post('validar_ci', function (Request $request) {
 
 })->name("validar_ci");
 
-=======
-Route::get('/activar/'.$id_users, [AdminClientesController::class, 'activarClientes']);
->>>>>>> Stashed changes
+Route::get('/activar/{token}', [AdminClientesController::class, 'activarUsuario']);
